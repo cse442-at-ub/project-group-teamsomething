@@ -1,7 +1,9 @@
-import "./index.css";
-
 function App() {
-  return <div className="bg-slate-500">Hello World</div>;
+  return (
+    <div className="h-screen bg-slate-500">
+      <div className="">Hello World</div>;
+    </div>
+  );
 }
 
 export default App;
