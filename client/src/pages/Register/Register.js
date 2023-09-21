@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Login = () => {
+const Register = () => {
   return (
-    <div>Login Page</div>
+    <h1 className="logo-purple"> Oauthpal </h1>
   )
 }
 
-export default Login
+export default Register 
