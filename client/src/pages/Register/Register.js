@@ -15,12 +15,12 @@ const Form = () => {
 		<form className="form-box">
 
       <label>First Name
-        <input type="text" />
+        <input className="text-box" type="text" />
       </label>
 			<br />
 
       <label>Last Name
-        <input type="text" />
+        <input className="text-box" type="text" />
       </label>
 			<br />
 
