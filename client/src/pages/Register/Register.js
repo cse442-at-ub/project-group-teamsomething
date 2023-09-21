@@ -4,7 +4,8 @@ import './Register.css'
 const Register = () => {
   return (
 		<div>
-    <h1 className="logo-purple"> Oauthpal </h1>
+			<h1 className="logo-purple"> Oauthpal </h1>
+			<Form />
 		</div>
   )
 }
