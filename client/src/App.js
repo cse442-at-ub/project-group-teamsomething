@@ -1,4 +1,4 @@
-import Public from "./pages/Public/Public";
+import Public from "./pages/public/Public";
 import {
   BrowserRouter as Router,
   Route,
