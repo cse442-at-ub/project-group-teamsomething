@@ -14,21 +14,15 @@ const Form = () => {
 	return (
 		<form>
 
-			<label> First Name
-				<input type="text" />
-			</label>
+      <label>First Name
+        <input type="text" />
+      </label>
+			<br />
 
-			<label> Last Name
-				<input type="text" />
-			</label>
-
-			<label> Email
-				<input type="text" />
-			</label>
-
-			<label> Password 
-				<input type="text" />
-			</label>
+      <label>Last Name
+        <input type="text" />
+      </label>
+			<br />
 
 		</form>
 	)
