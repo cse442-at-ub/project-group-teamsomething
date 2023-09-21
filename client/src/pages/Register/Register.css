@@ -3,7 +3,10 @@
 }
 
 .logo-purple {
-	background-color: rgb(3.5, 7.8, 32.9);
+	color: rgb(3.5, 7.8, 32.9);
+	font-family: 'Playfair Display SC';
+	font-weight: bold;
+	font-size: 48px;
 }
 
 .form-box {
