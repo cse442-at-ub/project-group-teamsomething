@@ -1,0 +1,11 @@
+Failed to compile.
+
+Module not found: Error: Cannot find file: 'Public.js' does not match the corresponding name on disk: './src/pages/Public/public'.
+WARNING in [eslint] 
+src/App.js
+  Line 6:3:  'useNavigate' is defined but never used  no-unused-vars
+
+ERROR in ./src/App.js 4:0-43
+Module not found: Error: Cannot find file: 'Public.js' does not match the corresponding name on disk: './src/pages/Public/public'.
+
+webpack compiled with 1 error and 1 warning
