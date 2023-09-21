@@ -12,7 +12,7 @@ const Register = () => {
 
 const Form = () => {
 	return (
-		<form>
+		<form className="form-box">
 
       <label>First Name
         <input type="text" />
