@@ -20,15 +20,11 @@ const Form = () => {
 	return (
 		<form className="form-box">
 
-      <label>First Name
-        <input className="text-box" type="text" />
-      </label>
-			<br />
+      <label className="label">First Name</label>
+      <input className="text-box" type="text" />
 
-      <label>Last Name
-        <input className="text-box" type="text" />
-      </label>
-			<br />
+      <label className="label"> Last Name</label>
+      <input className="text-box" type="text" />
 
 		</form>
 	)

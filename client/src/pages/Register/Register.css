@@ -22,17 +22,19 @@
 	left: 154px;
 }
 
-.text-box {
+.text-box{
 	width: 486px;
 	height: 40px;
 	border-radius: 20px;
 	display: block;
+	margin-left: 25px;
 }
 
 .label{
 	font-family: 'Inter';
 	font-weight: bold;
 	color: white;
+	margin-left: 25px;
 }
 
 .bg-beige {
