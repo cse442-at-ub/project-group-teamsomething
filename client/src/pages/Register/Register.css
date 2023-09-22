@@ -40,9 +40,9 @@
 	font-family: 'Inter';
 	font-weight: bold;
 	font-size: 25px;
-	margin-left: 184px;
 	position: fixed;
-	top: 180px;
+	top: 172px;
+	left: 190px;
 }
 
 .button {
