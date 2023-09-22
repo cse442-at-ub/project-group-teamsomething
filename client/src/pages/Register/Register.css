@@ -26,10 +26,13 @@
 	width: 486px;
 	height: 40px;
 	border-radius: 20px;
-	margin: 25px;
-	position: absolute;
-	left: 15px;
 	display: block;
+}
+
+.label{
+	font-family: 'Inter';
+	font-weight: bold;
+	color: white;
 }
 
 .bg-beige {
