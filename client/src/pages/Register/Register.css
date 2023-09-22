@@ -2,14 +2,13 @@
 	background-color: rgb(40, 38.4, 56.9);
 }
 
-.logo-purple {
+.logo {
 	color: #091454;
 	font-family: 'Playfair Display SC';
 	font-weight: bold;
 	font-size: 48px;
-	position: fixed;
-	left: 154px;
-	top: 64;
+	margin-left: 154px;
+	margin-top: 30px;
 }
 
 .form-box {
@@ -39,4 +38,9 @@
 
 .bg-beige {
 	background-color: #FED99B !important;
+}
+
+.form-title {
+	margin-left: 154px;
+	margin-bottom: 10px;
 }

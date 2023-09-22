@@ -5,14 +5,21 @@ const Register = () => {
   return (
 		<div classname="bg-beige"> 
 			<Logo />
+			<FormTitle />
 			<Form />
 		</div>
   )
 }
 
+const FormTitle = () => {
+	return (
+			<h2 className="form-title">Register</h2>
+	)
+}
+
 const Logo = () => {
 	return (
-		<h1 className="logo-purple"> Oauthpal </h1>
+		<h1 className="logo"> Oauthpal </h1>
 	)
 }
 
@@ -20,6 +27,7 @@ const Form = () => {
 	return (
 		<form className="form-box">
 
+			<br/>
 			<br/>
 			<br/>
       <label className="label">First Name</label>
