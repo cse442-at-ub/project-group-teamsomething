@@ -41,6 +41,8 @@ const Form = () => {
 			<br/>
       <label className="label">Password</label>
       <input className="text-box" type="text" />
+			<br/>
+			<button className="button">Register</button>
 
 		</form>
 	)
