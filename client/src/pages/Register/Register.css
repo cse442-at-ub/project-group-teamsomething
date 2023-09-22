@@ -47,7 +47,8 @@
 
 .button {
 	background-color: #FF3737;
-	border-radius: 25;
+	border-radius: 25px;
 	width: 138px;
 	height: 55px;
+	margin-left: 146.5px;
 }

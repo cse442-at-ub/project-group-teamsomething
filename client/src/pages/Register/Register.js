@@ -29,7 +29,6 @@ const Form = () => {
 
 			<br/>
 			<br/>
-			<br/>
       <label className="label">First Name</label>
       <input className="text-box" type="text" />
 			<br/>
