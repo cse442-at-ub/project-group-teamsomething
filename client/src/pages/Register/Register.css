@@ -7,6 +7,9 @@
 	font-family: 'Playfair Display SC';
 	font-weight: bold;
 	font-size: 48px;
+	position: fixed;
+	left: 154px;
+	top: 64;
 }
 
 .form-box {
@@ -23,4 +26,9 @@
 	width: 486px;
 	height: 40px;
 	border-radius: 20px;
+	margin: 5px;
+}
+
+.bg-beige {
+	background-color: #FED99B !important;
 }
