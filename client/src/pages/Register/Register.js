@@ -3,11 +3,17 @@ import './Register.css'
 
 const Register = () => {
   return (
-		<div>
-			<h1 className="logo-purple"> Oauthpal </h1>
+		<div classname="bg-beige"> 
+			<Logo />
 			<Form />
 		</div>
   )
+}
+
+const Logo = () => {
+	return (
+		<h1 className="logo-purple"> Oauthpal </h1>
+	)
 }
 
 const Form = () => {
