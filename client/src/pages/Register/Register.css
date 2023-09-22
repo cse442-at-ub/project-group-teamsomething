@@ -3,8 +3,9 @@
 	font-family: 'Playfair Display SC';
 	font-weight: bold;
 	font-size: 48px;
-	margin-left: 154px;
-	margin-top: 30px;
+	position: fixed; 
+	top: 64px;
+	left: 154px;
 }
 
 .form-box {
