@@ -41,6 +41,10 @@
 }
 
 .form-title {
-	margin-left: 154px;
-	margin-bottom: 10px;
+	font-family: 'Inter';
+	font-weight: bold;
+	font-size: 25px;
+	margin-left: 184px;
+	position: fixed;
+	top: 190px;
 }
