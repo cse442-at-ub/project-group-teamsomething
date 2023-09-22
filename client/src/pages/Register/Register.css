@@ -26,18 +26,10 @@
 	width: 486px;
 	height: 40px;
 	border-radius: 20px;
-	margin: 5px;
-	position: absolute;
-	left: 73px;
-}
-
-.text-box2 {
-	width: 486px;
-	height: 40px;
-	border-radius: 20px;
-	margin: 5px;
+	margin: 25px;
 	position: absolute;
 	left: 15px;
+	display: block;
 }
 
 .bg-beige {
