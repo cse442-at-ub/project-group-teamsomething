@@ -1,6 +1,6 @@
 import React from 'react'
 import './Register.css'
-// test for push abiilty from windows
+// test2
 
 const Register = () => {
   return (
