@@ -2,6 +2,7 @@ import React from 'react'
 import './Register.css'
 
 const Register = () => {
+	document.body.style = 'background: blue;';
   return (
 		<div classname="bg-beige"> 
 			<Logo />
