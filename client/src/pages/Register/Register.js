@@ -1,10 +1,12 @@
 import React from 'react'
 import './Register.css'
+import image from "./temp.png";
 
 const Register = () => {
 	document.body.style = 'background: #FED99B;';
+	//document.body.background = 'url(/temp.png)';
   return (
-		<div> 
+		<div style={{ backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundSize:"contain", height:600, width: 600 }}> 
 			<Logo />
 			<FormTitle />
 			<Form />
