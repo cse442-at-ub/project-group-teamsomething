@@ -47,6 +47,10 @@
 }
 
 .button {
+	font-family: 'Inter';
+	font-weight: bold;
+	font-size: 25px;
+	color: white;
 	background-color: #FF3737;
 	border-radius: 25px;
 	width: 138px;

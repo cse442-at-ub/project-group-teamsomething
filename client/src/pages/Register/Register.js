@@ -5,7 +5,7 @@ import './Register.css'
 const Register = () => {
 	document.body.style = 'background: #FED99B;';
   return (
-		<div classname="bg-beige"> 
+		<div> 
 			<Logo />
 			<FormTitle />
 			<Form />
