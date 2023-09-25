@@ -3,7 +3,7 @@ import './Register.css'
 // test3 powershell push
 
 const Register = () => {
-	document.body.style = 'background: blue;';
+	document.body.style = 'background: #FED99B;';
   return (
 		<div classname="bg-beige"> 
 			<Logo />
