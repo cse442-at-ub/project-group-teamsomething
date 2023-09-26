@@ -1,17 +1,31 @@
 import React from 'react'
 import './Register.css'
-import image from "./temp.png";
+import ppl from "./people.png";
 
 const Register = () => {
 	document.body.style = 'background: #FED99B;';
   return (
-		<div style={{ backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundPosition: "right 300px", height:600, width: 600 }}> 
+		<div> 
 			<Logo />
 			<FormTitle />
 			<Form />
+			<div className="ppl">
+				<img 
+					source={ppl}
+					alt="ppl"
+				></img>
+			</div>
 		</div>
   )
 }
+
+/*
+const ppl = () => {
+	return (
+		<img className="ppl">
+	)
+}
+*/
 
 const FormTitle = () => {
 	return (
