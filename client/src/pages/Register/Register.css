@@ -8,6 +8,14 @@
 }
 */
 
+.ppl {
+	position: fixed; 
+	top: 150px;
+	left: 154px;
+	width: 100px;
+	height: 100px;
+}
+
 .logo {
 	color: #091454;
 	font-family: 'Playfair Display SC';

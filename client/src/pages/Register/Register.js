@@ -9,12 +9,7 @@ const Register = () => {
 			<Logo />
 			<FormTitle />
 			<Form />
-			<div className="ppl">
-				<img 
-					source={ppl}
-					alt="ppl"
-				></img>
-			</div>
+			<img className="ppl" source={ppl} alt="people"></img>
 		</div>
   )
 }
