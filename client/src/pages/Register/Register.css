@@ -1,3 +1,13 @@
+/*
+.bg: {
+	backgroundImage: "url(${image})";
+	backgroundRepeat:"no-repeat";
+	backgroundSize:"contain"; 
+	height:600; 
+	width: 600;
+}
+*/
+
 .logo {
 	color: #091454;
 	font-family: 'Playfair Display SC';

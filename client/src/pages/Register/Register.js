@@ -4,9 +4,8 @@ import image from "./temp.png";
 
 const Register = () => {
 	document.body.style = 'background: #FED99B;';
-	//document.body.background = 'url(/temp.png)';
   return (
-		<div style={{ backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundSize:"contain", height:600, width: 600 }}> 
+		<div style={{ backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundPosition: "right", height:600, width: 600 }}> 
 			<Logo />
 			<FormTitle />
 			<Form />
