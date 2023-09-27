@@ -31,28 +31,10 @@ const Form = () => {
 	return (
 		<form className="form-box row-start-4 row-end-7 flex grid grid-rows-6 grid-cols-6">
 
-			<div className='col-start-2 row-start-3 col-span-4'> 
-      <label className="label">First Name</label>
-      <input className="text-box" type="text" />
+			<div className='col-start-2 row-start-2 w-full'> 
+				<label className="label">First Name</label>
+				<input type="block"></input>
 			</div>
-
-/*
-			<div className='col-start-2'> 
-      <label className="label"> Last Name</label>
-      <input className="text-box" type="text" />
-			</div>
-			<div className='col-start-2'> 
-      <label className="label">Email</label>
-      <input className="text-box" type="text" />
-			</div>
-
-			<div className='col-start-2'> 
-      <label className="label">Password</label>
-      <input className="text-box" type="text" />
-			</div>
-			*/
-
-			<button className="button">Register</button>
 
 		</form>
 	)
