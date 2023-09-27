@@ -10,6 +10,8 @@ import Login from "./pages/Login/Login";
 import CheckIn from "./pages/CheckIn/CheckIn";
 import ChangePassword from "./pages/Profile/ChangePassword";
 import ProfilePic from "./pages/Profile/ProfilePic";
+import Messages from "./pages/Messages/Messages"
+import Partners from "./pages/Partners/Partners"
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/check-in" element={<CheckIn />} />
         <Route path="/changepassword" element={<ChangePassword />} />
         <Route path="/profilepic" element={<ProfilePic />} />
+        <Route path="/Messages" element={<Messages />} />
+        <Route path="/Partners" element={<Partners />} />
       </Routes>
     </Router>
   );
