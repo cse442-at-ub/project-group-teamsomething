@@ -20,10 +20,7 @@
 	color: #091454;
 	font-family: 'Playfair Display SC';
 	font-weight: bold;
-	font-size: 48px;
-	position: fixed; 
-	top: 64px;
-	left: 154px;
+	/*font-size: 48px; */
 }
 
 .form-box {
@@ -31,24 +28,21 @@
 	height: 528px;
 	background-color: #662C91;
 	border-radius: 35px;
-	position: fixed;
-	top: 232px;
-	left: 154px;
 }
 
 .text-box{
-	width: 486px;
-	height: 40px;
+	/*width: 486px;
+	margin-left: 25px;
+	height: 40px;*/
 	border-radius: 20px;
 	display: block;
-	margin-left: 25px;
 }
 
 .label{
 	font-family: 'Inter';
 	font-weight: bold;
 	color: white;
-	margin-left: 30px;
+	/*margin-left: 30px;*/
 }
 
 .bg-beige {

@@ -4,8 +4,8 @@ import ppl from "./people.png";
 
 const Register = () => {
   return (
-		<div className='bg-[#FED99B] h-screen w-screen'> 
-			<Logo />
+		<div className='bg-[#FED99B] h-screen flex w-screen grid grid-cols-8 grid-rows-8'> 
+		<h1 className="logo row-start-1 row-end-6 flex"> Oauthpal </h1>
 			<FormTitle />
 			<Form />
 			<img className="ppl" source={ppl} alt="people"></img>
@@ -27,30 +27,31 @@ const FormTitle = () => {
 	)
 }
 
-const Logo = () => {
-	return (
-		<h1 className="logo"> Oauthpal </h1>
-	)
-}
-
 const Form = () => {
 	return (
-		<form className="form-box">
+		<form className="form-box row-start-4 row-end-7 flex grid grid-rows-6 grid-cols-6">
 
-			<br/>
-			<br/>
+			<div className='col-start-2 row-start-3 col-span-4'> 
       <label className="label">First Name</label>
       <input className="text-box" type="text" />
-			<br/>
+			</div>
+
+/*
+			<div className='col-start-2'> 
       <label className="label"> Last Name</label>
       <input className="text-box" type="text" />
-			<br/>
+			</div>
+			<div className='col-start-2'> 
       <label className="label">Email</label>
       <input className="text-box" type="text" />
-			<br/>
+			</div>
+
+			<div className='col-start-2'> 
       <label className="label">Password</label>
       <input className="text-box" type="text" />
-			<br/>
+			</div>
+			*/
+
 			<button className="button">Register</button>
 
 		</form>
