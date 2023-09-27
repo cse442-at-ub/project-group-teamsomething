@@ -3,9 +3,8 @@ import './Register.css'
 import ppl from "./people.png";
 
 const Register = () => {
-	document.body.style = 'background: #FED99B;';
   return (
-		<div> 
+		<div className='bg-[#FED99B] h-screen w-screen'> 
 			<Logo />
 			<FormTitle />
 			<Form />
