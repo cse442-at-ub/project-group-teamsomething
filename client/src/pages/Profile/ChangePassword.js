@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./profile.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePassword() {
   const [password, setPassword] = useState("");
@@ -33,8 +35,10 @@ export default function ChangePassword() {
     }
   };
 
+  const navigate = useNavigate();
   return (
     <div className="main">
+      
       <div className="form-container">
         <div className="security" style={{ marginBottom: 20 }}>
           {" "}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./profile.css";
 
 export default function ProfilePic() {
   const [profilepic, setProfilepic] = useState(null);
