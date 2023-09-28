@@ -4,11 +4,21 @@ import ppl from "./people.png";
 
 const Register = () => {
   return (
-		<div className='bg-[#FED99B] h-screen flex w-screen grid grid-cols-8 grid-rows-8'> 
-		<h1 className="logo row-start-1 row-end-6 flex"> Oauthpal </h1>
-			<FormTitle />
-			<Form />
-			<img className="ppl" source={ppl} alt="people"></img>
+		<div className='bg'> 
+			<h1 className='logo'> Oauthpal </h1>
+			<h2 className="form-title row-start-2 col-start-2">Register</h2>
+			<form className="form-box">
+				<label className="label">First Name</label>
+      			<input className="text-box" type="text" />
+				<label className="label"> Last Name</label>
+      			<input className="text-box" type="text" />
+				<br/>
+      			<label className="label">Email</label>
+      			<input className="text-box" type="text" />
+				<br/>
+     		 	<label className="label">Password</label>
+      			<input className="text-box" type="text" />
+			</form>
 		</div>
   )
 }
@@ -21,21 +31,9 @@ const ppl = () => {
 }
 */
 
-const FormTitle = () => {
-	return (
-			<h2 className="form-title">Register</h2>
-	)
-}
-
 const Form = () => {
 	return (
-		<form className="form-box row-start-4 row-end-7 flex grid grid-rows-6 grid-cols-6">
-
-			<div className='col-start-2 row-start-2 w-full'> 
-				<label className="label">First Name</label>
-				<input type="block"></input>
-			</div>
-
+		<form className="form-box">
 		</form>
 	)
 }
