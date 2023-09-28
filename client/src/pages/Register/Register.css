@@ -63,7 +63,7 @@
 	font-family: 'Inter';
 	font-weight: bold;
 	color: white;
-	margin-left: 3rem;
+	margin-left: 7%;
 }
 
 .text-box{
@@ -90,7 +90,7 @@
 	width: 138px;
 	height: 55px;
 	grid-area: 6 / 1 / 7 / 3;
-	margin-left: 3rem;
+	margin-left: 14%;
 }
 
 .login-button {
