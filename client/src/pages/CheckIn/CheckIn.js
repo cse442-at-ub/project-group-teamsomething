@@ -8,10 +8,10 @@ const CheckIn = () => {
             <div class='place-self-center text-lg text-white sm:text-1xl md:text-2xl lg:text-3xl font-semibold mb-4'>
                 Did you complete your daily goal?
             </div>
-            <div class="place-self-center text-center w-1/3 h-1/3 rounded-full bg-[#57cf1e] text-lg text-white sm:text-1xl md:text-2xl lg:text-3xl font-semibold mb-4">
+            <div class="place-self-center text-center w-1/3 h-1/2 rounded-full bg-[#57cf1e] text-lg text-white sm:text-1xl md:text-2xl lg:text-3xl font-semibold mb-4">
                 ✓
             </div>
-            <div class='place-self-center text-center w-1/3 h-1/3 rounded-full bg-[#c72929] text-lg text-white sm:text-1xl md:text-2xl lg:text-3xl font-semibold mb-4'>
+            <div class='place-self-center text-center w-1/3 h-1/2 rounded-full bg-[#c72929] text-lg text-white sm:text-1xl md:text-2xl lg:text-3xl font-semibold mb-4'>
                 x
             </div>
         </div>
