@@ -85,12 +85,14 @@
 .reg-button {
 	font-family: 'Inter';
 	font-weight: bold;
-	font-size: 25px;
+	font-size: 150%;
 	color: white;
 	background-color: #FF3737;
 	border-radius: 25px;
-	width: 138px;
-	height: 55px;
+	width: 85%;
+	height: 60%;
+	justify-self: center;
+	align-self: start;
 	grid-area: 6 / 1 / 7 / 3;
 	margin-left: 14%;
 }
@@ -98,14 +100,15 @@
 .login-button {
 	font-family: 'Inter';
 	font-weight: bold;
-	font-size: 25px;
+	font-size: 150%;
 	color: white;
 	background-color: #662C91;
 	border-radius: 25px;
-	width: 138px;
-	height: 55px;
-	grid-area: 6 / 3 / 7 / 5;
-	margin-left: 3rem;
+	width: 75%;
+	height: 50%;
+	justify-self: center;
+	align-self: start;
+	grid-area: 6 / 4 / 7 / 5;
 }
 
 .image {
