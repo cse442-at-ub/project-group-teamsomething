@@ -1,6 +1,7 @@
 
 .bg {
-	background-color: #FED99B;
+	/*background-color: #FED99B;
+	background-image: url("./temp.png");*/
 	width: 100vw;
 	height: 100vh;
 	display: grid;
@@ -73,11 +74,7 @@
 	border-radius: 20px;
 	display: block;
 	width: 100%;
-	margin-left: 3rem;
-}
-
-.bg-beige {
-	background-color: #FED99B !important;
+	margin-left: 7%;
 }
 
 .reg-button {
@@ -106,10 +103,18 @@
 	margin-left: 3rem;
 }
 
-.ppl {
+.image {
+	/*
+	grid-area: 1 / 4 / 9 / 9;
+	width: 1010.8px;
+	height: 1058px;
 	position: fixed; 
 	top: 150px;
 	left: 154px;
-	width: 100px;
-	height: 100p;
+	*/
+}
+
+.divImg {
+	width: 100vw;
+	height: 100vh;
 }
