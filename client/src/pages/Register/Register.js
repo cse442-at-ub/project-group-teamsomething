@@ -1,11 +1,10 @@
 import React from 'react'
 import './Register.css'
-import bgImg from "../../assets/bg_ppl.png"
 
 const Register = () => {
   return (
 		<div className='bg'>
-			
+
 			<h1 className='logo'> Oauthpal </h1>
 			<h2 className="form-title row-start-2 col-start-2">Register</h2>
 			<form className="form-box">
@@ -41,11 +40,13 @@ const Register = () => {
   )
 }
 
+/*
 const Form = () => {
 	return (
 		<form className="form-box">
 		</form>
 	)
 }
+*/
 
 export default Register 
