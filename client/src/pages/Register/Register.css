@@ -1,7 +1,6 @@
 
 .bg {
-	/*background-color: #FED99B;
-	background-image: url("./temp.png");*/
+	background-color: #FED99B;
 	width: 100vw;
 	height: 100vh;
 	display: grid;
@@ -104,6 +103,10 @@
 }
 
 .image {
+	background-image: url("../../assets/ppl.png");
+	width: 100vw;
+	height: 100vh;
+	margin-left: 50vw;
 	/*
 	grid-area: 1 / 4 / 9 / 9;
 	width: 1010.8px;

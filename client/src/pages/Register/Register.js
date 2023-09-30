@@ -1,23 +1,14 @@
 import React from 'react'
 import './Register.css'
-import ppl from "./people.png";
-import "./temp.png"
+import bgImg from "../../assets/bg_ppl.png"
 
 const Register = () => {
   return (
-		<div className='bg'> 
-				<img source={ppl} alt="can't load image" className='divImg'></img>
+		<div className='bg'>
+			<div className='image'></div> 
 		</div>
   )
 }
-
-/*
-const ppl = () => {
-	return (
-		<img className="ppl">
-	)
-}
-*/
 
 const Form = () => {
 	return (
