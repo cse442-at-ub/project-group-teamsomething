@@ -12,6 +12,7 @@ import ChangePassword from "./pages/Profile/ChangePassword";
 import ProfilePic from "./pages/Profile/ProfilePic";
 import Messages from "./pages/Messages/Messages"
 import Partners from "./pages/Partners/Partners"
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profilepic" element={<ProfilePic />} />
         <Route path="/Messages" element={<Messages />} />
         <Route path="/Partners" element={<Partners />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,120 @@
+
+.bg {
+	background-color: #FED99B;
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-rows: repeat(8, 1fr);
+	grid-template-columns: repeat(8, 1fr);
+	justify-items: start;
+	align-items: end;
+}
+
+.logo {
+	color: #091454;
+	font-family: 'Playfair Display SC';
+	font-weight: bold;
+	font-size: 3rem; 
+	grid-area: 1 / 2 / 2 / 4
+}
+
+.form-title {
+	font-family: 'Inter';
+	font-weight: bold;
+	font-size: 2rem;
+	grid-area: 2 / 2 / 3 / 4;
+	margin-left: 3rem;
+}
+
+
+.form-box {
+	width: 100%;
+	height: 100%;
+	border-radius: 35px;
+	background-color: #662C91;
+	grid-area: 3 / 2 / 8 / 5;
+	/* grid dimensions */
+	display: grid;
+	grid-template-rows: repeat(6, 1fr);
+	grid-template-columns: repeat(5, 1fr);
+	justify-items: start;
+	align-items: start;
+}
+
+.fname {
+	grid-area: 2 / 1 / 3 / 5;
+	width: 100%;
+	height:100%
+}
+.lname {
+	grid-area: 3 / 1 / 4 / 5;
+	width: 100%;
+	height:100%
+}
+.email {
+	grid-area: 4 / 1 / 5 / 5;
+	width: 100%;
+	height:100%
+}
+.pw {
+	grid-area: 5 / 1 / 6 / 5;
+	width: 100%;
+	height:100%
+}
+
+
+.label{
+	font-family: 'Inter';
+	font-weight: bold;
+	color: white;
+	margin-left: 7%;
+	font-size: 125%;
+}
+
+.text-box{
+	/*width: 486px;
+	margin-left: 25px;
+	height: 40px;*/
+	border-radius: 20px;
+	display: block;
+	width: 100%;
+	height: 30%;
+	margin-left: 7%;
+}
+
+.reg-button {
+	font-family: 'Inter';
+	font-weight: bold;
+	font-size: 150%;
+	color: white;
+	background-color: #FF3737;
+	border-radius: 25px;
+	width: 85%;
+	height: 60%;
+	justify-self: center;
+	align-self: start;
+	grid-area: 6 / 1 / 7 / 3;
+	margin-left: 14%;
+}
+
+.login-button {
+	font-family: 'Inter';
+	font-weight: bold;
+	font-size: 150%;
+	color: white;
+	background-color: #662C91;
+	border-radius: 25px;
+	width: 75%;
+	height: 50%;
+	justify-self: center;
+	align-self: start;
+	grid-area: 6 / 4 / 7 / 5;
+}
+
+.image {
+	background-image: url("../../assets/ppl.png");
+	width: 100%;
+	height: 100%;
+	grid-area: 1 / 5 / 9 / 9;
+	/*object-fit: contain; didnt seem to work, not the right element type prob*/ 
+}
