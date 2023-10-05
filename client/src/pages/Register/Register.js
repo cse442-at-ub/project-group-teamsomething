@@ -1,13 +1,15 @@
 import React from 'react'
 import './Register.css'
 
+// var phpPath = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/"
+
 const Register = () => {
   return (
 		<div className='bg'>
 
 			<h1 className='logo'> Oauthpal </h1>
 			<h2 className="form-title row-start-2 col-start-2">Register</h2>
-			<form className="form-box">
+			<form action= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/" className="form-box">
 
 				<div className="fname">
 				<label className="label">First Name</label>
@@ -38,6 +40,9 @@ const Register = () => {
 
 		</div>
   )
+
+
+const 
 }
 
 /*
