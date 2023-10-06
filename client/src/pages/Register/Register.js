@@ -14,7 +14,7 @@ const Register = () => {
 
 				<div className="fname">
 				<label className="label">First Name</label>
-				<input className="text-box" type="text" />
+				<input className="text-box" name="fname" type="text" />
 				</div>
 
 				<div className="lname">
