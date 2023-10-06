@@ -1,7 +1,8 @@
 import React from 'react'
 import './Register.css'
 
-// var phpPath = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/"
+var cheshire= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/Register.php"
+// var local = "http://localhost:80/442/Register.php"
 
 const Register = () => {
   return (
@@ -9,7 +10,7 @@ const Register = () => {
 
 			<h1 className='logo'> Oauthpal </h1>
 			<h2 className="form-title row-start-2 col-start-2">Register</h2>
-			<form action= "http://localhost:80/442/Register.php" method="post" className="form-box">
+			<form action={cheshire}  method="post" className="form-box">
 
 				<div className="fname">
 				<label className="label">First Name</label>
