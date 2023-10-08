@@ -12,10 +12,7 @@ import ChangePassword from "./pages/Profile/ChangePassword";
 import ProfilePic from "./pages/Profile/ProfilePic";
 import Messages from "./pages/Messages/Messages"
 import Partners from "./pages/Partners/Partners"
-<<<<<<< HEAD
 import SignUp from "./pages/SignUp/SignUp";
-=======
->>>>>>> run-server
 import Register from "./pages/Register/Register";
 
 function App() {

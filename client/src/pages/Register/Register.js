@@ -52,8 +52,4 @@ const Form = () => {
 }
 */
 
-<<<<<<< HEAD
 export default Register 
-=======
-export default Register 
->>>>>>> run-server
