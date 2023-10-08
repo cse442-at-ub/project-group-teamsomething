@@ -79,8 +79,9 @@ const Component = (props) => {
         <div className="w-[246px] h-[251px]">
           <div className="w-[246px] h-[59px] absolute top-56 left-[27px] rounded-[10px] bg-[#fed99b]" />
           <div className="box-border flex justify-center items-center absolute top-[161px] left-[97px] gap-2.5 p-2.5">
-            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black">
+            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black button-hover">
               Home
+              <span className="button-hover-text" >Home http://localhost:3000/home</span>
             </p>
           </div>
           <button
@@ -91,14 +92,15 @@ const Component = (props) => {
           >
           
             <img
-              className="w-[30px] h-[30px] object-cover"
+              className="w-[30px] h-[30px] object-cover button-hover"
               src={HomeLogo}
               alt =""
             />
           </button>
           <div className="box-border flex justify-center items-center absolute top-[368px] left-[97px] gap-2.5 p-2.5">
-            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black">
+            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black button-hover">
               Streak
+              <span className="button-hover-text" >Streak http://localhost:3000/Checkin</span>
             </p>
           </div>
 
@@ -115,13 +117,15 @@ const Component = (props) => {
             />
           </button> 
           <div className="box-border flex justify-center items-center absolute top-[298px] left-[97px] gap-2.5 p-2.5">
-            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black">
+            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black button-hover">
               Messages
+              <span className="button-hover-text" >Messages http://localhost:3000/Messages</span>
             </p>
           </div>
           <div className="box-border flex justify-center items-center absolute top-[229px] left-[97px] gap-2.5 p-2.5">
-            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black">
+            <p className="whitespace-pre-wrap flex-grow-0 flex-shrink-0 font-['Inter'] text-xl leading-[normal] font-black text-left text-black button-hover">
               Partner
+              <span className="button-hover-text" style={{ width : "80px"}} >Partner</span>
             </p>
           </div>
           <img

@@ -29,40 +29,44 @@ const Public = () => {
                 How it works
               </li>
               <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button
+                <button className="button-hover"
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
                   Login
+                <span className="button-hover-text" >Login http://localhost:3000/login</span>  
                 </button>
               </li>
               <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button
+                <button className="button-hover"
                   onClick={() => {
                     navigate("/changepassword");
                   }}
                 >
                   ChangePassword
+                  <span className="button-hover-text" style={{width : "280px"}} >Change Password http://localhost:3000/changepassword</span>  
                 </button>
               </li>
                 <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button
+                <button className="button-hover"
                   onClick={() => {
                     navigate("/profilepic");
                   }}
                 >
                   ProfilePicture
+                  <span className="button-hover-text" >Profile Picture http://localhost:3000/profilepic</span> 
                 </button>
               </li>
               <li className="flex items-center">
-                <button
-                  className="text-lg sm:text-xl md:text-2xl font-bold rounded-md bg-[#FF3737] px-3 sm:px-4 md:px-4 py-1 sm:py-2 md:py-2"
+                <button 
+                  className="text-lg sm:text-xl md:text-2xl font-bold rounded-md bg-[#FF3737] px-3 sm:px-4 md:px-4 py-1 sm:py-2 md:py-2 button-hover"
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
                   Sign up
+                  <span className="button-hover-text" >Sign up http://localhost:3000/login</span> 
                 </button>
               </li>
             </ul>
@@ -86,12 +90,13 @@ const Public = () => {
               habits and make you a superb leader!
             </div>
             <button
-              className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold rounded-md bg-[#FF3737] px-4 py-2 mt-4 md:mt-0"
+              className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold rounded-md bg-[#FF3737] px-4 py-2 mt-4 md:mt-0 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 mt-6 md:mt-0 mr-20 flex flex-col justify-end">
@@ -171,12 +176,13 @@ const Public = () => {
               partner for you
             </p>
             <button
-              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2"
+              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -200,12 +206,13 @@ const Public = () => {
               goals!
             </p>
             <button
-              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2"
+              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -228,12 +235,13 @@ const Public = () => {
               is crucial in getting to know someone better!
             </p>
             <button
-              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2"
+              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -257,12 +265,13 @@ const Public = () => {
               goals!
             </p>
             <button
-              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2"
+              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -285,12 +294,13 @@ const Public = () => {
               not, have a discussion with your partner!
             </p>
             <button
-              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2"
+              className="text-sm sm:text-md md:text-lg lg:text-xl font-bold rounded-md bg-[#FF3737] px-4 py-2 button-hover"
               onClick={() => {
                 navigate("/login");
               }}
             >
               Sign Up Today
+              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
