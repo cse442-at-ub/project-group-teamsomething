@@ -11,7 +11,15 @@ const Home = () => {
       </Grid>
       <Grid item xs={10}>
         <div className="flex justify-center items-center w-full h-full bg-[#FED99B]">
-          Home
+          <div className="flex flex-col justify-center items-center mb-12">
+            <img src="../../assets/" className="rounded-full h-10 w-10"></img>
+            <div className="rounded-md bg-[#FF3737] w-80 h-10 mb-12">
+              <p className="">How's the progress for the day?</p>
+            </div>
+            <div className="rounded-md bg-[#662c91] w-80 h-10">
+              <p className="">Progress towards goal</p>
+            </div>
+          </div>
         </div>
       </Grid>
     </Grid>
