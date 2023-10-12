@@ -13,7 +13,6 @@ import group from "../../assets/3group.png";
 import therapy from "../../assets/3therapy.png";
 import logo from "../../assets/logo.png";
 
-// Public page
 const Public = () => {
   const navigate = useNavigate();
   return (
