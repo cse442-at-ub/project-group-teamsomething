@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 
 import WhiteBox from "./WhiteBox";
 
-import DownArrow from "./DownArrow.png";
+import DownArrow from "../../assets/DownArrow.png";
 
-import HomeLogo from "./HomeLogo.png";
+import HomeLogo from "../../assets/HomeLogo.png";
 
-import PartnerLogo from "./PartnerLogo.png";
+import PartnerLogo from "../../assets/PartnerLogo.png";
 
-import WebsiteLogo from "./WebsiteLogo.png";
+import WebsiteLogo from "../../assets/WebsiteLogo.png";
 
-import MockPicture from "./MockPicture.png";
+import MockPicture from "../../assets/MockPicture.png";
 
 
-import StreakLogo from "./StreakLogo.png";
+import StreakLogo from "../../assets/StreakLogo.png";
 
-import MessagesLogo from "./MessagesLogo.png";
+import MessagesLogo from "../../assets/MessagesLogo.png";
 
 const Component = (props) => {
 
