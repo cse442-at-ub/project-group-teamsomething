@@ -9,27 +9,23 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen bg-[#FED99B] relative flex items-center justify-center">
+    <div className="h-screen bg-[#E8E9F4] relative flex items-center justify-center">
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
         <form className="w-11/12">
-        <div className="mb-5">
-            <p className="text-white">First Name</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
+          <p className="text-white">First Name</p>
+          <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
 
-            <p className="text-white">Last Name</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"></input>
-          </div>
+          <p className="text-white">Last Name</p>
+          <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
 
-          <div className="mb-5">
-            <p className="text-white">Email</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
+          <p className="text-white">Email</p>
+          <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
 
-            <p className="text-white">Password</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"></input>
+          <p className="text-white">Password</p>
+          <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"></input>
 
-            <p className="text-white">Confirm Password</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"></input>
-          </div>
+          <p className="text-white">Confirm Password</p>
+          <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-8"></input>
 
           <div className="flex flex-row gap-4">
             <button className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white">

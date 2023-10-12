@@ -9,7 +9,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen bg-[#FED99B] relative flex items-center justify-center">
+    <div className="h-screen bg-[#E8E9F4] relative flex items-center justify-center">
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
         <button className="bg-white w-11/12 h-12 mb-5 flex flex-row justify-center items-center gap-5 rounded-xl">
           <img src={google} width={30} height={30} alt="Google Logo" />
