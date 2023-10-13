@@ -13,8 +13,8 @@ import ProfilePic from "./pages/Profile/ProfilePic";
 import Messages from "./pages/Messages/Messages"
 import Partners from "./pages/Partners/Partners"
 
-//var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/build";
-var cheshire = ''
+var cheshire = "/CSE442-542/2023-Fall/cse-442x/build";
+//var cheshire = ''
 
 function App() {
   return (
