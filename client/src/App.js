@@ -13,18 +13,20 @@ import ProfilePic from "./pages/Profile/ProfilePic";
 import Messages from "./pages/Messages/Messages"
 import Partners from "./pages/Partners/Partners"
 
+var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/build/";
+
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Public />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/check-in" element={<CheckIn />} />
-        <Route path="/changepassword" element={<ChangePassword />} />
-        <Route path="/profilepic" element={<ProfilePic />} />
-        <Route path="/Messages" element={<Messages />} />
-        <Route path="/Partners" element={<Partners />} />
+        <Route path= {cheshire + "/"} element={<Public />} />
+        <Route path= {cheshire + "/home"} element={<Home />} />
+        <Route path= {cheshire + "/login"} element={<Login />} />
+        <Route path= {cheshire + "/check-in"} element={<CheckIn />} />
+        <Route path= {cheshire + "/changepassword"} element={<ChangePassword />} />
+        <Route path= {cheshire + "/profilepic"} element={<ProfilePic />} />
+        <Route path= {cheshire + "/Messages"} element={<Messages />} />
+        <Route path= {cheshire + "/Partners"} element={<Partners />} />
       </Routes>
     </Router>
   );
