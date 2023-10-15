@@ -9,7 +9,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen bg-[#E8E9F4] relative flex items-center justify-center">
+    <div className="h-screen bg-[#E8E9F4] relative flex flex-col items-center justify-center">
+      <p className="mb-5 text-5xl font-playfair font-black">Oathopal</p>
+      <p className="mb-5 text-xl">Register</p>
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
         <button className="bg-white w-11/12 h-12 mb-5 flex flex-row justify-center items-center gap-5 rounded-xl">
           <img src={google} width={30} height={30} alt="Google Logo" />
@@ -29,7 +31,12 @@ const Login = () => {
           </div>
 
           <div className="flex flex-row gap-4">
-            <button className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white">
+            <button
+              className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white"
+              onClick={() => {
+                navigate("/home");
+              }}
+            >
               Login
             </button>
             <button

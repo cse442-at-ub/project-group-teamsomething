@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Partner = () => {
+const Partners = () => {
   return (
     <div>
-      
+      Partners
     </div>
   )
 }
 
-export default Partner
+export default Partners

@@ -17,7 +17,7 @@ const Public = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="h-full bg-[#662c91] flex flex-col font-sans">
+      <div className="h-full bg-[#662c91] flex flex-col font-inter">
         {/* navigation */}
         <div className="mx-6 md:mx-12 lg:mx-24 my-6 md:my-8 lg:my-12 flex items-center">
           <div className="flex-1 flex items-center justify-start text-3xl sm:text-4xl md:text-5xl font-black text-left text-[#ff3737]">

@@ -9,7 +9,9 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen bg-[#E8E9F4] relative flex items-center justify-center">
+    <div className="h-screen bg-[#E8E9F4] relative flex flex-col items-center justify-center">
+      <p className="mb-5 text-5xl font-playfair font-black">Oathopal</p>
+      <p className="mb-5 text-xl">Register</p>
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
         <form className="w-11/12">
           <p className="text-white">First Name</p>

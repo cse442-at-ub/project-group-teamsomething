@@ -39,8 +39,8 @@ const SideDrawer = () => {
             </li>
           </NavLink>
 
-          {/* Partner */}
-          <NavLink to="/partner">
+          {/* Partners */}
+          <NavLink to="/partners">
             <li
               className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
               style={{
@@ -49,7 +49,7 @@ const SideDrawer = () => {
               }}
             >
               <img src={Partner} className="w-6 h-6 mr-3" />
-              <div className="font-extralight text-sm">Partner</div>
+              <div className="font-extralight text-sm">Partners</div>
             </li>
           </NavLink>
 
