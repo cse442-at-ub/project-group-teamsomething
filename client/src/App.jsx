@@ -13,24 +13,17 @@ import Partners from "./pages/Partners/Partners"
 import Matches from "./pages/Matches/Matches";
 import Message from "./pages/Message/Message";
 
-var cheshire = "/CSE442-542/2023-Fall/cse-442x/build";
-//var cheshire = ''
-
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path= {cheshire + "/"} element={<Public />} />
-        <Route path= {cheshire + "/home"} element={<Home />} />
-        <Route path= {cheshire + "/login"} element={<Login />} />
-        <Route path= {cheshire + "/check-in"} element={<CheckIn />} />
-        <Route path= {cheshire + "/changepassword"} element={<ChangePassword />} />
-        <Route path= {cheshire + "/profilepic"} element={<ProfilePic />} />
-        <Route path= {cheshire + "/Message"} element={<Message />} />
-        <Route path= {cheshire + "/partners"} element={<Partners />} />
-        <Route path={cheshire + "/register"} element={<Register />} />
-        <Route path= {cheshire + "/sign-up"} element={<SignUp />} />
-        <Route path= {cheshire + "/Matches"} element={<Matches />} />
+        <Route path="/" element={<Public />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/Message" element={<Message />} />
+        <Route path="/partners"element={<Partners />} />
+        <Route path="/Matches" element={<Matches />} />
       </Routes>
     </Router>
   );
