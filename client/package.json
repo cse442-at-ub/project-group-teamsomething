@@ -23,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/build",
   "eslintConfig": {
     "extends": [
       "react-app",
