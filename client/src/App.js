@@ -3,14 +3,15 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
+
 import Public from "./pages/public/Public";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
 
 import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Messages from "./pages/Messages/Messages";
-import ChangePassword from "./pages/Profile/ChangePassword";
-import ProfilePic from "./pages/Profile/ProfilePic";
-import SignUp from "./pages/SignUp/SignUp";
+import Partner from "./pages/Partners/Partner"
+import Matches from "./pages/Matches/Matches";
+import Message from "./pages/Message/Message";
 
 function App() {
   return (
@@ -20,9 +21,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/changepassword" element={<ChangePassword />} />
-        <Route path="/profilepic" element={<ProfilePic />} />
-        <Route path="/Messages" element={<Messages />} />
+        <Route path="/partner" element={<Partner />} />
+        <Route path="/Matches" element={<Matches />} />
+        <Route path="/Message" element={<Message />} />
       </Routes>
     </Router>
   );

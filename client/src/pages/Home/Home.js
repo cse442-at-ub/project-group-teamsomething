@@ -10,7 +10,7 @@ const Home = () => {
         <SideDrawer />
       </Grid>
       <Grid item xs={10}>
-        <div className="flex justify-center items-center w-full h-full bg-[#FED99B]">
+        <div className="flex justify-center items-center w-full h-full bg-[#E8E9F4]">
           <div className="flex flex-col justify-center items-center mb-12">
             <img src="../../assets/" className="rounded-full h-10 w-10"></img>
             <div className="rounded-md bg-[#FF3737] w-80 h-10 mb-12">

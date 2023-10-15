@@ -6,105 +6,78 @@ import HomeIcon from "@mui/icons-material/Home";
 import MessageIcon from "@mui/icons-material/Message";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 
+import Home from "../../assets/Home.png";
+import Partner from "../../assets/Partner.png";
+import Messages from "../../assets/Messages.png";
+import Matches from "../../assets/Matches.png";
+
 import Logo from "../../assets/logo.png";
 
 const SideDrawer = () => {
   return (
     <>
-      <div className="h-screen flex flex-1 flex-col">
+      <div className="h-screen flex flex-1 flex-col font-kanit">
         {/* Logo */}
         <div className="flex flex-row justify-center items-center p-2 mt-4">
-          <img src={Logo} className="w-5 h-5"></img>
-          <span className="text-[#EA4335]">Oathopal</span>
+          <img src={Logo} className="w-10 h-10 mr-1"></img>
+          <span className="text-[#EA4335] text-2xl">Oathopal</span>
         </div>
 
         {/* Navigation */}
         <ul className="list-none w-full h-full flex flex-col">
           {/* Home */}
-          <NavLink to="/protected">
+          <NavLink to="/home">
             <li
-              className="hover:cursor-pointer hover:bg-blue-500 hover:rounded-md flex"
+              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex items-center"
               style={{
                 padding: "calc(0.5vw + 0.5vh)",
                 marginLeft: "calc(0.5vw + 0.5vh)",
-                marginRight: "calc(0.5vw + 0.5vh)",
               }}
             >
-              <HomeIcon
-                style={{
-                  marginRight: "calc(0.5vw + 0.5vh)",
-                  fontSize: "calc(1.5vw)",
-                }}
-              />
-              <div className="font-semibold" style={{ fontSize: "calc(1vw)" }}>
-                Home
-              </div>
+              <img src={Home} className="w-6 h-6 mr-3" />
+              <div className="font-extralight text-sm">Home</div>
             </li>
           </NavLink>
 
           {/* Partner */}
-          <NavLink to="/protected">
+          <NavLink to="/partner">
             <li
-              className="hover:cursor-pointer hover:bg-blue-500 hover:rounded-md flex"
+              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
               style={{
                 padding: "calc(0.5vw + 0.5vh)",
                 marginLeft: "calc(0.5vw + 0.5vh)",
-                marginRight: "calc(0.5vw + 0.5vh)",
               }}
             >
-              <HandshakeIcon
-                style={{
-                  marginRight: "calc(0.5vw + 0.5vh)",
-                  fontSize: "calc(1.5vw)",
-                }}
-              />
-              <div className="font-semibold" style={{ fontSize: "calc(1vw)" }}>
-                Partner
-              </div>
+              <img src={Partner} className="w-6 h-6 mr-3" />
+              <div className="font-extralight text-sm">Partner</div>
             </li>
           </NavLink>
 
-          {/* Messages */}
-          <NavLink to="/protected">
+          {/* matches */}
+          <NavLink to="/matches">
             <li
-              className="hover:cursor-pointer hover:bg-blue-500 hover:rounded-md flex"
+              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
               style={{
                 padding: "calc(0.5vw + 0.5vh)",
                 marginLeft: "calc(0.5vw + 0.5vh)",
-                marginRight: "calc(0.5vw + 0.5vh)",
               }}
             >
-              <MessageIcon
-                style={{
-                  marginRight: "calc(0.5vw + 0.5vh)",
-                  fontSize: "calc(1.5vw)",
-                }}
-              />
-              <div className="font-semibold" style={{ fontSize: "calc(1vw)" }}>
-                Messages
-              </div>
+              <img src={Matches} className="w-6 h-6 mr-3" />
+              <div className="font-extralight text-sm">Matches</div>
             </li>
           </NavLink>
 
-          {/* Streak */}
-          <NavLink to="/protected">
+          {/* Message */}
+          <NavLink to="/Message">
             <li
-              className="hover:cursor-pointer hover:bg-blue-500 hover:rounded-md flex"
+              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
               style={{
                 padding: "calc(0.5vw + 0.5vh)",
                 marginLeft: "calc(0.5vw + 0.5vh)",
-                marginRight: "calc(0.5vw + 0.5vh)",
               }}
             >
-              <PublishedWithChangesIcon
-                style={{
-                  marginRight: "calc(0.5vw + 0.5vh)",
-                  fontSize: "calc(1.5vw)",
-                }}
-              />
-              <div className="font-semibold" style={{ fontSize: "calc(1vw)" }}>
-                Streak
-              </div>
+              <img src={Messages} className="w-6 h-6 mr-3" />
+              <div className="font-extralight text-sm">Message</div>
             </li>
           </NavLink>
         </ul>
