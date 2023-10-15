@@ -1,17 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import HomeIcon from "@mui/icons-material/Home";
-import MessageIcon from "@mui/icons-material/Message";
-import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
-
 import Home from "../../assets/Home.png";
 import Partner from "../../assets/Partner.png";
 import Messages from "../../assets/Messages.png";
 import Matches from "../../assets/Matches.png";
 
 import Logo from "../../assets/logo.png";
+import DialogDemo from "../Profile/Profile";
 
 const SideDrawer = () => {
   return (
@@ -80,6 +76,8 @@ const SideDrawer = () => {
               <div className="font-extralight text-sm">Message</div>
             </li>
           </NavLink>
+
+          <DialogDemo />
         </ul>
       </div>
     </>
