@@ -12,6 +12,8 @@ import ChangePassword from "./pages/Profile/ChangePassword";
 import ProfilePic from "./pages/Profile/ProfilePic";
 import Messages from "./pages/Messages/Messages"
 import Partners from "./pages/Partners/Partners"
+import SignUp from "./pages/SignUp/SignUp";
+import Register from "./pages/Register/Register";
 
 var cheshire = "/CSE442-542/2023-Fall/cse-442x/build";
 //var cheshire = ''
@@ -28,6 +30,7 @@ function App() {
         <Route path= {cheshire + "/profilepic"} element={<ProfilePic />} />
         <Route path= {cheshire + "/Messages"} element={<Messages />} />
         <Route path= {cheshire + "/Partners"} element={<Partners />} />
+        <Route path={cheshire + "/register"} element={<Register />} />
       </Routes>
     </Router>
   );
