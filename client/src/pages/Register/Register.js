@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 
-var cheshire= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/Register.php"
+var cheshire= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/login"
 // var local = "http://localhost:80/442/Register.php"
 
 const Register = () => {
@@ -24,12 +24,12 @@ const Register = () => {
 
 				<div className="email">
 				<label className="label">Email</label>
-				<input className="text-box" type="text" />
+				<input className="text-box" name="username" type="text" />
 				</div>
 
 				<div className="pw">
 				<label className="label">Password</label>
-				<input className="text-box" type="text" />
+				<input className="text-box" name="password" type="text" />
 				</div>
 
 				<button type="submit" method="post" className="reg-button">Register</button>
