@@ -1,7 +1,7 @@
 import React from 'react'
 import './Register.css'
 
-var cheshire= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/login"
+var cheshire= "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/register.php"
 // var local = "http://localhost:80/442/Register.php"
 
 const Register = () => {

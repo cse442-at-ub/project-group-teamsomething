@@ -13,7 +13,7 @@ function registerUser($username, $password) {
     $hashedPassword = hash('sha256', $salt . $password);
 
     // Store the user information in the database
-    $conn = new mysqli("localhost", "username", "password", "user_db");
+    $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
