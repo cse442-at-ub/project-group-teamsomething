@@ -1,13 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import Logo from "../../assets/logo.png";
 import Home from "../../assets/Home.png";
 import Partner from "../../assets/Partner.png";
 import Messages from "../../assets/Messages.png";
 import Matches from "../../assets/Matches.png";
-
-import Logo from "../../assets/logo.png";
-import DialogDemo from "../Profile/Profile";
+import tempProfilePic from "../../assets/TempProfilePic.png";
 
 const SideDrawer = () => {
   return (
@@ -76,9 +75,23 @@ const SideDrawer = () => {
               <div className="font-extralight text-sm">Message</div>
             </li>
           </NavLink>
-
-          <DialogDemo />
         </ul>
+        <div className="p-2">
+          <NavLink to="/profile">
+            <div className="flex flex-row items-center hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg">
+              <img
+                src={tempProfilePic}
+                className="w-12 h-12 object-cover mr-1"
+              ></img>
+              <div className="flex flex-col">
+                <p className="text-xs font-semibold">Lindsey Dun</p>
+                <p className="text-xs font-medium">
+                  <label htmlFor=""></label>Lindseydun@gmail.com
+                </p>
+              </div>
+            </div>
+          </NavLink>
+        </div>
       </div>
     </>
   );

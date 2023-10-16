@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import Partners from "./pages/Partners/Partners"
 import Matches from "./pages/Matches/Matches";
 import Message from "./pages/Message/Message";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/Message" element={<Message />} />
+        <Route path="/message" element={<Message />} />
         <Route path="/partners"element={<Partners />} />
-        <Route path="/Matches" element={<Matches />} />
+        <Route path="/matches" element={<Matches />} />
+        <Route path="/profile" element={<Profile />} />        
       </Routes>
     </Router>
   );
