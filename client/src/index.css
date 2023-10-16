@@ -1,7 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import "~inter-ui/inter.css";
 
 .button-hover {
     position: relative;
