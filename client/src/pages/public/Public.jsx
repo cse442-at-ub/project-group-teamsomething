@@ -17,7 +17,7 @@ const Public = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="h-full bg-[#662c91] flex flex-col font-sans">
+      <div className="h-full bg-[#662c91] flex flex-col font-inter">
         {/* navigation */}
         <div className="mx-6 md:mx-12 lg:mx-24 my-6 md:my-8 lg:my-12 flex items-center">
           <div className="flex-1 flex items-center justify-start text-3xl sm:text-4xl md:text-5xl font-black text-left text-[#ff3737]">
@@ -112,7 +112,7 @@ const Public = () => {
           </p>
         </div>
         <ul className="mx-6 md:mx-28 my-8 md:my-12 flex flex-col space-y-14 md:space-y-0 md:space-x-4 md:flex-row">
-          <li className="flex flex-col items-center justify-center mb-6 md:mb-0 md:flex-1 text-center">
+          <li className="flex flex-col items-center mb-6 md:mb-0 md:flex-1 text-center">
             <img
               className="w-6/12 mb-4 md:mb-6 shadow-sm"
               src={handshake}
@@ -123,7 +123,7 @@ const Public = () => {
               Partners created
             </p>
           </li>
-          <li className="flex flex-col items-center justify-center mb-6 md:mb-0 md:flex-1 text-center">
+          <li className="flex flex-col items-center mb-6 md:mb-0 md:flex-1 text-center">
             <img
               className="w-6/12 mb-4 md:mb-6 shadow-sm"
               src={goals}
@@ -132,7 +132,7 @@ const Public = () => {
             <p className="text-3xl font-bold text-black">900k</p>
             <p className="text-2xl font-semibold text-black">Goals hit</p>
           </li>
-          <li className="flex flex-col items-center justify-center mb-6 md:mb-0 md:flex-1 text-center">
+          <li className="flex flex-col items-center mb-6 md:mb-0 md:flex-1 text-center">
             <img
               className="w-6/12 mb-4 md:mb-6 shadow-sm"
               src={weights}
@@ -141,7 +141,7 @@ const Public = () => {
             <p className="text-3xl font-bold text-black">920k</p>
             <p className="text-2xl font-semibold text-black">Habits formed</p>
           </li>
-          <li className="flex flex-col items-center justify-center mb-6 md:mb-0 md:flex-1 text-center">
+          <li className="flex flex-col items-center mb-6 md:mb-0 md:flex-1 text-center">
             <img
               className="w-6/12 mb-4 md:mb-6 shadow-sm"
               src={money}
