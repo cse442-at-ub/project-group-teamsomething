@@ -26,7 +26,9 @@ export default function ProfilePic() {
             />
           </button>
         </div>
-        <button className="savechanges">Save changes</button>
+        <button className="savechanges button-hover">
+          Save changes
+        </button>
       </div>
     </div>
   );

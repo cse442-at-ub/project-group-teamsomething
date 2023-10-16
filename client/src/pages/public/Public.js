@@ -29,33 +29,30 @@ const Public = () => {
                 How it works
               </li>
               <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button className="button-hover"
+                <button className="text-hover"
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
                   Login
-                <span className="button-hover-text" >Login http://localhost:3000/login</span>  
                 </button>
               </li>
               <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button className="button-hover"
+                <button className="text-hover"
                   onClick={() => {
                     navigate("/changepassword");
                   }}
                 >
                   ChangePassword
-                  <span className="button-hover-text" style={{width : "280px"}} >Change Password http://localhost:3000/changepassword</span>  
                 </button>
               </li>
                 <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
-                <button className="button-hover"
+                <button className="text-hover"
                   onClick={() => {
                     navigate("/profilepic");
                   }}
                 >
                   ProfilePicture
-                  <span className="button-hover-text" >Profile Picture http://localhost:3000/profilepic</span> 
                 </button>
               </li>
               <li className="flex items-center">
@@ -66,7 +63,6 @@ const Public = () => {
                   }}
                 >
                   Sign up
-                  <span className="button-hover-text" >Sign up http://localhost:3000/login</span> 
                 </button>
               </li>
             </ul>
@@ -96,7 +92,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 mt-6 md:mt-0 mr-20 flex flex-col justify-end">
@@ -182,7 +177,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -212,7 +206,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -241,7 +234,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -271,7 +263,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">
@@ -300,7 +291,6 @@ const Public = () => {
               }}
             >
               Sign Up Today
-              <span className="button-hover-text" >Login http://localhost:3000/login</span>  
             </button>
           </div>
           <div className="flex-1 md:p-12 flex flex-col justify-center items-center">

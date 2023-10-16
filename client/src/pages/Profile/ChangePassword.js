@@ -90,7 +90,7 @@ export default function ChangePassword() {
             style={{
               alignSelf: "flex-end",
             }}
-            className="savechanges"
+            className="savechanges button-hover"
           >
             Save changes
           </button>
