@@ -11,7 +11,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
 import Partners from "./pages/Partners/Partners"
 import Matches from "./pages/Matches/Matches";
-import Message from "./pages/Message/Message";
+import Message_Blocked from "./pages/Message/Message_Blocked";
 import Profile from "./pages/Profile/Profile";
 
 function App() {
@@ -22,7 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/message" element={<Message />} />
+        <Route path="/message" element={<Message_Blocked />} />
+        <Route path="/message/blocked" element={<Message_Blocked />} />
         <Route path="/partners"element={<Partners />} />
         <Route path="/matches" element={<Matches />} />
         <Route path="/profile" element={<Profile />} />        
