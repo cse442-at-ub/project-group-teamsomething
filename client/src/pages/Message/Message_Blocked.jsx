@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Lock from "../../assets/lock1.png";
-import Pf1 from "../../assets/MockPhoto1.png";
+
 const Message_Blocked = () => {
   return (
     <Grid container spacing={0}>

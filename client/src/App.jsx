@@ -14,6 +14,7 @@ import Matches from "./pages/Matches/Matches";
 import Message_Blocked from "./pages/Message/Message_Blocked";
 import Profile from "./pages/Profile/Profile";
 
+
 function App() {
   return (
     <Router>
@@ -26,7 +27,8 @@ function App() {
         <Route path="/message/blocked" element={<Message_Blocked />} />
         <Route path="/partners"element={<Partners />} />
         <Route path="/matches" element={<Matches />} />
-        <Route path="/profile" element={<Profile />} />        
+        <Route path="/profile" element={<Profile />} />
+        
       </Routes>
     </Router>
   );
