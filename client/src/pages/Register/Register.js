@@ -19,7 +19,7 @@ const Register = () => {
 
 				<div className="lname">
 				<label className="label">Last Name</label>
-				<input className="text-box" type="text" />
+				<input className="text-box" name="lname" type="text" />
 				</div>
 
 				<div className="email">
