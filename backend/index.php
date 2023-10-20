@@ -67,20 +67,35 @@ $app->post('/register', function (Request $request, Response $response, array $a
     $data = $request->getParsedBody();
     $username = $data['username'] ?? '';
     $password = $data['password'] ?? '';
+    $username = $data['fname'] ?? '';
+    $password = $data['lname'] ?? '';
 
     // Path to the local text file where user data is stored
     $filePath = 'users.txt';
 
-    // Check if the username is already registered
-    $users = file($filePath, FILE_IGNORE_NEW_LINES);
-    foreach ($users as $user) {
-        list($storedUsername, $placeholder) = explode(':', $user);
-        if ($username === $storedUsername) {
-            $response->getBody()->write(json_encode(['message' => 'Username already registered']));
-            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
-        }
+    // connect to db
+    $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
+	$sql = "SELECT username FROM users";
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {  
+			if ($username === $row["username"]){
+				$response->getBody()->write(json_encode(['message' => 'Username already registered']));
+				return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+			}
+			
+	$stmt = $conn->prepare("INSERT INTO users (username, salt, password_hash, fname, lname) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sss", $username, $salt, $hashedPassword, $fname, $lname);
+
+
+
+  }
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
