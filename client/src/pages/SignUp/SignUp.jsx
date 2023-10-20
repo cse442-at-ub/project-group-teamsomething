@@ -18,7 +18,7 @@ const SignUp = () => {
     console.log(password);
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/register", { username, password });
+      const res = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php", { username, password });
       console.log(res.config.data)
       console.log(res);
     } catch (error) {

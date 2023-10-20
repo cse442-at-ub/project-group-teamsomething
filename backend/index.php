@@ -18,23 +18,31 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response;
 });
 
-function loginUser($username, $password) {
-    // Path to the local text file
-    $filePath = 'users.txt';
+function verifyUser($username, $password) {
+    $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
 
-    // Read user data from the text file
-    $users = file($filePath, FILE_IGNORE_NEW_LINES);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-    foreach ($users as $user) {
-        list($storedUsername, $hashedPassword) = explode(':', $user);
-        
-        if ($username === $storedUsername && password_verify($password, trim($hashedPassword))) {
-            $_SESSION["username"] = $username; // Store the username in the session
-            return "Login successful!";
+    $stmt = $conn->prepare("SELECT password_hash FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+
+    if ($stmt->execute()) {
+        $stmt->store_result();
+
+        if ($stmt->num_rows === 1) {
+            $stmt->bind_result($storedPasswordHash);
+            $stmt->fetch();
+
+            // Use password_verify to check the provided password against the stored hash
+            if (password_verify($password, $storedPasswordHash)) {
+                return true; // Passwords match
+            }
         }
     }
 
-    return "User not found or incorrect password.";
+    return false; // User not found or password doesn't match
 }
 
 $app->options('/login', function (Request $request, Response $response) {
@@ -53,7 +61,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
     $data = $request->getParsedBody();
     $username = $data['username'] ?? '';
     $password = $data['password'] ?? '';
-    $loginResult = loginUser($username, $password);
+    $loginResult = verifyUser($username, $password);
     echo $loginResult;
     $response->getBody()->write(json_encode(['message' => $loginResult]));
     return $response->withHeader('Content-Type', 'application/json');
@@ -75,11 +83,11 @@ $app->post('/register', function (Request $request, Response $response, array $a
 
     // connect to db
     $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
-
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // check username isn't already registered
 	$sql = "SELECT username FROM users";
 	$result = $conn->query($sql);
 
@@ -89,19 +97,15 @@ $app->post('/register', function (Request $request, Response $response, array $a
 				$response->getBody()->write(json_encode(['message' => 'Username already registered']));
 				return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
 			}
-			
-	$stmt = $conn->prepare("INSERT INTO users (username, salt, password_hash, fname, lname) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sss", $username, $salt, $hashedPassword, $fname, $lname);
+        }
+    }
 
-
-
-  }
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Store the user data in the text file
-    $userLine = $username . ':' . $hashedPassword . PHP_EOL;
-    file_put_contents($filePath, $userLine, FILE_APPEND);
+    // insert into db
+	$stmt = $conn->prepare("INSERT INTO users (username, hashedPassword, fname, lname) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sss", $username, $salt, $hashedPassword, $fname, $lname);
 
     // Return a success response
     $response->getBody()->write(json_encode(['message' => 'Registration successful']));
