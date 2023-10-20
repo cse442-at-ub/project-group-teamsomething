@@ -8,6 +8,10 @@ import facebook from "../../assets/facebookIcon.png";
 
 import { useNavigate } from "react-router-dom";
 
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php";
+// var local = "http://localhost:80/442/index.php"
+
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -18,38 +22,41 @@ const Login = () => {
     console.log(password);
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/login", { username, password });
+      const res = await axios.post(cheshire + "/login", { username, password });
       console.log(res);
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <div className="h-screen bg-[#FED99B] relative flex items-center justify-center">
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
-
         <form onSubmit={loginHandler} className="w-11/12">
           <div className="mb-5">
             <p className="text-white">Username</p>
-            <input 
-              type="text" 
-              className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4" 
-              value={username} 
+            <input
+              type="text"
+              className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
 
             <p className="text-white">Password</p>
-            <input 
-              type="password" 
-              className="bg-[#FFFFFF] w-full h-8 rounded-3xl" 
-              value={password} 
+            <input
+              type="password"
+              className="bg-[#FFFFFF] w-full h-8 rounded-3xl"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <div className="flex flex-row gap-4">
-            <button type="submit" className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white">
+            <button
+              type="submit"
+              className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white"
+            >
               Login
             </button>
             <button

@@ -2,10 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 
-
 import background from "../../assets/loginBackground.png";
 import google from "../../assets/googleIcon.png";
 import facebook from "../../assets/facebookIcon.png";
+
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php";
+// var local = "http://localhost:80/442/index.php"
 
 import { useNavigate } from "react-router-dom";
 const SignUp = () => {
@@ -18,14 +21,16 @@ const SignUp = () => {
     console.log(password);
     event.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/register", { username, password });
-      console.log(res.config.data)
+      const res = await axios.post(cheshire + "/register", {
+        username,
+        password,
+      });
+      console.log(res.config.data);
       console.log(res);
     } catch (error) {
       console.error(error);
     }
   };
-
 
   return (
     <div className="h-screen bg-[#E8E9F4] relative flex flex-col items-center justify-center">
@@ -33,33 +38,38 @@ const SignUp = () => {
       <p className="mb-5 text-xl">Register</p>
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
         <form className="w-11/12" onSubmit={registerHandler}>
-        <div className="mb-5">
+          <div className="mb-5">
             <p className="text-white">First Name</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"/>
+            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4" />
 
             <p className="text-white">Last Name</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"/>
+            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl" />
           </div>
 
           <div className="mb-5">
             <p className="text-white">Username</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)}
+            <input
+              className="bg-[#FFFFFF] w-full h-8 rounded-3xl mb-4"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <p className="text-white">Password</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)}
+            <input
+              className="bg-[#FFFFFF] w-full h-8 rounded-3xl"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <p className="text-white">Confirm Password</p>
-            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl"/>
+            <input className="bg-[#FFFFFF] w-full h-8 rounded-3xl" />
           </div>
 
           <div className="flex flex-row gap-4">
-            <button type="submit" className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white">
+            <button
+              type="submit"
+              className="bg-[#FF3737] rounded-3xl px-5 py-2 text-white"
+            >
               Register
             </button>
             <button
