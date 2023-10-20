@@ -11,16 +11,8 @@ const Login = () => {
   return (
     <div className="h-screen bg-[#E8E9F4] relative flex flex-col items-center justify-center">
       <p className="mb-5 text-5xl font-playfair font-black">Oathopal</p>
-      <p className="mb-5 text-xl">Register</p>
+      <p className="mb-5 text-xl">Login</p>
       <div className="w-[500px] h-auto bg-[#662c91] rounded-3xl flex flex-col pt-8 pb-8 items-center z-10">
-        <button className="bg-white w-11/12 h-12 mb-5 flex flex-row justify-center items-center gap-5 rounded-xl">
-          <img src={google} width={30} height={30} alt="Google Logo" />
-          <p className="text-xl">Log in with Google</p>
-        </button>
-        <button className="bg-white w-11/12 h-12 mb-6 flex flex-row justify-center items-center gap-5 rounded-xl">
-          <img src={facebook} width={30} height={30} alt="Facebook Logo" />{" "}
-          <p className="text-xl">Log in with Facebook</p>
-        </button>
         <form className="w-11/12">
           <div className="mb-5">
             <p className="text-white">Email</p>
