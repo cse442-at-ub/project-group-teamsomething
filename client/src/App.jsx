@@ -24,9 +24,7 @@ function App() {
         <Route path= {cheshire + "/"} element={<Public />} />
         <Route path= {cheshire + "/home"} element={<Home />} />
         <Route path= {cheshire + "/login"} element={<Login />} />
-        <Route path= {cheshire + "/check-in"} element={<CheckIn />} />
-        <Route path= {cheshire + "/changepassword"} element={<ChangePassword />} />
-        <Route path= {cheshire + "/profilepic"} element={<ProfilePic />} />
+        <Route path= {cheshire + "/profilepic"} element={<Profile />} />
         <Route path= {cheshire + "/message"} element={<Message />} />
         <Route path= {cheshire + "/partners"} element={<Partners />} />
         <Route path= {cheshire + "/sign-up"} element={<SignUp />} />
