@@ -75,8 +75,8 @@ $app->post('/register', function (Request $request, Response $response, array $a
     $data = $request->getParsedBody();
     $username = $data['username'] ?? '';
     $password = $data['password'] ?? '';
-    $username = $data['fname'] ?? '';
-    $password = $data['lname'] ?? '';
+    $fname = $data['fname'] ?? '';
+    $lname = $data['lname'] ?? '';
 
     // Path to the local text file where user data is stored
     $filePath = 'users.txt';
