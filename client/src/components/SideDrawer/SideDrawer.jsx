@@ -1,5 +1,4 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import Logo from "../../assets/logo.png";
 import Home from "../../assets/Home.png";
@@ -9,6 +8,7 @@ import Matches from "../../assets/Matches.png";
 import tempProfilePic from "../../assets/TempProfilePic.png";
 
 const SideDrawer = () => {
+  const { pathname } = useLocation()
   return (
     <>
       <div className="h-screen flex flex-1 flex-col font-kanit">
@@ -76,9 +76,9 @@ const SideDrawer = () => {
             </li>
           </NavLink>
         </ul>
-        <div className="p-2">
-          <NavLink to="/profile">
-            <div className="flex flex-row items-center hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg">
+        <div className="">
+          <NavLink to="/home/user/profile">
+            <div className={`flex flex-row items-center ${pathname.includes('/home/user') ? 'bg-[#E8E9F4]' : ''} hover:cursor-pointer hover:bg-[#E8E9F4] p-5 hover:rounded-tl-lg hover:rounded-bl-lg`}>
               <img
                 src={tempProfilePic}
                 className="w-12 h-12 object-cover mr-1"
