@@ -18,6 +18,9 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import Description from "./pages/User/Pages/Description";
 import ChangePassword from "./pages/User/Pages/ChangePassword";
 
+var cheshire = "/CSE442-542/2023-Fall/cse-442x/build";
+//var cheshire = ''
+
 function App() {
 
   const theme = createTheme({
@@ -59,13 +62,14 @@ function App() {
   })
 
   return (
+
     <ThemeProvider theme={theme}>
       <Router>
         <Routes>
-          <Route path="/" element={<Public />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/home" element={<Home />}>
+          <Route path={cheshire + "/"} element={<Public />} />
+          <Route path={cheshire + "/login"}  element={<Login />} />
+          <Route path={cheshire + "/sign-up"} element={<SignUp />} />
+          <Route path={cheshire + "/home"}element={<Home />}>
             <Route path='user' element={<User />}>
               <Route path='profile' element={<Profile />} />
               <Route path='description' element={<Description />} />
@@ -75,10 +79,10 @@ function App() {
               <Route path='payment' element={<div>payment</div>} />
             </Route>
           </Route>
-          <Route path="/message" element={<Message />} />
-          <Route path="/partners"element={<Partners />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/profile" element={<Profile />} />        
+          <Route path={cheshire + "/message"} element={<Message />} />
+          <Route path={cheshire + "/partners"} element={<Partners />} />
+          <Route path={cheshire + "/matches"} element={<Matches />} />
+          // <Route path={cheshire + "/profile"} element={<Profile />} />        
         </Routes>
       </Router>
     </ThemeProvider>

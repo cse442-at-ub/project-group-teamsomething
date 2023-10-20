@@ -5,7 +5,7 @@ function generateSalt() {
 }
 
 // Function to register a new user
-function registerUser($username, $password) {
+function registerUser($username, $password, $fname, $lname) {
     // Generate a random salt
     $salt = generateSalt();
 
@@ -19,8 +19,8 @@ function registerUser($username, $password) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("INSERT INTO users (username, salt, password_hash) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $salt, $hashedPassword);
+    $stmt = $conn->prepare("INSERT INTO users (username, salt, password_hash, fname, lname) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sss", $username, $salt, $hashedPassword, $fname, $lname);
 
     if ($stmt->execute()) {
         echo "User registration successful!";
@@ -36,6 +36,8 @@ function registerUser($username, $password) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
-    registerUser($username, $password);
+    $fname = $_POST["fname"];
+    $lname = $_POST["lname"];
+    registerUser($username, $password, $fname, $lname);
 }
 ?>
