@@ -5,7 +5,7 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
 
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
@@ -74,7 +74,7 @@ $app->post('/register', function (Request $request, Response $response, array $a
     // Check if the username is already registered
     $users = file($filePath, FILE_IGNORE_NEW_LINES);
     foreach ($users as $user) {
-        list($storedUsername, $hashedPassword) = explode(':', $user);
+        list($storedUsername, $placeholder) = explode(':', $user);
         if ($username === $storedUsername) {
             $response->getBody()->write(json_encode(['message' => 'Username already registered']));
             return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
