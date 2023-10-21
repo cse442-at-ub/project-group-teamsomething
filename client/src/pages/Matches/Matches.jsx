@@ -28,7 +28,7 @@ const Matches = () => {
                 className="w-12 h-12 object-cover mr-1"
               ></img>
               <div className="flex flex-col">
-                <p className="text-xl font-semibold">Samantha Smith</p>
+                <p className="text-xl font-semibold">Jaden Smith</p>
                 
               </div>
               </div>
