@@ -1,13 +1,14 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import TempProfilePic from "../../../../assets/TempProfilePic.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const [profilepic, setProfilepic] = useState(null);
-  const [ email, setEmail ] = useState('');
-  const [ changeEmail, setChangeEmail ] = useState('');
-  const [ name, setName ] = useState('');
+  const [email, setEmail] = useState("");
+  const [changeEmail, setChangeEmail] = useState("");
+  const [name, setName] = useState("");
 
   const handleProfilepic = (e) => {
     setProfilepic(e.target.files[0]);
@@ -16,23 +17,23 @@ export default function Profile() {
   const handleEditEmail = (e) => {
     e.preventDefault();
     console.log(changeEmail);
-  }
+  };
 
   const handleEditName = (e) => {
     e.preventDefault();
     console.log(name);
-  }
+  };
 
   return (
     <Box p={5} maxWidth={800}>
       <Stack spacing={3}>
-        <Typography variant="h4" fontWeight='bold'>
+        <Typography variant="h4" fontWeight="bold">
           Account Info
         </Typography>
         <Stack spacing={2} width={250}>
           <Box
-            height={250}
-            width={250}
+            height={50}
+            width={50}
             className="overflow-hidden rounded-[30px] relative border-2"
           >
             <img
@@ -48,12 +49,16 @@ export default function Profile() {
               onChange={handleProfilepic}
             />
           </Button>
-
         </Stack>
         <Stack spacing={2}>
-          <Stack direction='row' spacing={2}>
+          <Stack direction="row" spacing={2}>
             <Stack flex={3}>
-              <Typography variant="h6" fontWeight='600' component='label' htmlFor="email">
+              <Typography
+                variant="h6"
+                fontWeight="600"
+                component="label"
+                htmlFor="email"
+              >
                 Email
               </Typography>
               <TextField
@@ -67,9 +72,20 @@ export default function Profile() {
             </Stack>
             <Box flex={1} />
           </Stack>
-          <Stack direction='row' alignItems='flex-end' spacing={2} component='form' onSubmit={handleEditEmail}>
+          <Stack
+            direction="row"
+            alignItems="flex-end"
+            spacing={2}
+            component="form"
+            onSubmit={handleEditEmail}
+          >
             <Stack flex={3}>
-              <Typography variant="h6" fontWeight='600' component='label' htmlFor="change-email">
+              <Typography
+                variant="h6"
+                fontWeight="600"
+                component="label"
+                htmlFor="change-email"
+              >
                 Change Email
               </Typography>
               <TextField
@@ -88,9 +104,20 @@ export default function Profile() {
               </Button>
             </Box>
           </Stack>
-          <Stack direction='row' alignItems='flex-end' spacing={2} component='form' onSubmit={handleEditName}>
+          <Stack
+            direction="row"
+            alignItems="flex-end"
+            spacing={2}
+            component="form"
+            onSubmit={handleEditName}
+          >
             <Stack flex={3}>
-              <Typography variant="h6" fontWeight='600' component='label' htmlFor="name">
+              <Typography
+                variant="h6"
+                fontWeight="600"
+                component="label"
+                htmlFor="name"
+              >
                 Name
               </Typography>
               <TextField
@@ -109,17 +136,27 @@ export default function Profile() {
               </Button>
             </Box>
           </Stack>
-          <Stack alignItems='flex-start' width={200} spacing={2}>
-            <Button variant="contained" fullWidth LinkComponent={Link} to='/home/user/change-password'>
+          <Stack alignItems="flex-start" width={200} spacing={2}>
+            <Button
+              variant="contained"
+              fullWidth
+              LinkComponent={Link}
+              to="/home/user/change-password"
+            >
               Change Password
             </Button>
-            <Button variant="contained" fullWidth>
+            <Button
+              onClick={() => {
+                navigate("/");
+              }}
+              variant="contained"
+              fullWidth
+            >
               Log Out
             </Button>
           </Stack>
         </Stack>
       </Stack>
     </Box>
-  )
-
+  );
 }

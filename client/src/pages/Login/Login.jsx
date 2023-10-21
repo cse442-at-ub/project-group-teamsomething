@@ -1,16 +1,12 @@
-import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import background from "../../assets/loginBackground.png";
-import google from "../../assets/googleIcon.png";
-import facebook from "../../assets/facebookIcon.png";
 
 import { useNavigate } from "react-router-dom";
 
-// var cheshire =
-//   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php";
-var local = "http://localhost:8000";
+var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
+// var local = "http://localhost:8000";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,7 +19,7 @@ const Login = () => {
     try {
       console.log(username);
       console.log(password);
-      const res = await axios.post(local + "/login", { username, password });
+      const res = await axios.post(cheshire, { username, password });
       console.log(res);
       navigate("/home");
     } catch (error) {
