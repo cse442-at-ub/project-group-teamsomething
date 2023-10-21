@@ -62,6 +62,7 @@ function App() {
   })
 
   return (
+<<<<<<< HEAD
 
     <ThemeProvider theme={theme}>
       <Router>
@@ -86,6 +87,20 @@ function App() {
         </Routes>
       </Router>
     </ThemeProvider>
+=======
+    <Router>
+      <Routes>
+        <Route path= {cheshire + "/"} element={<Public />} />
+        <Route path= {cheshire + "/home"} element={<Home />} />
+        <Route path= {cheshire + "/login"} element={<Login />} />
+        <Route path= {cheshire + "/profilepic"} element={<Profile />} />
+        <Route path= {cheshire + "/message"} element={<Message />} />
+        <Route path= {cheshire + "/partners"} element={<Partners />} />
+        <Route path= {cheshire + "/sign-up"} element={<SignUp />} />
+        <Route path= {cheshire + "/matches"} element={<Matches />} />    
+      </Routes>
+    </Router>
+>>>>>>> sprint2-complete-db
   );
 }
 
