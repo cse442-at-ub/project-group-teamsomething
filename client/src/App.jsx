@@ -67,12 +67,12 @@ function App() {
   return (
 
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
         <Routes>
-          <Route path={cheshire + "/"} element={<Public />} />
-          <Route path={cheshire + "/login"}  element={<Login />} />
-          <Route path={cheshire + "/sign-up"} element={<SignUp />} />
-          <Route path={cheshire + "/home"}element={<Home />}>
+          <Route path={"/"} element={<Public />} />
+          <Route path={"/login"}  element={<Login />} />
+          <Route path={"/sign-up"} element={<SignUp />} />
+          <Route path={"/home"}element={<Home />}>
             <Route path='user' element={<User />}>
               <Route path='profile' element={<Profile />} />
               <Route path='description' element={<Description />} />

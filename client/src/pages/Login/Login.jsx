@@ -8,9 +8,9 @@ import facebook from "../../assets/facebookIcon.png";
 
 import { useNavigate } from "react-router-dom";
 
-var cheshire =
-  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php";
-// var local = "http://localhost:80/442/index.php"
+// var cheshire =
+//   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/index.php";
+var local = "http://localhost:8000";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,11 +18,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const loginHandler = async (event) => {
-    console.log(username);
-    console.log(password);
     event.preventDefault();
+
     try {
-      const res = await axios.post(cheshire + "/login", { username, password });
+      console.log(username);
+      console.log(password);
+      const res = await axios.post(local + "/login", { username, password });
       console.log(res);
       navigate("/home");
     } catch (error) {
