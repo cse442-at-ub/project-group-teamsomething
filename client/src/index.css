@@ -2,10 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-body {
-  box-sizing: border-box !important;
-}
-
 .button-hover {
     position: relative;
     display: inline-block;

@@ -37,6 +37,24 @@ const Public = () => {
                   Login
                 </button>
               </li>
+              <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
+                <button className="text-hover"
+                  onClick={() => {
+                    navigate("/changepassword");
+                  }}
+                >
+                  ChangePassword
+                </button>
+              </li>
+                <li className="flex items-center font-medium sm:font-semibold md:font-bold text-sm sm:text-base md:text-lg">
+                <button className="text-hover"
+                  onClick={() => {
+                    navigate("/profilepic");
+                  }}
+                >
+                  ProfilePicture
+                </button>
+              </li>
               <li className="flex items-center">
                 <button 
                   className="text-lg sm:text-xl md:text-2xl font-bold rounded-md bg-[#FF3737] px-3 sm:px-4 md:px-4 py-1 sm:py-2 md:py-2 button-hover"
