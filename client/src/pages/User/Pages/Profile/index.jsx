@@ -110,10 +110,10 @@ export default function Profile() {
             </Box>
           </Stack>
           <Stack alignItems='flex-start' width={200} spacing={2}>
-            <Button variant="contained" fullWidth LinkComponent={Link} to='/home/user/change-password'>
+            <Button variant="contained" fullWidth LinkComponent={Link} to='/CSE442-542/2023-Fall/cse-442x/build/home/user/change-password'>
               Change Password
             </Button>
-            <Button variant="contained" fullWidth>
+            <Button variant="contained" fullWidth LinkComponent={Link} to='/CSE442-542/2023-Fall/cse-442x/build/'>
               Log Out
             </Button>
           </Stack>
