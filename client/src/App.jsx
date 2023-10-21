@@ -20,6 +20,9 @@ import ChangePassword from "./pages/User/Pages/ChangePassword";
 
 var cheshire = "/CSE442-542/2023-Fall/cse-442x/build";
 // var cheshire = ''
+import Message_Blocked from "./pages/Message/Message_Blocked";
+//import Profile from "./pages/Profile/Profile";
+
 
 function App() {
 
@@ -79,7 +82,7 @@ function App() {
               <Route path='payment' element={<div>payment</div>} />
             </Route>
           </Route>
-          <Route path={cheshire + "/message"} element={<Message />} />
+          <Route path={cheshire + "/message"} element={<Message_Blocked />} />
           <Route path={cheshire + "/partners"} element={<Partners />} />
           <Route path={cheshire + "/matches"} element={<Matches />} />
           // <Route path={cheshire + "/profile"} element={<Profile />} />        
