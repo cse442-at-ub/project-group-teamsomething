@@ -6,7 +6,24 @@ import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Pf1 from "../../assets/MockPhoto1.png";
 import Pf2 from "../../assets/MockPhoto2.png";
 
+var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/backend/matches.php";
+
 const Matches = () => {
+	function matchAccepted(e) {
+		e.preventDefault();
+		axios
+			.post(cheshire, {
+				accepter: "eriklich"
+				accepted: "btan"
+			}
+			.then((response) => {
+				console.log(response);
+				alert("friend request sent!");
+			})
+			.catch((error) => {
+				console.log(error);
+			}
+	};
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
@@ -90,7 +107,7 @@ const Matches = () => {
               <Grid container justifyContent="flex-end" alignItems="right">
                 
                 <Grid item>
-                  <Button variant="contained" style={{backgroundColor: "#FF3737", color: "white"}}>
+                  <Button onClick={matchAccepted} variant="contained" style={{backgroundColor: "#FF3737", color: "white"}}>
                     Accept
                   </Button>
                 </Grid>
