@@ -11,18 +11,17 @@ var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442
 const Matches = () => {
 	function matchAccepted(e) {
 		e.preventDefault();
-		axios
-			.post(cheshire, {
-				accepter: "eriklich"
+		axios.post(cheshire, {
+				accepter: "eriklich",
 				accepted: "btan"
-			}
+			})
 			.then((response) => {
 				console.log(response);
 				alert("friend request sent!");
 			})
 			.catch((error) => {
 				console.log(error);
-			}
+			});
 	};
   return (
     <Grid container spacing={0}>
