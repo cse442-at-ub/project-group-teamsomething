@@ -1,8 +1,10 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth-context";
 
 export default function ProfileHelper() {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [profilepic, setProfilepic] = useState(null);
   const [email, setEmail] = useState("");
@@ -146,6 +148,7 @@ export default function ProfileHelper() {
             </Button>
             <Button
               onClick={() => {
+                logout();
                 navigate("/");
               }}
               variant="contained"

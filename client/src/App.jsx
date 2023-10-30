@@ -16,6 +16,9 @@ import PartnerReview from "./pages/User/PartnerReview/PartnerReview.jsx";
 import Payment from "./pages/User/Payment/Payment.jsx";
 import ChangePassword from "./pages/User/ChangePassword/ChangePassword";
 
+import { useAuth } from "./hooks/auth-hook";
+import { AuthContext } from "./context/auth-context";
+
 function App() {
   const theme = createTheme({
     components: {
@@ -54,26 +57,44 @@ function App() {
     },
   });
 
+  const { username, login, logout } = useAuth();
+  let routes;
+  if (username) {
+    routes = (
+      <>
+        <Route path={"/home"} element={<Home />}></Route>
+        <Route path={"/profile"} element={<Profile />} />
+        <Route path={"/description"} element={<Description />} />
+        <Route path={"/past-contracts"} element={<PastContract />} />
+        <Route path={"/change-password"} element={<ChangePassword />} />
+        <Route path={"/partner-reviews"} element={<PartnerReview />} />
+        <Route path={"/payment"} element={<Payment />} />
+        <Route path={"/message"} element={<Message_Blocked />} />
+        <Route path={"/partners"} element={<Partners />} />
+        <Route path={"/matches"} element={<Matches />} />
+      </>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
-      <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
-        <Routes>
-          <Route path={"/"} element={<Public />} />
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/sign-up"} element={<SignUp />} />
-          {/* protected routes below */}
-          <Route path={"/home"} element={<Home />}></Route>
-          <Route path={"/profile"} element={<Profile />} />
-          <Route path={"/description"} element={<Description />} />
-          <Route path={"/past-contracts"} element={<PastContract />} />
-          <Route path={"/change-password"} element={<ChangePassword />} />
-          <Route path={"/partner-reviews"} element={<PartnerReview />} />
-          <Route path={"/payment"} element={<Payment />} />
-          <Route path={"/message"} element={<Message_Blocked />} />
-          <Route path={"/partners"} element={<Partners />} />
-          <Route path={"/matches"} element={<Matches />} />
-        </Routes>
-      </Router>
+      <AuthContext.Provider
+        value={{
+          username: username,
+          login: login,
+          logout: logout,
+        }}
+      >
+        <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
+          <Routes>
+            <Route path={"/"} element={<Public />} />
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/sign-up"} element={<SignUp />} />
+            {/* protected routes below */}
+            {routes}
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
     </ThemeProvider>
   );
 }
