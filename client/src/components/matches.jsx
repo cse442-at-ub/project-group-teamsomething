@@ -10,14 +10,16 @@ const Matches = () => {
     useEffect(() => {
         axios.get(cheshire)
         .then((response) => {
-            setState({...state,matches:response})
+            setState({...state,matches:[response['data']]})
         })
         .catch((error) => {
             console.log(error);
         });
     },[])
 
-    const x = matches.map((match) => 
+    console.log(state['matches'])
+
+    const x = state['matches'].map((match) => 
         <div>{match}</div>
     );
 
