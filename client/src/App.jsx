@@ -58,9 +58,9 @@ function App() {
   });
 
   const { username, login, logout } = useAuth();
-  let routes;
+  let protectedRoutes;
   if (username) {
-    routes = (
+    protectedRoutes = (
       <>
         <Route path={"/home"} element={<Home />}></Route>
         <Route path={"/profile"} element={<Profile />} />
@@ -91,7 +91,7 @@ function App() {
             <Route path={"/login"} element={<Login />} />
             <Route path={"/sign-up"} element={<SignUp />} />
             {/* protected routes below */}
-            {routes}
+            {protectedRoutes}
           </Routes>
         </Router>
       </AuthContext.Provider>
