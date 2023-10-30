@@ -140,7 +140,7 @@ export default function ProfileHelper() {
               variant="contained"
               fullWidth
               LinkComponent={Link}
-              to="/home/user/change-password"
+              to="/change-password"
             >
               Change Password
             </Button>

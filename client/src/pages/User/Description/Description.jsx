@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 import UserSidebar from "../../../components/UserSidebar/UserSidebar";
-import DescriptionHelper from "./index"
+import DescriptionHelper from "./DescriptionHelper"
 
 const Description = () => {
   return (

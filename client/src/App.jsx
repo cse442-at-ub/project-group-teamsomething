@@ -14,6 +14,7 @@ import Description from "./pages/User/Description/Description";
 import PastContract from "./pages/User/PastContract/PastContract.jsx";
 import PartnerReview from "./pages/User/PartnerReview/PartnerReview.jsx";
 import Payment from "./pages/User/Payment/Payment.jsx";
+import ChangePassword from "./pages/User/ChangePassword/ChangePassword";
 
 function App() {
   const theme = createTheme({
@@ -64,7 +65,7 @@ function App() {
           <Route path={"/profile"} element={<Profile />} />
           <Route path={"/description"} element={<Description />} />
           <Route path={"/past-contracts"} element={<PastContract />} />
-          {/* <Route path={"/change-password"} element={<Description2 />} /> */}
+          <Route path={"/change-password"} element={<ChangePassword />} />
           <Route path={"/partner-reviews"} element={<PartnerReview />} />
           <Route path={"/payment"} element={<Payment />} />
           <Route path={"/message"} element={<Message_Blocked />} />

@@ -37,7 +37,7 @@ export default function ChangePassword() {
   };
   return (
     <Stack p={5} maxWidth={800} spacing={2}>
-      <Stack direction="row" component={Link} to="/home/user/profile">
+      <Stack direction="row" component={Link} to="/profile">
         <WestOutlinedIcon sx={{ fontSize: 30 }} />
       </Stack>
       <Typography variant="h4" fontWeight="bold">
