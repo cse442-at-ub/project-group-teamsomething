@@ -5,7 +5,7 @@ import background from "../../assets/loginBackground.png";
 
 var cheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
-// var local = "http://localhost:8000";
+// var cheshire = "http://localhost/server/register.php";
 
 import { useNavigate } from "react-router-dom";
 const SignUp = () => {

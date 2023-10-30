@@ -61,6 +61,7 @@ function App() {
           <Route path={"/"} element={<Public />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/sign-up"} element={<SignUp />} />
+          {/* protected routes below */}
           <Route path={"/home"} element={<Home />}></Route>
           <Route path={"/profile"} element={<Profile />} />
           <Route path={"/description"} element={<Description />} />

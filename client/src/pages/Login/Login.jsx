@@ -5,9 +5,8 @@ import background from "../../assets/loginBackground.png";
 
 import { useNavigate } from "react-router-dom";
 
-var cheshire =
-  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
-// var local = "http://localhost:8000";
+var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
+// var cheshire = "http://localhost:8080/server/login.php";
 
 const Login = () => {
   const navigate = useNavigate();
