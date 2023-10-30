@@ -77,7 +77,7 @@ const SideDrawer = () => {
           </NavLink>
         </ul>
         <div className="">
-          <NavLink to="/home/user/profile">
+          <NavLink to="/profile">
             <div className={`flex flex-row items-center ${pathname.includes('/home/user') ? 'bg-[#E8E9F4]' : ''} hover:cursor-pointer hover:bg-[#E8E9F4] p-5 hover:rounded-tl-lg hover:rounded-bl-lg`}>
               <img
                 src={tempProfilePic}
