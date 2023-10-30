@@ -1,9 +1,8 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import TempProfilePic from "../../../../assets/TempProfilePic.png";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Profile() {
+export default function ProfileHelper() {
   const navigate = useNavigate();
   const [profilepic, setProfilepic] = useState(null);
   const [email, setEmail] = useState("");

@@ -9,10 +9,11 @@ import Home from "./pages/Home/Home";
 import Matches from "./pages/Matches/Matches";
 import Message_Blocked from "./pages/Message/Message_Blocked";
 import Partners from "./pages/Partners/Partners";
-import ChangePassword from "./pages/User/Pages/ChangePassword";
-import Description from "./pages/User/Pages/Description";
-import Profile from "./pages/User/Pages/Profile/index";
-import User from "./pages/User/User";
+import Profile from "./pages/User/Profile/Profile";
+import Description from "./pages/User/Description/Description";
+import PastContract from "./pages/User/PastContract/PastContract.jsx";
+import PartnerReview from "./pages/User/PartnerReview/PartnerReview.jsx";
+import Payment from "./pages/User/Payment/Payment.jsx";
 
 function App() {
   const theme = createTheme({
@@ -59,26 +60,16 @@ function App() {
           <Route path={"/"} element={<Public />} />
           <Route path={"/login"} element={<Login />} />
           <Route path={"/sign-up"} element={<SignUp />} />
-          <Route path={"/home"} element={<Home />}>
-            <Route path="user" element={<User />}>
-              <Route path="profile" element={<Profile />} />
-              <Route path="description" element={<Description />} />
-              <Route path="change-password" element={<ChangePassword />} />
-              <Route
-                path="past-contracts"
-                element={<div>past-contracts</div>}
-              />
-              <Route
-                path="partner-reviews"
-                element={<div>partner-reviews</div>}
-              />
-              <Route path="payment" element={<div>payment</div>} />
-            </Route>
-          </Route>
+          <Route path={"/home"} element={<Home />}></Route>
+          <Route path={"/profile"} element={<Profile />} />
+          <Route path={"/description"} element={<Description />} />
+          <Route path={"/past-contracts"} element={<PastContract />} />
+          {/* <Route path={"/change-password"} element={<Description2 />} /> */}
+          <Route path={"/partner-reviews"} element={<PartnerReview />} />
+          <Route path={"/payment"} element={<Payment />} />
           <Route path={"/message"} element={<Message_Blocked />} />
           <Route path={"/partners"} element={<Partners />} />
           <Route path={"/matches"} element={<Matches />} />
-          <Route path={"/profile"} element={<Profile />} />
         </Routes>
       </Router>
     </ThemeProvider>
