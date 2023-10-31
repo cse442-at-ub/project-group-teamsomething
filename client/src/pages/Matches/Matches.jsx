@@ -11,20 +11,6 @@ import Pf2 from "../../assets/MockPhoto2.png";
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
 
 const Matches = () => {
-	function matchAccepted(e) {
-		e.preventDefault();
-		axios.post(cheshire, {
-				accepter: "eriklich",
-				accepted: "btan"
-			})
-			.then((response) => {
-				console.log(response);
-				alert("friend request sent!");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
