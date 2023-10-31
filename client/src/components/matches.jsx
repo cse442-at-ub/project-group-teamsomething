@@ -8,11 +8,10 @@ const Matches = () => {
     const matchAccepted = (match, event) => {
 		event.preventDefault();
         console.log(match);
-        const w = document.getElementById("username");
-        console.log(w.textContent);
+        const user = document.getElementById("username").textContent;
 		axios.post(cheshire, {
-				accepter: "eriklich",
-				accepted: "btan"
+				accepter: user,
+				accepted: match
 			})
 			.then((response) => {
 				console.log(response);
