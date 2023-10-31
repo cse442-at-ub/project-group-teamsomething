@@ -11,22 +11,26 @@ const Matches = () => {
         axios.get(cheshire)
         .then((response) => {
             setState({...state,matches:[response['data']]});
+            //console.log(response['data']);
         })
         .catch((error) => {
             console.log(error);
         });
     },[])
 
-    const x = state['matches'].map((match) => 
+    console.log(state['matches']);
+    console.log('kobe');
+
+    const x = state['matches'][0]?.map((match) => 
         <div>
             {match}
-            <br></br>
-            newline
+            <button></button>
         </div>
     );
 
+    //console.log(x);
 
-    return (<div>{x}</div>)
+    return <div>{x}</div>
 }
 
 export default Matches
