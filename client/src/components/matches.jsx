@@ -7,8 +7,8 @@ const Matches = () => {
 
     const matchAccepted = (match, event) => {
 		event.preventDefault();
-        console.log(match);
         const user = document.getElementById("username").textContent;
+        console.log(match);
 		axios.post(cheshire, {
 				accepter: user,
 				accepted: match
@@ -28,7 +28,7 @@ const Matches = () => {
         axios.get(cheshire)
         .then((response) => {
             setState({...state,matches:[response['data']]});
-            //console.log(response['data']);
+            console.log(response['data']);
         })
         .catch((error) => {
             console.log(error);
@@ -38,14 +38,12 @@ const Matches = () => {
 
     const x = state['matches'][0]?.map((match) => 
         <div>
-            {match}
+            {match[0]}
             <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
-            onClick={(event) => matchAccepted(match, event)}></button>
+            onClick={(event) => matchAccepted(match[0], event)}></button>
             <br></br>
         </div>
     );
-
-    //console.log(x);
 
     return <div>{x}</div>
 }
