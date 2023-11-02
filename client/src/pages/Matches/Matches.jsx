@@ -12,7 +12,7 @@ import {
 import { NavLink, useLocation } from "react-router-dom";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
-// import MatchesCard  from "./MatchesCard";
+import MatchesCard  from "./MatchesCard";
 import Pf1 from "../../assets/MockPhoto1.png";
 import Pf2 from "../../assets/MockPhoto2.png";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -27,29 +27,13 @@ const Matches = () => {
       <Grid item xs={2}>
         <SideDrawer />
       </Grid>
-      {/* <Grid item xs={7}>
-        <ProfileCard 
-          profilePhoto = {TempProfilePic}
-          profileName = "Lindsey Dun"
-          profileLocation = "Queens - New York"
-          profileAge = {21}
-          ProfileDescription = "I'm an active enthusiast with a passion for fitness that extends beyond the gym. When I'm not breaking a sweat, you can often find me exploring vibrant hiking trails, challenging myself to conquer new peaks, or enjoying serene yoga sessions in the great outdoors. I relish in organizing group fitness activities with my friends, whether it's a weekend hike ..."
-          ReviewerContent = "From the moment we embarked on this path, Samantha’s unwavering commitment and support have been nothing short of remarkable for me. One of the most outstanding qualities of my accountability partner is their consistency. Whether it's early morning workouts, midday meal prepping, or evening yoga sessions, they never miss a beat..."
-          ReviewerName = "Danny"
-          ReviewerAge = {22}
-          Duration = {2}
-          TotalWagered = "$300"
-          TotalTime = {7}
-          GoalMet = {6}
-          GoalFail = {1}
-          Wager = "$70"
-          TimeDuration = {2}
-        />
-      </Grid> */}
+      
       
       <Grid item xs ={10}>
       <div className="flex justify-start items-start w-full h-full bg-[#E8E9F4]">
         <Box p={20}>
+        
+        
         <Card>
           <CardContent>
             <Grid container spacing={0}>
@@ -314,7 +298,7 @@ const Matches = () => {
             
           </CardContent>
         </Card>
-      </Box>
+      </Box> 
       
       </div>
       

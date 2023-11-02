@@ -6,7 +6,7 @@ import Public from "./pages/public/Public";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 import Home from "./pages/Home/Home";
-import Matches from "./pages/Matches/Matches";
+import Matches from "./pages/Matches/MatchesCard";
 import Message_Blocked from "./pages/Message/Message_Blocked";
 import Partners from "./pages/Partners/Partners";
 import Profile from "./pages/User/Profile/Profile";
