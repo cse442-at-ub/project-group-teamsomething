@@ -8,14 +8,21 @@ const Matches = () => {
     const matchAccepted = (match, event) => {
 		event.preventDefault();
         const user = document.getElementById("username").textContent;
-        console.log(match);
 		axios.post(cheshire, {
 				accepter: user,
 				accepted: match
 			})
 			.then((response) => {
 				console.log(response);
-				alert("friend request sent!");
+                if (response['data'] == "fr accepted"){
+                    alert("friend request sent!");
+                }
+                else if (response['data'] == "user has partner"){
+                    document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
+                }
+                else if (response['data'] == "partner taken"){
+                    alert("match has already found a partner, please reload page to see current matches");
+                }
 			})
 			.catch((error) => {
 				console.log(error);

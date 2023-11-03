@@ -39,15 +39,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$partner = $result->fetch_assoc()["partner"];
-		echo $partner . "is partner";
+		// echo $partner . " is partner";
 		if (!is_null($partner)) {
-			echo "user already has partner";
+			echo "user has partner";
 			exit();
 		}
 
-
 		// check if partner got accepted by someone else already, if so send failure message back
-		echo "placeholder";
+		$sql = "SELECT partner FROM users WHERE username=?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $p2);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$partner = $result->fetch_assoc()["partner"];
+		// echo $partner . " is partner";
+		if (!is_null($partner)) {
+			echo "partner taken";
+			exit();
+		}
 
 		$stmt = $conn->prepare("UPDATE users SET partner=? WHERE username=?");
 		if (!$stmt) {
@@ -75,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->close();
 		$conn->close();
 
-		echo "request received";
+		echo "fr accepted";
     exit();
     }
 
