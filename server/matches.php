@@ -32,6 +32,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(['message' => "Connection failed: " . $conn->connect_error]);
 		}
 
+		// check if user has partner already, if so page should be blocked
+		$sql = "SELECT partner FROM users WHERE username=?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $p1);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$partner = $result->fetch_assoc()["partner"];
+		echo $partner . "is partner";
+		if (!is_null($partner)) {
+			echo "user already has partner";
+			exit();
+		}
+
+
+		// check if partner got accepted by someone else already, if so send failure message back
+		echo "placeholder";
+
 		$stmt = $conn->prepare("UPDATE users SET partner=? WHERE username=?");
 		if (!$stmt) {
         http_response_code(500);
