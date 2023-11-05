@@ -29,10 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	// Connect to db
 	$conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
-	if ($conn->connect_error) {
-		http_response_code(500);
-		echo json_encode(['message' => "Connection failed: " . $conn->connect_error]);
-	}
 
 	// loading page, so check if user has partner, if they do block otherwise return available users
 	if ($action == "load"){
@@ -68,28 +64,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	
 		$stmt = $conn->prepare("UPDATE users SET partner=? WHERE username=?");
-		if (!$stmt) {
-			http_response_code(500);
-			echo json_encode(['message' => "Statement preparation failed: " . $conn->error]);
-			exit();
-		}
+		$stmt
 
 		// set accepter's (user's) partner
 		$stmt->bind_param("ss", $p1, $p2);
-		if (!$stmt->execute()) {
-			http_response_code(500);
-			echo json_encode(['message' => "Statement execution failed: " . $stmt->error]);
-			exit();
-	}
+		$stmt->execute()
 
 		// set accepted's partner 
 		$p1 = $data['accepted']; 
 		$p2 = $data['accepter'];
-		if (!$stmt->execute()) {
-			http_response_code(500);
-			echo json_encode(['message' => "Statement execution failed: " . $stmt->error]);
-			exit();
-	}
+		$stmt->execute()
 
 		$stmt->close();
 		$conn->close();
