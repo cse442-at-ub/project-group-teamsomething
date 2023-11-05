@@ -5,6 +5,22 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 
+// check if user has partner already, if so page should be blocked
+function userTaken($username, $conn1){
+	$sql = "SELECT partner FROM users WHERE username=?";
+	$stmt = $conn1->prepare($sql);
+	$stmt->bind_param("s", $username);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$partner = $result->fetch_assoc()["partner"];
+	
+	if (!is_null($partner)) { 
+		return true; 
+	}
+	return false;
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $data = json_decode(file_get_contents("php://input"), true);
 	$action = $data['action'];
@@ -18,73 +34,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo json_encode(['message' => "Connection failed: " . $conn->connect_error]);
 	}
 
+	// loading page, so check if user has partner, if they do block otherwise return available users
 	if ($action == "load"){
 		
-		// check if user has partner already, if so page should be blocked
-		$sql = "SELECT partner FROM users WHERE username=?";
-		$stmt = $conn->prepare($sql);
-		$stmt->bind_param("s", $p1);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$partner = $result->fetch_assoc()["partner"];
-		// echo $partner . " is partner";
-		if (!is_null($partner)) {
-			echo "user has partner";
-			exit();
-		}
+		if (userTaken($p1, $conn)) {
+				echo "user taken";
+				exit();
+			}
+
+		// user doesn't have partner so load available users and send back to frontend
 		$usernames = $conn->query("SELECT username FROM users")->fetch_all();
 		echo json_encode($usernames);
 		exit();
 	}
 
+	// User hit button to accept friend request
 	else {
 		$p2 = $data['accepted'];
+		echo $accepter;
+		echo $accepted;
 
-			echo $accepter;
-			echo $accepted;
-
-			// check if partner got accepted by someone else already, if so send failure message back
-			$sql = "SELECT partner FROM users WHERE username=?";
-			$stmt = $conn->prepare($sql);
-			$stmt->bind_param("s", $p2);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$partner = $result->fetch_assoc()["partner"];
-			// echo $partner . " is partner";
-			if (!is_null($partner)) {
-				echo "partner taken";
-				exit();
-			}
-
-			$stmt = $conn->prepare("UPDATE users SET partner=? WHERE username=?");
-			if (!$stmt) {
+		// check if partner got accepted by someone else already, if so send failure message back
+		$sql = "SELECT partner FROM users WHERE username=?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $p2);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$partner = $result->fetch_assoc()["partner"];
+		// echo $partner . " is partner";
+		if (!is_null($partner)) {
+			echo "partner taken";
+			exit();
+		}
+	
+		$stmt = $conn->prepare("UPDATE users SET partner=? WHERE username=?");
+		if (!$stmt) {
 			http_response_code(500);
 			echo json_encode(['message' => "Statement preparation failed: " . $conn->error]);
 			exit();
-			}
-			// set accepter's partner
-			$stmt->bind_param("ss", $p1, $p2);
-			if (!$stmt->execute()) {
+		}
+
+		// set accepter's (user's) partner
+		$stmt->bind_param("ss", $p1, $p2);
+		if (!$stmt->execute()) {
 			http_response_code(500);
 			echo json_encode(['message' => "Statement execution failed: " . $stmt->error]);
 			exit();
-		}
+	}
 
-			// set accepted's partner 
-			$p1 = $data['accepted']; 
-			$p2 = $data['accepter'];
-			if (!$stmt->execute()) {
+		// set accepted's partner 
+		$p1 = $data['accepted']; 
+		$p2 = $data['accepter'];
+		if (!$stmt->execute()) {
 			http_response_code(500);
 			echo json_encode(['message' => "Statement execution failed: " . $stmt->error]);
 			exit();
-		}
+	}
 
-			$stmt->close();
-			$conn->close();
+		$stmt->close();
+		$conn->close();
 
-			echo "fr accepted";
+		echo "fr accepted";
 		exit();
-    }
+	}
 
 }
 

@@ -20,6 +20,7 @@ const Matches = () => {
 				console.log(response);
                 if (response['data'] == "fr accepted"){
                     alert("friend request sent!");
+                    document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
                 }
                 else if (response['data'] == "partner taken"){
                     alert("match has already found a partner, please reload page to see current matches");
@@ -35,7 +36,7 @@ const Matches = () => {
         axios.post(cheshire, {accepter: user, action: "load"})
         .then((response) => {
             console.log(response['data']);
-            if (response['data'] == "user has partner"){
+            if (response['data'] == "user taken"){
                 console.log("steph");
                 setStatus(true);
             }
