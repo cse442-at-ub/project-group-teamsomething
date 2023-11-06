@@ -22,7 +22,7 @@ const Matches = () => {
                     alert("friend request sent!");
                     document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
                 }
-                else if (response['data'] == "partner taken"){
+                else if (response['data'] == "user taken"){
                     alert("match has already found a partner, please reload page to see current matches");
                 }
 			})
@@ -51,7 +51,6 @@ const Matches = () => {
 
     console.log(userTaken);
     if (userTaken) { 
-        console.log("lebron");
         //document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
         return <div> user already has partner, go to matches page to talk with them </div>
     }
