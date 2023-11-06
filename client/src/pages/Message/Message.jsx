@@ -5,6 +5,9 @@ import SendIcon from "@mui/icons-material/Send";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
+
 const Message = () => {
   const auth = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
@@ -13,7 +16,11 @@ const Message = () => {
   const sendMessage = (e) => {
     e.preventDefault();
     if (input.trim() !== "") {
-      const newMessage = { text: input, sender: auth.username };
+      const newMessage = {
+        text: input,
+        sender_username: auth.username,
+        receiver_username: auth.username,
+      };
       setMessages([...messages, newMessage]);
       setInput("");
     }
@@ -46,10 +53,12 @@ const Message = () => {
 
           <div className="text-sm text-gray-600 mb-2">
             GoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
 
-          <div className="text-sm text-gray-600 mb-4">Hobbies and Interests</div>
+          <div className="text-sm text-gray-600 mb-4">
+            Hobbies and Interests
+          </div>
 
           <div className="text-sm text-gray-600 mb-4">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -79,14 +88,14 @@ const Message = () => {
                 <div
                   key={index}
                   className={`flex ${
-                    message.sender === auth.username
+                    message.sender_username === auth.username
                       ? "justify-end"
                       : "justify-start"
                   }`}
                 >
                   <div
                     className={`rounded px-4 py-2 m-2 ${
-                      message.sender === "username"
+                      message.sender_username === auth.username
                         ? "bg-blue-600 text-white"
                         : "bg-gray-100"
                     }`}
