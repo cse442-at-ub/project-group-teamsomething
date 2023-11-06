@@ -35,11 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (strlen($password) < 8 || strlen($password) > 31) {
         http_response_code(400);
-        echo json_encode(["Error: incorrect password length"]);
+        echo json_encode(['message' => 'Username already registered']);
         exit();
     }
-    $stmt->close();
-
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
