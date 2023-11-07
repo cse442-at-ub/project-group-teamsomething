@@ -6,7 +6,7 @@ import Public from "./pages/public/Public";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 import Home from "./pages/Home/Home";
-import Matches from "./pages/Matches/Matches";
+import Matches from "./pages/Matches/MatchesCard";
 import Message_Blocked from "./pages/Message/Message_Blocked";
 import Partners from "./pages/Partners/Partners";
 import Profile from "./pages/User/Profile/Profile";
@@ -15,6 +15,7 @@ import PastContract from "./pages/User/PastContract/PastContract.jsx";
 import PartnerReview from "./pages/User/PartnerReview/PartnerReview.jsx";
 import Payment from "./pages/User/Payment/Payment.jsx";
 import ChangePassword from "./pages/User/ChangePassword/ChangePassword";
+import Message from "./pages/Message/Message.jsx";
 
 import { useAuth } from "./hooks/auth-hook";
 import { AuthContext } from "./context/auth-context";
@@ -69,7 +70,7 @@ function App() {
         <Route path={"/change-password"} element={<ChangePassword />} />
         <Route path={"/partner-reviews"} element={<PartnerReview />} />
         <Route path={"/payment"} element={<Payment />} />
-        <Route path={"/message"} element={<Message_Blocked />} />
+        <Route path={"/message"} element={<Message />} />
         <Route path={"/partners"} element={<Partners />} />
         <Route path={"/matches"} element={<Matches />} />
       </>
