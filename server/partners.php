@@ -18,8 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//userTaken($p1, $conn);
 
 		// user doesn't have partner so load available users and send back to frontend
-		$usernames = $conn->query("SELECT username, fname, lname FROM users WHERE partner IS NULL")->fetch_all(MYSQLI_ASSOC);
-		echo json_encode($usernames);
+		$free_users = array();
+		$users = $conn->query("SELECT username, fname, lname FROM users WHERE partner IS NULL");
+
+		if ($users->num_rows > 0) {
+			while ($row = $users->fetch_assoc()) {
+					if ($row["username"] != $p1) {
+						array_push($free_users, $row);
+					}
+			}
+		}
+
+		echo json_encode($free_users);
 	}
 
 	/* User hit button to accept friend request

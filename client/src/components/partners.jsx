@@ -39,7 +39,6 @@ const Partners = () => {
         axios.post(cheshire1, {accepter: user, action: "load"})
         .then((response) => {
             console.log(response['data']);
-            console.log("kobe");
             // user has partner so lock page
             if (response['data'] == "user taken"){
                 setStatus(true);
