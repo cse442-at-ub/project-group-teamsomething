@@ -5,15 +5,18 @@ var cheshire1 = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-44
 
 const Partners = () => {
 
-    const [partners, setPartners] = useState({partners:[]});
+    const [partners, setPartners] = useState([]);
     const [userTaken, setStatus] = useState(false);
 
-	/* friend request event (button click)
-    const fr = (match, event) => {
+	/*friend request event (button click)
+    const fr = (partner, event) => {
         const user = document.getElementById("username").textContent;
 		event.preventDefault();
+        console.log(partner);
+        console.log("this is the partner!");
+        /*
 		axios.post(cheshire, {
-				accepter: user,
+				accepter: partner,
 				accepted: match,
                 action: "fr"
 			})
@@ -31,21 +34,23 @@ const Partners = () => {
 				console.log(error);
 			});
 	};
-    */
+                */
 
     // onload get available users
     useEffect(() => {
         const user = document.getElementById("username").textContent;
         axios.post(cheshire1, {accepter: user, action: "load"})
         .then((response) => {
-            console.log(response['data']);
             // user has partner so lock page
             if (response['data'] == "user taken"){
                 setStatus(true);
             }
             // user's free load available partners into partners variable
             else {
-                setPartners({...partners,partners:[response['data']]});
+                console.log(response['data'][0]);
+                setPartners([...partners, response['data'][1]]);
+                //console.log(typeof(partners));
+                console.log("kobe");
             }
         })
         .catch((error) => {
@@ -58,18 +63,18 @@ const Partners = () => {
         return <div> user already has partner, go to matches page to talk with them </div>
     }
 
-    /*
-    const x = partners['matches'][0]?.map((match) => 
+    
+    const x = partners.map((partner) => 
         <div>
-            {match[0]}
-            <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
-            onClick={(event) => matchAccepted(match[0], event)}></button>
-            <br></br>
+            {partner['username']}            <br></br>
+            {partner['fname']}             <br></br>
+            {partner['lname']}             <br></br>
         </div>
     );
-    */
+    
 
-    return <div>erik</div> 
+    return <div>{x}</div> 
+    
 
 }
 
