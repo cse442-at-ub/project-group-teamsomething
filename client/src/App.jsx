@@ -70,7 +70,7 @@ function App() {
         <Route path={"/change-password"} element={<ChangePassword />} />
         <Route path={"/partner-reviews"} element={<PartnerReview />} />
         <Route path={"/payment"} element={<Payment />} />
-        <Route path={"/message"} element={<Message />} />
+        <Route path={"/message"} element={<Message_Blocked/>} />
         <Route path={"/partners"} element={<Partners />} />
         <Route path={"/matches"} element={<Matches />} />
       </>
