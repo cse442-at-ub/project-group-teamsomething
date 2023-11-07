@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { Outlet } from "react-router-dom";
+import PartnersComp from '../../components/partners.jsx'
 
 const Partners = () => {
   return (
@@ -10,6 +11,7 @@ const Partners = () => {
         <SideDrawer />
       </Stack>
       <Stack flex={10}>
+      <PartnersComp></PartnersComp>
         <Outlet />
       </Stack>
     </Stack>
