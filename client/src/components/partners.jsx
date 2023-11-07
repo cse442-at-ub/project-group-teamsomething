@@ -47,8 +47,8 @@ const Partners = () => {
             }
             // user's free load available partners into partners variable
             else {
-                console.log(response['data'][0]);
-                setPartners([...partners, response['data'][1]]);
+                //console.log(response['data']);
+                setPartners(response['data']);
                 //console.log(typeof(partners));
                 console.log("kobe");
             }
@@ -61,7 +61,7 @@ const Partners = () => {
     if (userTaken) { 
         //document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
         return <div> user already has partner, go to matches page to talk with them </div>
-    }
+    }   
 
     
     const x = partners.map((partner) => 
@@ -72,6 +72,7 @@ const Partners = () => {
         </div>
     );
     
+    console.log(partners);
 
     return <div>{x}</div> 
     
