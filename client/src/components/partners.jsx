@@ -1,45 +1,46 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
 
-var cheshire1 = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/partners.php";
+const cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/partners.php";
 
 const Partners = () => {
 
     const [partners, setPartners] = useState([]);
     const [userTaken, setStatus] = useState(false);
 
-	/*friend request event (button click)
+	// friend request event (button click)
     const fr = (partner, event) => {
         const user = document.getElementById("username").textContent;
 		event.preventDefault();
         console.log(partner);
         console.log("this is the partner!");
-        /*
+        
 		axios.post(cheshire, {
-				accepter: partner,
-				accepted: match,
+				partner: partner,
+				user: user,
                 action: "fr"
 			})
 			.then((response) => {
 				console.log(response);
-                if (response['data'] == "fr accepted"){
+                if (response['data'] == "good fr"){
                     alert("friend request sent!");
-                    document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
+                    // document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
                 }
                 else if (response['data'] == "user taken"){
-                    alert("match has already found a partner, please reload page to see current matches");
+                    alert("you or your match has been taken, please reload page to see updated matches");
                 }
 			})
 			.catch((error) => {
 				console.log(error);
 			});
+            
 	};
-                */
+
 
     // onload get available users
     useEffect(() => {
         const user = document.getElementById("username").textContent;
-        axios.post(cheshire1, {accepter: user, action: "load"})
+        axios.post(cheshire, {user: user, action: "load"})
         .then((response) => {
             // user has partner so lock page
             if (response['data'] == "user taken"){
@@ -66,9 +67,12 @@ const Partners = () => {
     
     const x = partners.map((partner) => 
         <div>
-            {partner['username']}            <br></br>
-            {partner['fname']}             <br></br>
-            {partner['lname']}             <br></br>
+            username: {partner['username']}  first name: {partner['fname']} last name: {partner['lname']}
+            
+            <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
+            onClick={(event) => fr(partner['username'], event)}></button>
+
+            <br></br>
         </div>
     );
     
