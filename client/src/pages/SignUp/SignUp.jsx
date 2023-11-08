@@ -39,6 +39,16 @@ const SignUp = () => {
       alert("Please enter a password.");
       return;
     }
+
+    if (password.length < 8){
+      alert("Password too short");
+      return;
+    }
+
+    if (password.length > 31){
+      alert("Password too long");
+      return;
+    }
     
     event.preventDefault();
     try {
