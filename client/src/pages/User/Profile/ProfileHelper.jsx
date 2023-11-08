@@ -1,9 +1,10 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
-import TempProfilePic from "../../../../assets/TempProfilePic.png";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/auth-context";
 
-export default function Profile() {
+export default function ProfileHelper() {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [profilepic, setProfilepic] = useState(null);
   const [email, setEmail] = useState("");
@@ -141,12 +142,13 @@ export default function Profile() {
               variant="contained"
               fullWidth
               LinkComponent={Link}
-              to="/home/user/change-password"
+              to="/change-password"
             >
               Change Password
             </Button>
             <Button
               onClick={() => {
+                logout();
                 navigate("/");
               }}
               variant="contained"
