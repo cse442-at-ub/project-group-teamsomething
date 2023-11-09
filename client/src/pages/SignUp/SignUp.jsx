@@ -3,8 +3,9 @@ import React, { useState } from "react";
 
 import background from "../../assets/loginBackground.png";
 
-var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
-// var local = "http://localhost:8000";
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
+// var cheshire = "http://localhost/server/register.php";
 
 import { useNavigate } from "react-router-dom";
 const SignUp = () => {
@@ -19,6 +20,36 @@ const SignUp = () => {
     console.log(lname);
     console.log(username);
     console.log(password);
+    if (fname === "") {
+      alert("Please enter a username.");
+      return;
+    }
+
+    if (lname === "") {
+      alert("Please enter a password.");
+      return;
+    }
+
+    if (username === "") {
+      alert("Please enter a username.");
+      return;
+    }
+
+    if (password === "") {
+      alert("Please enter a password.");
+      return;
+    }
+
+    if (password.length < 8){
+      alert("Password too short");
+      return;
+    }
+
+    if (password.length > 31){
+      alert("Password too long");
+      return;
+    }
+    
     event.preventDefault();
     try {
       const res = await axios.post(cheshire, {

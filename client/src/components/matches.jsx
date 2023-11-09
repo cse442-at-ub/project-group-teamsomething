@@ -1,7 +1,7 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
 
-var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
+var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/matches.php";
 
 const Matches = () => {
 
