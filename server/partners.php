@@ -60,26 +60,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		userTaken($user, $conn);
 		
 		// check for duplicate requests
-		$sql = "SELECT partner FROM partner_requests WHERE user=?";
+		$sql = "SELECT * FROM partner_requests WHERE user=? AND partner=?";
 		if($q = $conn->prepare($sql)) { // assuming $mysqli is the connection
-			$q->bind_param('s', $user);
+			$q->bind_param('ss', $user, $partner);
 			$q->execute();
-			$result = $q->get_result();
-			if ($result){
-				$p = $result->fetch_row()[0];
-				if ($p == $partner){
-					echo json_encode($p);
-					echo "duplicate request";
-					$conn->close();
-					exit();
-				}
+			$q->store_result();
+			if ($q->num_rows > 0){
+				echo "duplicate request";
+				$conn->close();
+				exit();
 			}
+		}
 			// any additional code you need would go here.
-		} else {
+		else {
 			$error = $q->errno . ' ' . $q->error;
 			echo $error; // 1054 Unknown column 'foo' in 'field list'
 		}
-		$q->close();
 		/*
 		if ($stmt->error) {
 			die("error in executing statement: " . $stmt->error);
