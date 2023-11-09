@@ -61,6 +61,7 @@ const Matches = () => {
         name={match[0]}
         username={match[0]}
         buttonFunction={(event) => matchAccepted(match[0], event)}
+        buttonText={"Accept Request"}
         />
     );
 
