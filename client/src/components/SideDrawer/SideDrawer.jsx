@@ -85,7 +85,7 @@ const SideDrawer = () => {
               ></img>
               <div className="flex flex-col">
                 <p className="text-xs font-semibold">Lindsey Dun</p>
-                <p className="text-xs font-medium">
+                <p id="username" className="text-xs font-medium">
                   <label htmlFor=""></label>Lindseydun@gmail.com
                 </p>
               </div>
