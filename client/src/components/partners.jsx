@@ -7,6 +7,7 @@ const Partners = () => {
 
     const [partners, setPartners] = useState([]);
     const [userTaken, setStatus] = useState(false);
+    //const [user, setUser] = useState(document.getElementById("username").textContent);
 
 	// friend request event (button click)
     const fr = (partner, event) => {
@@ -14,7 +15,7 @@ const Partners = () => {
 		event.preventDefault();
         console.log(partner);
         console.log("this is the partner!");
-        
+        console.log(user);
 		axios.post(cheshire, {
 				partner: partner,
 				user: user,
@@ -40,6 +41,7 @@ const Partners = () => {
     // onload get available users
     useEffect(() => {
         const user = document.getElementById("username").textContent;
+        console.log(user);
         axios.post(cheshire, {user: user, action: "load"})
         .then((response) => {
             // user has partner so lock page
