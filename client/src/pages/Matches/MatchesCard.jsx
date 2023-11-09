@@ -45,7 +45,7 @@ const ProfileCard = ({name,username, description, buttonFunction, buttonText}
               <Stack direction="row" spacing={2} alignItems="flex-start">
                 <Stack>
                   <Typography fontSize={20} fontWeight={600}>{name}</Typography>
-                  <Typography fontSize={14} fontWeight={600}>Username: {username}</Typography>
+                  <Typography fontSize={14} fontWeight={600}>{username}</Typography>
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={1}>
                   <GppGoodOutlinedIcon sx={{ fontSize: 24 }} />
