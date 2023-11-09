@@ -20,7 +20,7 @@ const Matches = () => {
 			.then((response) => {
 				console.log(response);
                 if (response['data'] == "fr accepted"){
-                    alert("friend request sent!");
+                    alert("partner accepted!");
                     document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
                 }
                 else if (response['data'] == "user taken"){
@@ -50,7 +50,6 @@ const Matches = () => {
         });
     },[])
 
-    console.log(userTaken);
     if (userTaken) { 
         //document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
         return <div> user already has partner, go to matches page to talk with them </div>
@@ -59,7 +58,6 @@ const Matches = () => {
     const x = state['matches'][0]?.map((match) => 
         <ProfileCard
         name={match[0]}
-        username={match[0]}
         buttonFunction={(event) => matchAccepted(match[0], event)}
         buttonText={"Accept Request"}
         />
