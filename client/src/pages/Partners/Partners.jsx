@@ -1,4 +1,4 @@
-import { Grid, Button, Paper, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { Outlet } from "react-router-dom";
@@ -6,14 +6,15 @@ import PartnersComp from '../../components/partners.jsx'
 
 const Partners = () => {
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={2}>
+    <Stack direction='row' height='100vh' py={2}>
+      <Stack flex={2}>
         <SideDrawer />
-      <Stack flex={10}></Stack>
+      </Stack>
+      <Stack flex={10}>
       <PartnersComp></PartnersComp>
         <Outlet />
-      </Grid>
-    </Grid>
+      </Stack>
+    </Stack>
   );
 };
 

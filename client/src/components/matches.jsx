@@ -1,6 +1,5 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
-import Username from '../hooks/auth-hook'
 
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
 

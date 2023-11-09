@@ -16,7 +16,7 @@ import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
 
 const Matches = () => {
-  const { pathname } = useLocation()
+  //const { pathname } = useLocation()
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
