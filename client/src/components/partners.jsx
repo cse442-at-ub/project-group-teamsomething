@@ -3,7 +3,7 @@ import axios from "axios";
 import matchesCard from '../pages/Matches/MatchesCard'
 import ProfileCard from '../pages/Matches/MatchesCard';
 
-const cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/partners.php";
+const cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/partners.php";
 
 const Partners = () => {
 
@@ -27,7 +27,7 @@ const Partners = () => {
 				console.log(response);
                 if (response['data'] == "good fr"){
                     alert("friend request sent!");
-                    // document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
+                    document.getElementById(partner).innerHTML = "user already has partner, go to matches page to talk with them";
                 }
                 else if (response['data'] == "user taken"){
                     alert("you or your match has been taken, please reload page to see updated matches");
@@ -74,6 +74,7 @@ const Partners = () => {
             <ProfileCard
                 name={partner['fname'] + ' ' + partner['lname']}
                 username={partner['username']}
+                buttonFunction={(event) => fr(partner['username'], event)}
                 />
             <br></br>
         </div>
