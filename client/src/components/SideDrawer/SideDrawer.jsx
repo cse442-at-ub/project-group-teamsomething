@@ -6,9 +6,13 @@ import Partner from "../../assets/Partner.png";
 import Messages from "../../assets/Messages.png";
 import Matches from "../../assets/Matches.png";
 import tempProfilePic from "../../assets/TempProfilePic.png";
+import { AuthContext } from "../../context/auth-context";
+import { useContext } from "react";
 
 const SideDrawer = () => {
   const { pathname } = useLocation()
+  const auth = useContext(AuthContext);
+
   return (
     <>
       <div className="h-screen flex flex-1 flex-col font-kanit">
@@ -84,9 +88,9 @@ const SideDrawer = () => {
                 className="w-12 h-12 object-cover mr-1"
               ></img>
               <div className="flex flex-col">
-                <p className="text-xs font-semibold">Lindsey Dun</p>
+                <p className="text-xs font-semibold">{auth.username}</p>
                 <p id="username" className="text-xs font-medium">
-                  <label htmlFor=""></label>Lindseydun@gmail.com
+                  <label htmlFor=""></label>{auth.username}
                 </p>
               </div>
             </div>
