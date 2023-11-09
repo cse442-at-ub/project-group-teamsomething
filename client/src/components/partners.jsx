@@ -1,6 +1,6 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
-import matchesCard from '../pages/Matches/MatchesCard'
+
 import ProfileCard from '../pages/Matches/MatchesCard';
 
 const cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/partners.php";
@@ -75,6 +75,7 @@ const Partners = () => {
                 name={partner['fname'] + ' ' + partner['lname']}
                 username={partner['username']}
                 buttonFunction={(event) => fr(partner['username'], event)}
+                description=""
                 />
             <br></br>
         </div>

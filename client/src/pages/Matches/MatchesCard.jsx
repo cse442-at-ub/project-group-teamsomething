@@ -36,7 +36,7 @@ const ProfileCard = ({name,username, description, buttonFunction}
           <Grid item xs={2}>
             <Stack spacing={2}>
             <Avatar sx={{ width: 150, height: 150,  fontSize: 50,  bgcolor: avatarBgColor}}>
-            {name.charAt(0)}
+            {(name.charAt(0)).toUpperCase()}
             </Avatar>
             </Stack>
           </Grid>
