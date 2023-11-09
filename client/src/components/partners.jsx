@@ -1,5 +1,7 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
+import matchesCard from '../pages/Matches/MatchesCard'
+import ProfileCard from '../pages/Matches/MatchesCard';
 
 const cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/partners.php";
 
@@ -69,11 +71,10 @@ const Partners = () => {
     
     const x = partners.map((partner) => 
         <div>
-            username: {partner['username']}  first name: {partner['fname']} last name: {partner['lname']}
-            
-            <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
-            onClick={(event) => fr(partner['username'], event)}></button>
-
+            <ProfileCard
+                name={partner['fname'] + ' ' + partner['lname']}
+                username={partner['username']}
+                />
             <br></br>
         </div>
     );
