@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
+import ProfileCard from '../pages/Matches/MatchesCard';
 
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/matches.php";
 
@@ -56,12 +57,11 @@ const Matches = () => {
     }
 
     const x = state['matches'][0]?.map((match) => 
-        <div>
-            {match[0]}
-            <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
-            onClick={(event) => matchAccepted(match[0], event)}></button>
-            <br></br>
-        </div>
+        <ProfileCard
+        name={match[0]}
+        username={match[0]}
+        buttonFunction={(event) => matchAccepted(match[0], event)}
+        />
     );
 
     return <div>{x}</div> 

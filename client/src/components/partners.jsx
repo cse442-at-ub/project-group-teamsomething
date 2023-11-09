@@ -76,7 +76,6 @@ const Partners = () => {
                 username={partner['username']}
                 buttonFunction={(event) => fr(partner['username'], event)}
                 />
-            <br></br>
         </div>
     );
     
