@@ -64,6 +64,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if($q = $conn->prepare($sql)) { // assuming $mysqli is the connection
 			$q->bind_param('s', $user);
 			$q->execute();
+			$result = $q->get_result();
+			if ($result){
+				$p = $result->fetch_row()[0];
+				if ($p == $partner){
+					echo json_encode($p);
+					echo "duplicate request";
+					$conn->close();
+					exit();
+				}
+			}
 			// any additional code you need would go here.
 		} else {
 			$error = $q->errno . ' ' . $q->error;
