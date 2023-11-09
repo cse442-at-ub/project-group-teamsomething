@@ -24,7 +24,7 @@ const getRandomColor = () => {
   return color;
 };
 
-const ProfileCard = ({name,username, description}
+const ProfileCard = ({name,username, description, buttonFunction}
   ) => {
 
   const avatarBgColor = getRandomColor();
@@ -60,7 +60,7 @@ const ProfileCard = ({name,username, description}
               <Stack spacing={1} direction="column" alignItems="start">
               </Stack>
               <NavLink to="/Message">
-                <Button variant="contained">Accept Match</Button>
+                <Button onClick={buttonFunction} variant="contained">Accept Match</Button>
               </NavLink>
             </Stack>
           </Grid>
