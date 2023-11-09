@@ -59,6 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$p2 = $data['accepter'];
 		$stmt->execute();
 
+		// delete all requests user made
+		$stmt = $conn->prepare("DELETE FROM partner_requests WHERE user=?");
+		$stmt->bind_param("s", $p1);
+		$stmt->execute();
+		// delete all requests partner made
+		$stmt = $conn->prepare("DELETE FROM partner_requests WHERE user=?");
+		$stmt->bind_param("s", $p2);
+		$stmt->execute();
+
 		$stmt->close();
 		echo "fr accepted";
 	}
