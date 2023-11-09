@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import background from "../../assets/loginBackground.png";
+
+import { AuthContext } from "../../context/auth-context";
 
 var cheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
@@ -14,6 +16,9 @@ const SignUp = () => {
   const [lname, setLname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext)
 
   const registerHandler = async (event) => {
     console.log(fname);
@@ -58,9 +63,16 @@ const SignUp = () => {
         username,
         password,
       });
-      console.log(res.config.data);
       console.log(res);
-      navigate("/home");
+      console.log(res.data);
+      console.log(res.data.username)
+      console.log(res.data.fname)
+      console.log(res.data.lname)
+      if (res.status == 200) {
+        login(res.data.username, res.data.fname, res.data.lname);
+        console.log(auth.username);
+        navigate("/home");
+      }
     } catch (error) {
       console.error(error);
     }

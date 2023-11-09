@@ -58,7 +58,7 @@ function App() {
     },
   });
 
-  const { username, login, logout } = useAuth();
+  const { username, fname, lname, login, logout } = useAuth();
   let protectedRoutes;
   if (username) {
     protectedRoutes = (
@@ -84,6 +84,8 @@ function App() {
           username: username,
           login: login,
           logout: logout,
+          fname: fname,
+          lname: lname
         }}
       >
         <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
