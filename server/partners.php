@@ -5,7 +5,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
 //require_once "matches.php";
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // check if user has partner already, if so page should be blocked
 function userTaken($username, $dbConn){
@@ -57,11 +58,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		userTaken($partner, $conn);
 		// check if user's been accepted since page load
 		userTaken($user, $conn);
+		
+		// check for duplicate requests
+		$sql = "SELECT partner FROM partner_requests WHERE user=?";
+		if($q = $conn->prepare($sql)) { // assuming $mysqli is the connection
+			$q->bind_param('s', $user);
+			$q->execute();
+			// any additional code you need would go here.
+		} else {
+			$error = $q->errno . ' ' . $q->error;
+			echo $error; // 1054 Unknown column 'foo' in 'field list'
+		}
+		$q->close();
+		/*
+		if ($stmt->error) {
+			die("error in executing statement: " . $stmt->error);
+		}
+		if (!$stmt->execute()) {
+        //http_response_code(500);
+        //echo json_encode(['message' => "Statement execution failed: " . $stmt->error]);
+				echo json_encode('error: ' . $stmt->error);
+        exit();
+    }
+		//echo "erik";
+		 */
 	
 		// add partner request to table
-		$stmt = $conn->prepare("INSERT INTO partner_requests (user, partner) VALUES (?, ?)");
-		$stmt->bind_param("ss", $user, $partner);
-		$stmt->execute();
+		if($stmt = $conn->prepare("INSERT INTO partner_requests (user, partner) VALUES (?, ?)")) { // assuming $mysqli is the connection
+			$stmt->bind_param('ss', $user, $partner);
+			$stmt->execute();
+			// any additional code you need would go here.
+		} else {
+			$error = $stmt->errno . ' ' . $stmt->error;
+			echo $error; // 1054 Unknown column 'foo' in 'field list'
+		}
 
 		$stmt->close();
 		echo "good fr";
