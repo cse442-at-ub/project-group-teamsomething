@@ -14,8 +14,8 @@ error_reporting(E_ALL);
 function connectToDatabase()
 {
     $host = 'oceanus.cse.buffalo.edu';
-    $username = 'ianhunte';
-    $password = '50406690';
+    $username = 'eriklich';
+    $password = 'teamsomething';
     $database = 'cse442_2023_fall_team_x_db';
 
     $conn = new mysqli($host, $username, $password, $database);
@@ -40,11 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = connectToDatabase();
 
     // Insert the new message into the messages table
-    $stmtInsert = $conn->prepare("INSERT INTO messages (sender_username, receiver_username, content, timestamp) VALUES (?, ?, ?, ?)");
-    $currTime = time();
-    $stmtInsert->bind_param("ssss", $sender_username, $receiver_username, $text, $currTime);
+    $stmtInsert = $conn->prepare("INSERT INTO messages (sender_username, receiver_username, content, timestamp) VALUES (?, ?, ?, NOW())");
+    $stmtInsert->bind_param("sss", $sender_username, $receiver_username, $text);
     $stmtInsert->execute();
     $stmtInsert->close();
-
-    echo json_encode($messages);
 }
