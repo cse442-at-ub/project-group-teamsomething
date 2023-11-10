@@ -43,6 +43,7 @@ const Login = () => {
       }
       console.log(auth.username);
     } catch (error) {
+      alert("Wrong password")
       console.error(error);
     }
   };
