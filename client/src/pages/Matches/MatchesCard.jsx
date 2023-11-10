@@ -24,7 +24,7 @@ const getRandomColor = () => {
   return color;
 };
 
-const ProfileCard = ({name,username, description, buttonFunction}
+const ProfileCard = ({name,username, description, buttonFunction, buttonText}
   ) => {
 
   const avatarBgColor = getRandomColor();
@@ -45,7 +45,7 @@ const ProfileCard = ({name,username, description, buttonFunction}
               <Stack direction="row" spacing={2} alignItems="flex-start">
                 <Stack>
                   <Typography fontSize={20} fontWeight={600}>{name}</Typography>
-                  <Typography fontSize={14} fontWeight={600}>Username: {username}</Typography>
+                  <Typography fontSize={14} fontWeight={600}>{username}</Typography>
                 </Stack>
                 <Stack direction="row" alignItems="center" spacing={1}>
                   <GppGoodOutlinedIcon sx={{ fontSize: 24 }} />
@@ -60,7 +60,7 @@ const ProfileCard = ({name,username, description, buttonFunction}
               <Stack spacing={1} direction="column" alignItems="start">
               </Stack>
               <NavLink to="/Message">
-                <Button onClick={buttonFunction} variant="contained">Accept Match</Button>
+                <Button onClick={buttonFunction} variant="contained">{buttonText}</Button>
               </NavLink>
             </Stack>
           </Grid>
