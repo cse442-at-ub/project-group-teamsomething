@@ -90,7 +90,7 @@ const SideDrawer = () => {
               <div className="flex flex-col">
                 <p className="text-xs font-semibold">{auth.username}</p>
                 <p id="username" className="text-xs font-medium">
-                  <label htmlFor=""></label>{auth.username}
+                  {auth.fname} {auth.lname}
                 </p>
               </div>
             </div>

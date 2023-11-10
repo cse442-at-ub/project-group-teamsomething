@@ -33,10 +33,12 @@ const Login = () => {
         return;
       }
       const res = await axios.post(cheshire, { username, password });
+      console.log(res)
+      console.log(res.data)
+      console.log(res.data.user)
 
       if (res.status == 200) {
-        login(username);
-        console.log(auth.username);
+        login(res.data.user.username, res.data.user.fname, res.data.user.lname);
         navigate("/home");
       }
       console.log(auth.username);

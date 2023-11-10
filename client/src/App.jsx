@@ -6,7 +6,7 @@ import Public from "./pages/public/Public";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 import Home from "./pages/Home/Home";
-import Matches from "./pages/Matches/MatchesCard";
+import Matches from "./pages/Matches/Matches";
 import Message_Blocked from "./pages/Message/Message_Blocked";
 import Partners from "./pages/Partners/Partners";
 import Profile from "./pages/User/Profile/Profile";
@@ -58,7 +58,7 @@ function App() {
     },
   });
 
-  const { username, login, logout } = useAuth();
+  const { username, fname, lname, login, logout } = useAuth();
   let protectedRoutes;
   if (username) {
     protectedRoutes = (
@@ -84,6 +84,8 @@ function App() {
           username: username,
           login: login,
           logout: logout,
+          fname: fname,
+          lname: lname
         }}
       >
         <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">

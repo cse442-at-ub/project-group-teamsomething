@@ -61,8 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 
-    // Return a success response
+    // Prepare the data for the response
+    $responseData = [
+        'id' => $last_id,
+        'username' => $username,
+        'fname' => $fname,
+        'lname' => $lname,
+        'message' => 'Registration successful'
+    ];
+
+    // Return a success response with data
     http_response_code(200);
-    echo json_encode(['message' => 'Registration successful']);
+    echo json_encode($responseData);
     exit();
 }
