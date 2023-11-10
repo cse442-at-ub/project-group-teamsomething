@@ -10,6 +10,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
@@ -19,8 +20,9 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 
 // Access-Control headers are received during OPTIONS requests
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -28,59 +30,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
-// Database connection setup
-$dbHost = "oceanus.cse.buffalo.edu";
-$dbUsername = "eriklich"; // Your actual username
-$dbPassword = "teamsomething"; // Your actual password
-$dbName = "cse442_2023_fall_team_x_db"; // Your actual database name
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $username = $data['username'] ?? '';
 
-// Establish a new database connection
-$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
-
-// Check for a connection error and respond with an error message
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(['error' => "Connection failed: " . $conn->connect_error]);
-    exit();
-}
-
-// Function to send a friend request
-function sendFriendRequest($conn, $sender, $receiver) {
-    // Prepare the SQL statement to insert a new friend request
-    $stmt = $conn->prepare("INSERT INTO friend_requests (requester_username, requestee_username, status) VALUES (?, ?, 'pending')");
-    $stmt->bind_param("ss", $sender, $receiver);
-
-    if ($stmt->execute()) {
-        // Success
-        echo json_encode(['message' => 'Friend request sent successfully']);
-    } else {
-        // Error
+    // Connect to db
+    $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
+    if ($conn->connect_error) {
         http_response_code(500);
-        echo json_encode(['error' => 'Could not send friend request']);
+        echo json_encode(['message' => "Connection failed: " . $conn->connect_error]);
+        exit();
     }
 
-    // Close the statement
-    $stmt->close();
-}
+    $sql = "SELECT * FROM friend_requests WHERE requestee_username = ? AND status = 'pending'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $requests = $result->fetch_all(MYSQLI_ASSOC);
 
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    // Check if both sender and receiver are provided
-    if (isset($data['sender']) && isset($data['receiver'])) {
-        // Call the function to send the friend request
-        sendFriendRequest($conn, $data['sender'], $data['receiver']);
+    if ($requests) {
+        echo json_encode(['message' => 'Friend requests fetched successfully', 'data' => $requests]);
     } else {
-        // Respond with an error message if sender or receiver is missing
-        http_response_code(400);
-        echo json_encode(['error' => 'Both sender and receiver are required']);
+        // It's possible to get an empty array if there are no friend requests, which is not an error
+        echo json_encode(['message' => 'No friend requests found', 'data' => []]);
     }
-} else {
-    // Respond with an error message for invalid request methods
-    http_response_code(405);
-    echo json_encode(['error' => 'Invalid request method. Only POST is accepted']);
-}
 
-// Close the database connection
-$conn->close();
+    $stmt->close();
+    $conn->close();
+} else {
+    http_response_code(400);
+    echo json_encode(['message' => 'Only POST method is accepted.']);
+}
