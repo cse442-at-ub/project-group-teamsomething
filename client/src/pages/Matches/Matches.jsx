@@ -15,8 +15,6 @@ import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
 
-var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
-
 const Matches = () => {
   //const { pathname } = useLocation()
   return (
@@ -26,13 +24,7 @@ const Matches = () => {
       </Grid>
       
       <Grid item xs={10}>
-      <Typography variant="h5" gutterBottom></Typography>
-        <div id="yourMatches"  className="flex justify-center items-center w-full h-full bg-[#E8E9F4] font-kanit">
-          
-          <Paper style={{ padding: '20px', width: '80%' }}>
-            <MatchesComp></MatchesComp>
-
-          </Paper>
+        <div id="yourMatches"  className="flex justify-center items-center w-full h-full bg-[#E8E9F4] font-kanit"> 
         </div> 
       </Grid>
     </Grid> 

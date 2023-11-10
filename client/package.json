@@ -31,6 +31,7 @@
     "tailwindcss": "^3.3.3",
     "web-vitals": "^3.5.0"
   },
+  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/build",
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
