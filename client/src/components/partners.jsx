@@ -75,9 +75,8 @@ const Partners = () => {
                 name={partner['fname'] + ' ' + partner['lname']}
                 username={partner['username']}
                 buttonFunction={(event) => fr(partner['username'], event)}
-                description=""
+                buttonText="Friend Request"
                 />
-            <br></br>
         </div>
     );
     

@@ -34,8 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		userTaken($p1, $conn);
 
 		// user doesn't have partner so load available users and send back to frontend
-		$usernames = $conn->query("SELECT username FROM users")->fetch_all();
-		echo json_encode($usernames);
+		$q = "SELECT user FROM partner_requests WHERE partner=?";
+		$stmt = $conn->prepare($q);
+		$stmt->bind_param("s", $p1);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$matches = $result->fetch_all();
+		//$matches = $q->get_result();
+		echo json_encode($matches);
 	}
 
 	// User hit button to accept friend request
@@ -51,6 +57,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// set accepted's partner 
 		$p1 = $data['accepted']; 
 		$p2 = $data['accepter'];
+		$stmt->execute();
+
+		// delete all requests user made
+		$stmt = $conn->prepare("DELETE FROM partner_requests WHERE user=?");
+		$stmt->bind_param("s", $p1);
+		$stmt->execute();
+		// delete all requests partner made
+		$stmt = $conn->prepare("DELETE FROM partner_requests WHERE user=?");
+		$stmt->bind_param("s", $p2);
 		$stmt->execute();
 
 		$stmt->close();
