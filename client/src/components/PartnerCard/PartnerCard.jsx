@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth-context";
 import axios from "axios";
 
-const getAllPartnersCheshire =
-  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/partners.php";
-
 const cheshire2 =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getPartners.php";
+
+const requestPartnerURL =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendPartnerRequest.php";
 
 const PartnerCard = () => {
   // State to store the array of data from the API
@@ -18,9 +18,10 @@ const PartnerCard = () => {
   // The useEffect hook to perform the GET request on component mount
   useEffect(() => {
     axios
-      .get(getAllPartnersCheshire)
+      .get(cheshire2)
       .then((response) => {
         // Handle the response by storing the data in state
+        console.log(response.data);
         setPartners(response.data);
       })
       .catch((error) => {
@@ -28,6 +29,18 @@ const PartnerCard = () => {
         console.error("Error fetching partner data:", error);
       });
   }, []);
+
+  const sendFriendRequest = async (uname) => {
+    try {
+      const response = await axios.post(requestPartnerURL, {
+        sender: auth.username,
+        receiver: uname,
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching partner data:", error);
+    }
+  };
 
   // Render a list of cards with the data received or a loading message
   return (
@@ -43,10 +56,9 @@ const PartnerCard = () => {
                 {partner.fname} {partner.lname}
               </h3>
               <p className="text-gray-600 mb-4">{partner.username}</p>
-              {/* Include other partner details you wish to display */}
               <button
                 onClick={() => {
-                  /* function to handle friend request */
+                  sendFriendRequest(partner.username);
                 }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >

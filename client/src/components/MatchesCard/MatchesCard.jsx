@@ -17,17 +17,14 @@ const MatchesCard = () => {
           username: auth.username,
         });
         console.log(response.data);
-        // Append new partners data to the existing state
-        // Make sure to spread response.data.data if that's the array
         setPartners((prevPartners) => [...prevPartners, ...response.data.data]);
       } catch (error) {
         console.error("Error fetching partner data:", error);
       }
     };
 
-    // Call the async function
     fetchPartners();
-  }, []); // Dependencies array
+  }, [auth.username]); // Dependencies array
 
   return (
     <div className="w-full p-4">
@@ -44,7 +41,7 @@ const MatchesCard = () => {
               <p className="text-gray-600 mb-4">Status: {partner.status}</p>
               <button
                 onClick={() => {
-                  /* function to handle friend request acceptance */
+                  () => sendFriendRequest(partner.username);
                 }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
