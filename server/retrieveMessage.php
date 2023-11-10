@@ -14,8 +14,8 @@ error_reporting(E_ALL);
 function connectToDatabase()
 {
     $host = 'oceanus.cse.buffalo.edu';
-    $username = 'ianhunte';
-    $password = '50406690';
+    $username = 'eriklich';
+    $password = 'teamsomething';
     $database = 'cse442_2023_fall_team_x_db';
 
     $conn = new mysqli($host, $username, $password, $database);
@@ -32,7 +32,6 @@ function connectToDatabase()
 // Retrieve all the message history for a given user
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
-    $text = $data['text'] ?? '';
     $sender_username = $data['sender_username'] ?? '';
     $receiver_username = $data['receiver_username'] ?? '';
 

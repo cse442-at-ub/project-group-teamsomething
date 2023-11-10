@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
+
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
@@ -8,21 +10,46 @@ import { AuthContext } from "../../context/auth-context";
 var cheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
 
+var sendMessageCheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendMessage.php";
+
 const Message = () => {
   const auth = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  const sendMessage = (e) => {
-    e.preventDefault();
-    if (input.trim() !== "") {
-      const newMessage = {
-        text: input,
+  const updateMessages = async () => {
+    try {
+      const response = await axios.post(cheshire, {
         sender_username: auth.username,
         receiver_username: auth.username,
-      };
-      setMessages([...messages, newMessage]);
-      setInput("");
+      });
+      setMessages(response.data);
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(updateMessages, 1000);
+
+    return () => clearInterval(intervalId); // Clear the interval when the component unmounts
+  }, []);
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    try {
+      if (input.trim() !== "") {
+        const newMessage = await axios.post(sendMessageCheshire, {
+          text: input,
+          sender_username: auth.username,
+          receiver_username: auth.username,
+        });
+        console.log(newMessage);
+        setInput("");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
     }
   };
 
@@ -100,7 +127,7 @@ const Message = () => {
                         : "bg-gray-100"
                     }`}
                   >
-                    {message.text}
+                    {message.content}
                   </div>
                 </div>
               ))}
