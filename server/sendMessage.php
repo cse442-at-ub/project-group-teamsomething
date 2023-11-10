@@ -39,17 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Connect to the database
     $conn = connectToDatabase();
 
-    // Fetch the updated message history
-    $stmtSelect = $conn->prepare("SELECT * FROM messages WHERE sender_username=? OR receiver_username=? ORDER BY timestamp ASC");
-    $stmtSelect->bind_param("ss", $sender_username, $receiver_username);
-    $stmtSelect->execute();
-    $result = $stmtSelect->get_result();
-    $messages = [];
-    while ($row = $result->fetch_assoc()) {
-        $messages[] = $row;
-    }
-    $stmtSelect->close();
-    $conn->close();
+    // Insert the new message into the messages table
+    $stmtInsert = $conn->prepare("INSERT INTO messages (sender_username, receiver_username, content, timestamp) VALUES (?, ?, ?, ?)");
+    $currTime = time();
+    $stmtInsert->bind_param("ssss", $sender_username, $receiver_username, $text, $currTime);
+    $stmtInsert->execute();
+    $stmtInsert->close();
 
     echo json_encode($messages);
 }
