@@ -10,6 +10,7 @@ const acceptPartnerURL =
 const MatchesCard = () => {
   const [partners, setPartners] = useState([]);
   const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext)
 
   useEffect(() => {
     if (auth.username) {
@@ -18,6 +19,7 @@ const MatchesCard = () => {
   }, [auth.username]);
 
   const acceptFriendRequest = async (uname) => {
+    console.log(auth.partner)
     try {
       const response = await axios.post(acceptPartnerURL, {
         requester_username: auth.username,

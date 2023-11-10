@@ -26,14 +26,15 @@ function verifyUser($username, $password)
         sendResponse("Connection failed: " . $conn->connect_error, 500);
     }
 
-    $stmt = $conn->prepare("SELECT password_hash FROM users WHERE username = ?");
+    // Updated to select the partner column as well
+    $stmt = $conn->prepare("SELECT password_hash, partner FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
     if ($stmt->execute()) {
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            $stmt->bind_result($storedPasswordHash);
+            $stmt->bind_result($storedPasswordHash, $partner);  // Bind the partner variable
             $stmt->fetch();
             $stmt->close();
 
@@ -46,18 +47,20 @@ function verifyUser($username, $password)
                 $stmt->fetch();
                 $stmt->close();
 
-                // Return the user data as an array
+                // Return the user data as an array, including the partner
                 return [
                     'id' => $id,
                     'username' => $username,
                     'fname' => $fname,
-                    'lname' => $lname
+                    'lname' => $lname,
+                    'partner' => $partner  // Include the partner in the response
                 ];
             }
         }
     }
     return false;
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);

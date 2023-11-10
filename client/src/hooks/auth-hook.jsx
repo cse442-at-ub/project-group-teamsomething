@@ -5,19 +5,22 @@ export const useAuth = () => {
   const [username, setUsername] = useState(sessionStorage.getItem("username"));
   const [fname, setFname] = useState(null);
   const [lname, setLname] = useState(null);
+  const [partner, setPartner] = useState(null);
 
-  const login = useCallback((b_username, fname, lname) => {
+  const login = useCallback((b_username, fname, lname, partner) => {
     sessionStorage.setItem("username", b_username); // Store the username in sessionStorage
     setUsername(b_username);
-    setFname(fname)
-    setLname(lname)
+    setFname(fname);
+    setLname(lname);
+    setPartner(partner);
   }, []);
 
   const logout = useCallback(() => {
     sessionStorage.removeItem("username"); // Remove the username from sessionStorage
     setUsername(null);
-    setFname(null)
-    setLname(null)
+    setFname(null);
+    setLname(null);
+    setPartner(null);
   }, []);
 
   // Effect to synchronize state if sessionStorage changes (e.g., in a different tab)
@@ -35,5 +38,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { username, fname, lname, login, logout };
+  return { username, fname, lname, partner, login, logout };
 };

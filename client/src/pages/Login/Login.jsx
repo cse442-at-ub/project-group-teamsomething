@@ -21,14 +21,12 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      console.log(username);
-      console.log(password);
-      if (username === "") {
+      if (username.trim() === "") {
         alert("Please enter a username.");
         return;
       }
 
-      if (password === "") {
+      if (password.trim() === "") {
         alert("Please enter a password.");
         return;
       }
@@ -38,7 +36,7 @@ const Login = () => {
       console.log(res.data.user)
 
       if (res.status == 200) {
-        login(res.data.user.username, res.data.user.fname, res.data.user.lname);
+        login(res.data.user.username, res.data.user.fname, res.data.user.lname, res.data.user.partner);
         navigate("/home");
       }
       console.log(auth.username);
