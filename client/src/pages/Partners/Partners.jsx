@@ -11,7 +11,7 @@ const Partners = () => {
       </Grid>
 
       <Grid item xs={10}>
-        <PartnerCard></PartnerCard>
+        <PartnerCard />
       </Grid>
     </Grid>
   );

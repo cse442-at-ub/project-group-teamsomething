@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth-context";
 import axios from "axios";
 
-const cheshire =
+const getAllPartnersCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/partners.php";
 
 const cheshire2 =
@@ -18,7 +18,7 @@ const PartnerCard = () => {
   // The useEffect hook to perform the GET request on component mount
   useEffect(() => {
     axios
-      .get(cheshire)
+      .get(getAllPartnersCheshire)
       .then((response) => {
         // Handle the response by storing the data in state
         setPartners(response.data);

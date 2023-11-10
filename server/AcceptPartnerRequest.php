@@ -1,6 +1,6 @@
 <?php
 
-// SendFriendRequest.php
+// AcceptFriendRequest.php
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
@@ -19,16 +19,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Function to send a friend request
-function sendFriendRequest($conn, $requesterId, $requesteeId)
+// Function to accept a friend request
+function acceptFriendRequest($conn, $requestId)
 {
-    $stmt = $conn->prepare("INSERT INTO friend_requests (requester_id, requestee_id) VALUES (?, ?)");
-    $stmt->bind_param("ii", $requesterId, $requesteeId);
+    $stmt = $conn->prepare("UPDATE friend_requests SET status = 'accepted' WHERE id = ?");
+    $stmt->bind_param("i", $requestId);
 
     if ($stmt->execute()) {
-        echo json_encode(['message' => 'Friend request sent.']);
+        echo json_encode(['message' => 'Friend request accepted.']);
     } else {
-        echo json_encode(['error' => 'Could not send friend request.']);
+        echo json_encode(['error' => 'Could not accept friend request.']);
     }
 
     $stmt->close();
@@ -36,7 +36,7 @@ function sendFriendRequest($conn, $requesterId, $requesteeId)
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    sendFriendRequest($conn, $data['requesterId'], $data['requesteeId']);
+    acceptFriendRequest($conn, $data['requestId']);
 } else {
     echo json_encode(['error' => 'Invalid request method.']);
 }
