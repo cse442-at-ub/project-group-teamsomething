@@ -1,10 +1,13 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 
+import Public from "./pages/public/Public";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
-import Public from "./pages/public/Public";
 
-import { ThemeProvider, createTheme } from "@mui/material";
 import Home from "./pages/Home/Home";
 import Matches from "./pages/Matches/Matches";
 import Message_Blocked from "./pages/Message/Message_Blocked";

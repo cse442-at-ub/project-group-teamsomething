@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from 'react'
 import axios from "axios";
+import ProfileCard from '../pages/Matches/MatchesCard';
 
 var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/matches.php";
 
@@ -19,7 +20,7 @@ const Matches = () => {
 			.then((response) => {
 				console.log(response);
                 if (response['data'] == "fr accepted"){
-                    alert("friend request sent!");
+                    alert("partner accepted!");
                     document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
                 }
                 else if (response['data'] == "user taken"){
@@ -49,19 +50,17 @@ const Matches = () => {
         });
     },[])
 
-    console.log(userTaken);
     if (userTaken) { 
         //document.getElementById("yourMatches").innerHTML = "user already has partner, go to matches page to talk with them";
         return <div> user already has partner, go to matches page to talk with them </div>
     }
 
     const x = state['matches'][0]?.map((match) => 
-        <div>
-            {match[0]}
-            <button style={{backgroundColor: "#FF3737", color: "red", width: "30px", height: "30px"}} 
-            onClick={(event) => matchAccepted(match[0], event)}></button>
-            <br></br>
-        </div>
+        <ProfileCard
+        name={match[0]}
+        buttonFunction={(event) => matchAccepted(match[0], event)}
+        buttonText={"Accept Request"}
+        />
     );
 
     return <div>{x}</div> 
