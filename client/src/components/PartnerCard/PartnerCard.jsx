@@ -45,28 +45,34 @@ const PartnerCard = () => {
   // Render a list of cards with the data received or a loading message
   return (
     <div className="w-full p-4">
-      {partners.length ? (
-        partners.map((partner, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-lg shadow-md w-full overflow-hidden mb-4"
-          >
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                {partner.fname} {partner.lname}
-              </h3>
-              <p className="text-gray-600 mb-4">{partner.username}</p>
-              <button
-                onClick={() => {
-                  sendFriendRequest(partner.username);
-                }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Request Friend
-              </button>
+      {partners.length > 0 ? (
+        partners.map((partner, index) => {
+          // Skip rendering if partner.username is the same as auth.username
+          if (partner.username === auth.username) {
+            return null; // Don't render anything for this iteration
+          }
+
+          // Render the partner card for partners with a different username
+          return (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md w-full overflow-hidden mb-4"
+            >
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  {partner.fname} {partner.lname}
+                </h3>
+                <p className="text-gray-600 mb-4">{partner.username}</p>
+                <button
+                  onClick={() => sendFriendRequest(partner.username)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Request Friend
+                </button>
+              </div>
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
         <div>Loading...</div>
       )}

@@ -10,21 +10,28 @@ const MatchesCard = () => {
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    // Define an async function
     const fetchPartners = async () => {
       try {
         const response = await axios.post(PartnerRequestsURL, {
           username: auth.username,
         });
         console.log(response.data);
-        setPartners((prevPartners) => [...prevPartners, ...response.data.data]);
+        // Set the partners with the new data from the response
+        setPartners(response.data.data); // Assumes response.data.data is the array of partner requests
       } catch (error) {
         console.error("Error fetching partner data:", error);
       }
     };
 
-    fetchPartners();
-  }, [auth.username]); // Dependencies array
+    if (auth.username) {
+      fetchPartners();
+    }
+  }, [auth.username]); // Dependency array includes auth.username
+
+  // Define the sendFriendRequest function here, outside of your return statement
+  const sendFriendRequest = async (username) => {
+    // ...send friend request logic
+  };
 
   return (
     <div className="w-full p-4">
@@ -40,9 +47,7 @@ const MatchesCard = () => {
               </h3>
               <p className="text-gray-600 mb-4">Status: {partner.status}</p>
               <button
-                onClick={() => {
-                  () => sendFriendRequest(partner.username);
-                }}
+                onClick={() => sendFriendRequest(partner.requester_username)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 Accept Friend
