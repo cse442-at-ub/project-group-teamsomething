@@ -4,33 +4,43 @@ import axios from "axios";
 
 const PartnerRequestsURL =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getPartnerRequests.php";
+const acceptPartnerURL =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/AcceptPartnerRequest.php";
 
 const MatchesCard = () => {
   const [partners, setPartners] = useState([]);
   const auth = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchPartners = async () => {
-      try {
-        const response = await axios.post(PartnerRequestsURL, {
-          username: auth.username,
-        });
-        console.log(response.data);
-        // Set the partners with the new data from the response
-        setPartners(response.data.data); // Assumes response.data.data is the array of partner requests
-      } catch (error) {
-        console.error("Error fetching partner data:", error);
-      }
-    };
-
     if (auth.username) {
       fetchPartners();
     }
-  }, [auth.username]); // Dependency array includes auth.username
+  }, [auth.username]);
 
-  // Define the sendFriendRequest function here, outside of your return statement
-  const sendFriendRequest = async (username) => {
-    // ...send friend request logic
+  const acceptFriendRequest = async (uname) => {
+    try {
+      const response = await axios.post(acceptPartnerURL, {
+        requester_username: auth.username,
+        receiver_username: uname,
+      });
+      console.log(response.data);
+      // Refresh the list of partner requests after accepting
+      fetchPartners();
+    } catch (error) {
+      console.error("Error accepting friend request:", error);
+    }
+  };
+
+  const fetchPartners = async () => {
+    try {
+      const response = await axios.post(PartnerRequestsURL, {
+        username: auth.username,
+      });
+      console.log(response.data);
+      setPartners(response.data.data);
+    } catch (error) {
+      console.error("Error fetching partner data:", error);
+    }
   };
 
   return (
@@ -47,7 +57,7 @@ const MatchesCard = () => {
               </h3>
               <p className="text-gray-600 mb-4">Status: {partner.status}</p>
               <button
-                onClick={() => sendFriendRequest(partner.requester_username)}
+                onClick={() => acceptFriendRequest(partner.requester_username)}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 Accept Friend

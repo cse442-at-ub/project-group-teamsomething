@@ -1,84 +1,78 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 
-// Database connection setup
-$dbHost = "oceanus.cse.buffalo.edu";
-$dbUsername = "eriklich"; // Replace with your username
-$dbPassword = "teamsomething"; // Replace with your password
-$dbName = "cse442_2023_fall_team_x_db"; // Replace with your database name
+// Error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Establish a new database connection
-$conn = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 
-// Check for a connection error and respond with an error message
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(['error' => "Connection failed: " . $conn->connect_error]);
-    exit();
+// Allow from any origin
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Max-Age: 86400'); // cache for 1 day
 }
 
-/**
- * Accepts a friend request by setting its status to 'accepted'.
- *
- * @param mysqli $conn The database connection object.
- * @param int $requestId The ID of the friend request to accept.
- */
-function acceptFriendRequest($conn, $requestId)
-{
-    // Initiate a transaction
-    $conn->begin_transaction();
+// Access-Control headers are received during OPTIONS requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
-    try {
-        // Prepare and execute the update statement for friend_requests
-        $stmt = $conn->prepare("UPDATE friend_requests SET status = 'accepted' WHERE id = ?");
-        $stmt->bind_param("i", $requestId);
-        $stmt->execute();
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 
-        // Check if any rows were affected by the update
-        if ($stmt->affected_rows === 0) {
-            throw new Exception('No friend request found with the given ID.');
-        }
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
-        // Close the statement
-        $stmt->close();
+    exit(0);
+}
 
-        // Assuming the usernames of the requester and requestee are known,
-        // additional updates to the 'users' table would go here.
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $data = json_decode(file_get_contents("php://input"), true);
+    $requester = $data['requester_username'] ?? '';
+    $receiver = $data['receiver_username'] ?? '';
 
-        // Commit the transaction
-        $conn->commit();
-
-        // Respond with a success message
-        echo json_encode(['message' => 'Friend request accepted.']);
-    } catch (Exception $e) {
-        // Roll back the transaction in case of an error
-        $conn->rollback();
+    // Connect to db
+    $conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
+    if ($conn->connect_error) {
         http_response_code(500);
-        echo json_encode(['error' => $e->getMessage()]);
+        echo json_encode(['message' => "Connection failed: " . $conn->connect_error]);
+        exit();
     }
-}
 
-// Check if the request method is POST and the 'requestId' is provided
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
+    // First, update the friend request status
+    $sql = "UPDATE friend_requests SET status = 'accepted' WHERE (requester_username = ? AND requestee_username = ? AND status = 'pending') OR (requestee_username = ? AND requester_username = ? AND status = 'pending')";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $requester, $receiver, $requester, $receiver);
 
-    if (isset($data['requestId'])) {
-        // Call the function to accept the friend request
-        acceptFriendRequest($conn, $data['requestId']);
+    if ($stmt->execute()) {
+        // Check if any rows were updated in the friend requests table
+        if ($stmt->affected_rows > 0) {
+            // Now, update the users table for both users
+            $sqlUpdateUser = "UPDATE users SET partner = CASE WHEN username = ? THEN ? WHEN username = ? THEN ? END WHERE username IN (?, ?)";
+            $stmtUpdateUser = $conn->prepare($sqlUpdateUser);
+            $stmtUpdateUser->bind_param("ssssss", $requester, $receiver, $receiver, $requester, $receiver, $requester);
+
+            if ($stmtUpdateUser->execute()) {
+                echo json_encode(['message' => 'Friend request accepted and user partners updated']);
+            } else {
+                echo json_encode(['message' => 'Friend request accepted, but error updating user partners']);
+            }
+
+            $stmtUpdateUser->close();
+        } else {
+            echo json_encode(['message' => 'No pending friend requests found']);
+        }
     } else {
-        // Respond with an error message if 'requestId' is missing
-        http_response_code(400);
-        echo json_encode(['error' => 'The requestId is required.']);
+        echo json_encode(['message' => 'Error updating friend request']);
     }
-} else {
-    // Respond with an error message for invalid request methods
-    http_response_code(405);
-    echo json_encode(['error' => 'Invalid request method. Only POST is accepted.']);
-}
 
-// Close the database connection
-$conn->close();
+    $stmt->close();
+    $conn->close();
+} else {
+    http_response_code(400);
+    echo json_encode(['message' => 'Only POST method is accepted.']);
+}
