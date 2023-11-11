@@ -22,7 +22,7 @@ const Message = () => {
     try {
       const response = await axios.post(cheshire, {
         sender_username: auth.username,
-        receiver_username: auth.username,
+        receiver_username: auth.partner,
       });
       setMessages(response.data);
     } catch (error) {
@@ -43,7 +43,7 @@ const Message = () => {
         const newMessage = await axios.post(sendMessageCheshire, {
           text: input,
           sender_username: auth.username,
-          receiver_username: auth.username,
+          receiver_username: auth.partner,
         });
         console.log(newMessage);
         setInput("");
