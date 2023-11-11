@@ -59,32 +59,68 @@ const SideDrawer = () => {
           </NavLink>
 
           {/* Partners */}
-          <NavLink to="/partners">
-            <li
-              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
-              style={{
-                padding: "calc(0.5vw + 0.5vh)",
-                marginLeft: "calc(0.5vw + 0.5vh)",
-              }}
-            >
-              <img src={Partner} className="w-6 h-6 mr-3" />
-              <div className="font-extralight text-sm">Partners</div>
-            </li>
-          </NavLink>
+          {auth.partner ? (
+            <>
+              {/* Message */}
+              <NavLink to="/partners-blocked">
+                <li
+                  className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                  style={{
+                    padding: "calc(0.5vw + 0.5vh)",
+                    marginLeft: "calc(0.5vw + 0.5vh)",
+                  }}
+                >
+                  <img src={Partner} className="w-6 h-6 mr-3" />
+                  <div className="font-extralight text-sm">Partners</div>
+                </li>
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/partners">
+              <li
+                className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                style={{
+                  padding: "calc(0.5vw + 0.5vh)",
+                  marginLeft: "calc(0.5vw + 0.5vh)",
+                }}
+              >
+                <img src={Partner} className="w-6 h-6 mr-3" />
+                <div className="font-extralight text-sm">Partners</div>
+              </li>
+            </NavLink>
+          )}
 
           {/* matches */}
-          <NavLink to="/matches">
-            <li
-              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
-              style={{
-                padding: "calc(0.5vw + 0.5vh)",
-                marginLeft: "calc(0.5vw + 0.5vh)",
-              }}
-            >
-              <img src={Matches} className="w-6 h-6 mr-3" />
-              <div className="font-extralight text-sm">Matches</div>
-            </li>
-          </NavLink>
+          {auth.partner ? (
+            <>
+              {/* Message */}
+              <NavLink to="/partners-blocked">
+                <li
+                  className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                  style={{
+                    padding: "calc(0.5vw + 0.5vh)",
+                    marginLeft: "calc(0.5vw + 0.5vh)",
+                  }}
+                >
+                  <img src={Partner} className="w-6 h-6 mr-3" />
+                  <div className="font-extralight text-sm">Partners</div>
+                </li>
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/matches">
+              <li
+                className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                style={{
+                  padding: "calc(0.5vw + 0.5vh)",
+                  marginLeft: "calc(0.5vw + 0.5vh)",
+                }}
+              >
+                <img src={Matches} className="w-6 h-6 mr-3" />
+                <div className="font-extralight text-sm">Matches</div>
+              </li>
+            </NavLink>
+          )}
 
           {auth.partner ? (
             <>

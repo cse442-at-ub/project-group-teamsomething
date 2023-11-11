@@ -22,6 +22,7 @@ import { useContext, useEffect } from "react";
 import { useAuth } from "./hooks/auth-hook";
 import { AuthContext } from "./context/auth-context";
 import ContractPage from "./components/Contract/ContractPage.jsx";
+import Partner_Blocked from "./pages/Partners/Partner_Blocked.jsx";
 
 function App() {
   const theme = createTheme({
@@ -107,6 +108,7 @@ function App() {
         <Route path={"/message"} element={<Message />} />
         <Route path={"/message-blocked"} element={<Message_Blocked />} />
         <Route path={"/partners"} element={<Partners />} />
+        <Route path={"/partners-blocked"} element={<Partner_Blocked />} />
         <Route path={"/matches"} element={<Matches />} />
       </>
     );
