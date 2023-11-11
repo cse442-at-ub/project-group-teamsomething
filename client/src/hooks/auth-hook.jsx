@@ -23,6 +23,10 @@ export const useAuth = () => {
     setPartner(null);
   }, []);
 
+  const settingPartner = useCallback((b_partner) => {
+    setPartner(b_partner);
+  });
+
   // Effect to synchronize state if sessionStorage changes (e.g., in a different tab)
   useEffect(() => {
     const handleStorageChange = (event) => {
@@ -38,5 +42,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { username, fname, lname, partner, login, logout };
+  return { username, fname, lname, partner, login, logout, settingPartner };
 };

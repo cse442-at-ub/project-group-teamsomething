@@ -6,5 +6,6 @@ export const AuthContext = createContext({
   fname: null,
   partner: null,
   login: () => {},
-  logout: () => {}
+  logout: () => {},
+  settingPartner: () => {},
 });

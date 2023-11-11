@@ -32,14 +32,12 @@ const Login = () => {
       }
       const res = await axios.post(cheshire, { username, password });
       console.log(res)
-      console.log(res.data)
-      console.log(res.data.user)
 
       if (res.status == 200) {
         login(res.data.user.username, res.data.user.fname, res.data.user.lname, res.data.user.partner);
         navigate("/home");
       }
-      console.log(auth.username);
+      console.log(auth)
     } catch (error) {
       alert("Wrong password")
       console.error(error);

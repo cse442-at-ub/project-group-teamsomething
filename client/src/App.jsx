@@ -17,6 +17,8 @@ import Payment from "./pages/User/Payment/Payment.jsx";
 import ChangePassword from "./pages/User/ChangePassword/ChangePassword";
 import Message from "./pages/Message/Message.jsx";
 
+import { useContext, useEffect } from "react";
+
 import { useAuth } from "./hooks/auth-hook";
 import { AuthContext } from "./context/auth-context";
 import ContractPage from "./components/Contract/ContractPage.jsx";
@@ -49,7 +51,7 @@ function App() {
             boxShadow: "none",
             cursor: "pointer",
             textTransform: "none",
-          }
+          },
         },
       },
       MuiTextField: {
@@ -80,11 +82,15 @@ function App() {
             height: "12px",
           },
         },
-      }
+      },
     },
   });
 
-  const { username, fname, lname, partner, login, logout } = useAuth();
+  const { username, fname, lname, partner, login, logout, settingPartner } =
+    useAuth();
+
+  const auth = useContext(AuthContext);
+
   let protectedRoutes;
   if (username) {
     protectedRoutes = (
@@ -94,12 +100,12 @@ function App() {
         <Route path={"/description"} element={<Description />} />
         <Route path={"/past-contracts"} element={<PastContract />}>
           <Route path={"/past-contracts/:id"} element={<ContractPage />} />
-        </Route> 
+        </Route>
         <Route path={"/change-password"} element={<ChangePassword />} />
         <Route path={"/partner-reviews"} element={<PartnerReview />} />
         <Route path={"/payment"} element={<Payment />} />
         <Route path={"/message"} element={<Message />} />
-        <Route path={"/message"} element={<Message_Blocked/>} />
+        <Route path={"/message-blocked"} element={<Message_Blocked />} />
         <Route path={"/partners"} element={<Partners />} />
         <Route path={"/matches"} element={<Matches />} />
       </>
@@ -115,18 +121,13 @@ function App() {
           logout: logout,
           fname: fname,
           lname: lname,
-          partner: partner
+          partner: partner,
+          settingPartner: settingPartner,
         }}
       >
         <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
           <Routes>
             <Route path={"/"} element={<Public />} />
-            <Route path={"/profile"} element={<Profile />} />
-            <Route path={"/home"} element={<Home />}></Route>
-            <Route path={"/description"} element={<Description />} />
-            <Route path={"/past-contracts"} element={<PastContract />}>
-              <Route path={"/past-contracts/:id"} element={<ContractPage />} />
-            </Route>
             <Route path={"/login"} element={<Login />} />
             <Route path={"/sign-up"} element={<SignUp />} />
             {/* protected routes below */}

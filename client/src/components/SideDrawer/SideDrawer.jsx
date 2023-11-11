@@ -19,22 +19,19 @@ const stringToColor = (string) => {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  let color = '#';
+  let color = "#";
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.substr(-2);
   }
-  
 
   return color;
-}
+};
 
 const SideDrawer = () => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   const auth = useContext(AuthContext);
-  
-  
 
   return (
     <>
@@ -89,25 +86,53 @@ const SideDrawer = () => {
             </li>
           </NavLink>
 
-          {/* Message */}
-          <NavLink to="/Message">
-            <li
-              className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
-              style={{
-                padding: "calc(0.5vw + 0.5vh)",
-                marginLeft: "calc(0.5vw + 0.5vh)",
-              }}
-            >
-              <img src={Messages} className="w-6 h-6 mr-3" />
-              <div className="font-extralight text-sm">Message</div>
-            </li>
-          </NavLink>
+          {auth.partner ? (
+            <>
+              {/* Message */}
+              <NavLink to="/message">
+                <li
+                  className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                  style={{
+                    padding: "calc(0.5vw + 0.5vh)",
+                    marginLeft: "calc(0.5vw + 0.5vh)",
+                  }}
+                >
+                  <img src={Messages} className="w-6 h-6 mr-3" />
+                  <div className="font-extralight text-sm">Message</div>
+                </li>
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/message-blocked">
+              <li
+                className="hover:cursor-pointer hover:bg-[#E8E9F4] hover:rounded-tl-lg hover:rounded-bl-lg flex p-5 items-center"
+                style={{
+                  padding: "calc(0.5vw + 0.5vh)",
+                  marginLeft: "calc(0.5vw + 0.5vh)",
+                }}
+              >
+                <img src={Messages} className="w-6 h-6 mr-3" />
+                <div className="font-extralight text-sm">Message</div>
+              </li>
+            </NavLink>
+          )}
         </ul>
+
         <div className="">
           <NavLink to="/profile">
-            <div className={`flex flex-row items-center ${pathname.includes('/home/user') ? 'bg-[#E8E9F4]' : ''} hover:cursor-pointer hover:bg-[#E8E9F4] p-5 hover:rounded-tl-lg hover:rounded-bl-lg`}>
-
-              <Avatar sx={{ bgcolor: stringToColor(auth.username), width: 48, height: 48, marginRight: 2 }}>
+            <div
+              className={`flex flex-row items-center ${
+                pathname.includes("/home/user") ? "bg-[#E8E9F4]" : ""
+              } hover:cursor-pointer hover:bg-[#E8E9F4] p-5 hover:rounded-tl-lg hover:rounded-bl-lg`}
+            >
+              <Avatar
+                sx={{
+                  bgcolor: stringToColor(auth.username),
+                  width: 48,
+                  height: 48,
+                  marginRight: 2,
+                }}
+              >
                 {auth.username[0].toUpperCase()}
               </Avatar>
               <div className="flex flex-col">

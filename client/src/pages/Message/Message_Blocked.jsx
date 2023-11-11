@@ -19,16 +19,7 @@ const Message_Blocked = () => {
               <p className=""> </p>
             </div>            
             <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p className="">You Currently Do Have A Partner! </p>
-            </div>
-            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p whitespace-pre-wrap absolute className="">Finish Your Current Commitment </p>
-            </div>
-            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p whitespace-pre-wrap absolute className="">With Your Current Partner First </p>
-            </div>
-            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p whitespace-pre-wrap absolute className="">Before Looking for a New One!  </p>
+              <p className="">You Currently Do Not Have A Partner! </p>
             </div>
           </div>
         </div>
