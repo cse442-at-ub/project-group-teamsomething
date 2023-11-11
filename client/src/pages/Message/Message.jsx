@@ -3,7 +3,6 @@ import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 
-
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
@@ -13,8 +12,12 @@ var cheshire =
 var sendMessageCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendMessage.php";
 
+var endPartnership =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/endPartnership.php";
+
 const Message = () => {
   const auth = useContext(AuthContext);
+  const { settingPartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -53,6 +56,20 @@ const Message = () => {
     }
   };
 
+  const endPartner = async () => {
+    try {
+      const res = await axios.post(endPartnership, {
+        requester_username: auth.username,
+        receiver_username: auth.partner,
+      });
+      console.log(res)
+      settingPartner(null)
+      console.log(auth.partner)
+    } catch (err) {
+      console.error("Error ending partnership:", err);
+    }
+  };
+
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
@@ -73,7 +90,7 @@ const Message = () => {
               src="../../assets/TempProfilePic.png"
               alt="Profile"
             />
-            <h1 className="text-xl font-medium text-gray-700">Samantha</h1>
+            <h1 className="text-xl font-medium text-gray-700">{auth.partner}</h1>
           </div>
 
           <div className="text-sm text-gray-600 mb-2">Goal</div>
@@ -98,7 +115,10 @@ const Message = () => {
           </div>
 
           <div>
-            <button className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+            <button
+              onClick={endPartner}
+              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            >
               End partnership
             </button>
           </div>

@@ -103,7 +103,7 @@ const SideDrawer = () => {
                   }}
                 >
                   <img src={Partner} className="w-6 h-6 mr-3" />
-                  <div className="font-extralight text-sm">Partners</div>
+                  <div className="font-extralight text-sm">Matches</div>
                 </li>
               </NavLink>
             </>
