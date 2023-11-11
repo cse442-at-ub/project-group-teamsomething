@@ -1,6 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth-context";
 import axios from "axios";
+import { Avatar } from "@mui/material";
+
+const stringToColor = (string) => {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  
+
+  return color;
+}
+
 
 const cheshire2 =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getPartners.php";
@@ -56,20 +78,30 @@ const PartnerCard = () => {
           return (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md w-full overflow-hidden mb-4"
+              className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 overflow-hidden"
             >
-              <div className="p-6">
+              <div className= "flex items-center flex-grow">
+              <Avatar
+                style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95,  fontSize: 50,}}
+                className="m-10"
+              >
+                {partner.fname[0].toUpperCase()}
+              </Avatar>
+                <div classname = "flex flex-col">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {partner.fname} {partner.lname}
                 </h3>
                 <p className="text-gray-600 mb-4">{partner.username}</p>
+                </div>
+                </div>
+                <div style={{ flexBasis: '33%' }}></div>
                 <button
                   onClick={() => sendFriendRequest(partner.username)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-[#FF3737] hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Request Friend
                 </button>
-              </div>
+              
             </div>
           );
         })
@@ -81,3 +113,6 @@ const PartnerCard = () => {
 };
 
 export default PartnerCard;
+
+
+// i have this code that provides the webpage similar to the attached photo. Can you make the ParnterCard more similar to the second photo without changing any logic of the original code
