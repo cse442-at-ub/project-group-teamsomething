@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Fetch the updated message history
     $stmtSelect = $conn->prepare("SELECT * FROM messages WHERE (sender_username=? AND receiver_username=?) OR (sender_username=? AND receiver_username=?) ORDER BY timestamp ASC");
-    $stmtSelect->bind_param("ss", $sender_username, $receiver_username);
+    $stmtSelect->bind_param("ssss", $sender_username, $receiver_username, $sender_username, $receiver_username);
     $stmtSelect->execute();
     $result = $stmtSelect->get_result();
     $messages = [];
