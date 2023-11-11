@@ -13,7 +13,7 @@ const acceptPartnerURL =
 const MatchesCard = () => {
   const [partners, setPartners] = useState([]);
   const auth = useContext(AuthContext);
-  const { settingPartner } = useContext(AuthContext);
+  const { makePartner } = useContext(AuthContext);
 
   useEffect(() => {
     if (auth.username) {
@@ -29,7 +29,7 @@ const MatchesCard = () => {
       });
       console.log(response.data);
       console.log(uname)
-      settingPartner(uname)
+      makePartner(uname)
       // Refresh the list of partner requests after accepting
       console.log(auth.partner)
       fetchPartners();

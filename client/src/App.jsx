@@ -87,10 +87,16 @@ function App() {
     },
   });
 
-  const { username, fname, lname, partner, login, logout, settingPartner } =
-    useAuth();
-
-  const auth = useContext(AuthContext);
+  const {
+    username,
+    fname,
+    lname,
+    partner,
+    login,
+    logout,
+    makePartner,
+    removePartner,
+  } = useAuth();
 
   let protectedRoutes;
   if (username) {
@@ -124,7 +130,8 @@ function App() {
           fname: fname,
           lname: lname,
           partner: partner,
-          settingPartner: settingPartner,
+          makePartner: makePartner,
+          removePartner: removePartner,
         }}
       >
         <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">

@@ -17,7 +17,7 @@ var endPartnership =
 
 const Message = () => {
   const auth = useContext(AuthContext);
-  const { settingPartner } = useContext(AuthContext);
+  const { makePartner, removePartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [pollingInterval, setPollingInterval] = useState(1000);
@@ -71,7 +71,8 @@ const Message = () => {
         receiver_username: auth.partner,
       });
       console.log(res);
-      settingPartner(null);
+      makePartner(null);
+      removePartner();
       console.log(auth.partner);
     } catch (err) {
       console.error("Error ending partnership:", err);

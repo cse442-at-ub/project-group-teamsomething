@@ -102,7 +102,7 @@ const SideDrawer = () => {
                     marginLeft: "calc(0.5vw + 0.5vh)",
                   }}
                 >
-                  <img src={Partner} className="w-6 h-6 mr-3" />
+                  <img src={Matches} className="w-6 h-6 mr-3" />
                   <div className="font-extralight text-sm">Matches</div>
                 </li>
               </NavLink>

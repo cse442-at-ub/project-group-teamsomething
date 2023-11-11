@@ -30,9 +30,14 @@ export const useAuth = () => {
     setPartner(null);
   }, []);
 
-  const settingPartner = useCallback((b_partner) => {
+  const makePartner = useCallback((b_partner) => {
     sessionStorage.setItem("partner", b_partner); // Update the partner in sessionStorage
     setPartner(b_partner);
+  }, []);
+
+  const removePartner = useCallback(() => {
+    sessionStorage.removeItem("partner");
+    setPartner(null);
   }, []);
 
   // Effect to synchronize state if sessionStorage changes (e.g., in a different tab)
@@ -59,5 +64,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { username, fname, lname, partner, login, logout, settingPartner };
+  return { username, fname, lname, partner, login, logout, makePartner, removePartner };
 };
