@@ -6,7 +6,7 @@ import axios from "axios";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
-var cheshire =
+var retrieveMessageCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
 
 var sendMessageCheshire =
@@ -20,13 +20,15 @@ const Message = () => {
   const { settingPartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [pollingInterval, setPollingInterval] = useState(1000);
 
   const updateMessages = async () => {
     try {
-      const response = await axios.post(cheshire, {
+      const response = await axios.post(retrieveMessageCheshire, {
         sender_username: auth.username,
         receiver_username: auth.partner,
       });
+      console.log(response);
       setMessages(response.data);
     } catch (error) {
       console.error("Error sending message:", error);
@@ -34,25 +36,31 @@ const Message = () => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(updateMessages, 1000);
+    // Set up the interval for polling
+    const intervalId = setInterval(updateMessages, pollingInterval);
+    console.log("Polling...");
 
-    return () => clearInterval(intervalId); // Clear the interval when the component unmounts
-  }, []);
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [pollingInterval]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    try {
-      if (input.trim() !== "") {
-        const newMessage = await axios.post(sendMessageCheshire, {
-          text: input,
-          sender_username: auth.username,
-          receiver_username: auth.partner,
-        });
-        console.log(newMessage);
+    if (input.trim() !== "") {
+      const newMessage = {
+        text: input,
+        sender_username: auth.username,
+        receiver_username: auth.partner,
+      };
+
+      try {
+        setMessages((messages) => [...messages, newMessage]);
         setInput("");
+        const response = await axios.post(sendMessageCheshire, newMessage);
+        console.log(response);
+      } catch (error) {
+        console.error("Error sending message:", error);
       }
-    } catch (error) {
-      console.error("Error sending message:", error);
     }
   };
 
@@ -62,9 +70,9 @@ const Message = () => {
         requester_username: auth.username,
         receiver_username: auth.partner,
       });
-      console.log(res)
-      settingPartner(null)
-      console.log(auth.partner)
+      console.log(res);
+      settingPartner(null);
+      console.log(auth.partner);
     } catch (err) {
       console.error("Error ending partnership:", err);
     }
@@ -90,7 +98,9 @@ const Message = () => {
               src="../../assets/TempProfilePic.png"
               alt="Profile"
             />
-            <h1 className="text-xl font-medium text-gray-700">{auth.partner}</h1>
+            <h1 className="text-xl font-medium text-gray-700">
+              {auth.partner}
+            </h1>
           </div>
 
           <div className="text-sm text-gray-600 mb-2">Goal</div>
