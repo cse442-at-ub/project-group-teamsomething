@@ -3,6 +3,7 @@ import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
 
+
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
@@ -14,6 +15,28 @@ var sendMessageCheshire =
 
 var endPartnership =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/endPartnership.php";
+
+
+  import { Avatar } from "@mui/material";
+
+  const stringToColor = (string) => {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = "#";
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+  
+    return color;
+  }; 
 
 const Message = () => {
   const auth = useContext(AuthContext);
@@ -94,11 +117,16 @@ const Message = () => {
           </div>
 
           <div className="flex items-center space-x-4 mb-4">
-            <img
-              className="w-16 h-16 rounded-full border-2 border-gray-300 object-cover"
-              src="../../assets/TempProfilePic.png"
-              alt="Profile"
-            />
+              <Avatar
+                sx={{
+                  bgcolor: stringToColor(auth.partner),
+                  width: 48,
+                  height: 48,
+                  marginRight: 2,
+                }}
+              >
+                {auth.partner[0].toUpperCase()}
+              </Avatar>
             <h1 className="text-xl font-medium text-gray-700">
               {auth.partner}
             </h1>
@@ -169,7 +197,7 @@ const Message = () => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Message Samantha..."
+                  placeholder="Message Partner..."
                   className="w-full pl-4 pr-10 py-3 rounded-md bg-gray-100 text-gray-600 placeholder-gray-600 focus:outline-none"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
