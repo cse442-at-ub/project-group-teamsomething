@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import background from "../../assets/loginBackground.png";
 
-var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
-// var local = "http://localhost:8000";
+import { AuthContext } from "../../context/auth-context";
+
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/register.php";
+// var cheshire = "http://localhost/server/register.php";
 
 import { useNavigate } from "react-router-dom";
 const SignUp = () => {
@@ -14,11 +17,44 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext)
+
   const registerHandler = async (event) => {
     console.log(fname);
     console.log(lname);
     console.log(username);
     console.log(password);
+    if (fname === "") {
+      alert("Please enter a username.");
+      return;
+    }
+
+    if (lname === "") {
+      alert("Please enter a password.");
+      return;
+    }
+
+    if (username === "") {
+      alert("Please enter a username.");
+      return;
+    }
+
+    if (password === "") {
+      alert("Please enter a password.");
+      return;
+    }
+
+    if (password.length < 8){
+      alert("Password too short");
+      return;
+    }
+
+    if (password.length > 31){
+      alert("Password too long");
+      return;
+    }
+    
     event.preventDefault();
     try {
       const res = await axios.post(cheshire, {
@@ -27,9 +63,16 @@ const SignUp = () => {
         username,
         password,
       });
-      console.log(res.config.data);
       console.log(res);
-      navigate("/home");
+      console.log(res.data);
+      console.log(res.data.username)
+      console.log(res.data.fname)
+      console.log(res.data.lname)
+      if (res.status == 200) {
+        login(res.data.username, res.data.fname, res.data.lname);
+        console.log(auth.username);
+        navigate("/home");
+      }
     } catch (error) {
       console.error(error);
     }

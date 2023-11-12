@@ -1,28 +1,45 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import background from "../../assets/loginBackground.png";
 
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context";
 
-var cheshire = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
-// var local = "http://localhost:8000";
+var cheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
+// var cheshire = "http://localhost:8080/server/login.php";
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const auth = useContext(AuthContext);
+  const { login } = useContext(AuthContext)
 
   const loginHandler = async (event) => {
     event.preventDefault();
 
     try {
-      console.log(username);
-      console.log(password);
+      if (username.trim() === "") {
+        alert("Please enter a username.");
+        return;
+      }
+
+      if (password.trim() === "") {
+        alert("Please enter a password.");
+        return;
+      }
       const res = await axios.post(cheshire, { username, password });
-      console.log(res);
-      navigate("/home");
+      console.log(res)
+
+      if (res.status == 200) {
+        login(res.data.user.username, res.data.user.fname, res.data.user.lname, res.data.user.partner);
+        navigate("/home");
+      }
+      console.log(auth)
     } catch (error) {
+      alert("Wrong password")
       console.error(error);
     }
   };
