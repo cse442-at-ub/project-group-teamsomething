@@ -18,6 +18,7 @@ var endPartnership =
 
 
   import { Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
   const stringToColor = (string) => {
     let hash = 0;
@@ -39,6 +40,7 @@ var endPartnership =
   }; 
 
 const Message = () => {
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const { makePartner, removePartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
@@ -95,7 +97,8 @@ const Message = () => {
       });
       console.log(res);
       makePartner(null);
-      removePartner();
+      navigate("/home")
+      // removePartner();
       console.log(auth.partner);
     } catch (err) {
       console.error("Error ending partnership:", err);
