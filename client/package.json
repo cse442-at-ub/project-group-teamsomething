@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aldabil/react-scheduler": "^2.7.25",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.13",
@@ -31,6 +32,7 @@
     "tailwindcss": "^3.3.3",
     "web-vitals": "^3.5.0"
   },
+  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/build",
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
