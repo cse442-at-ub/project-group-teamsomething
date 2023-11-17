@@ -21,7 +21,7 @@ export default function ProfileHelper() {
     e.preventDefault();
     try {
       await axios.post(profileUrl, {
-        username: auth.username,
+        oldUsername: auth.username,
         newUsername: username,
         action: "changeUsername"
       }).then((response) => {
@@ -33,10 +33,6 @@ export default function ProfileHelper() {
       console.log(auth.username);
       console.error("Error changing username:", error);
     }
-  }
-
-  const deezNutz = () => {
-    axios.get(profileUrl).then(response => console.log(response))
   }
 
   const changeUsername = e => {
@@ -132,7 +128,6 @@ export default function ProfileHelper() {
                 //type="email"
                 required
               />
-              <button onClick={deezNutz}>hello deez nutz</button>
             </Stack>
             <Box flex={1}>
               <Button variant="contained" fullWidth type="submit" onClick={submitUsername}>
