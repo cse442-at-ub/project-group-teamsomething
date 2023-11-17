@@ -1,5 +1,5 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../context/auth-context";
@@ -16,16 +16,20 @@ export default function ProfileHelper() {
   //const [changeEmail, setChangeEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState(auth.username);
+  useEffect(() => {
+    axios.get(profileUrl).then((response) => console.log(response))
+  }, [])
 
   const submitUsername = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     try {
       await axios.post(profileUrl, {
         oldUsername: auth.username,
         newUsername: username,
         action: "changeUsername"
       }).then((response) => {
-        auth.username = username;
+        sessionStorage.setItem("username", username); 
+        location.reload();
         console.log(response);
       })
     } catch (error) {
