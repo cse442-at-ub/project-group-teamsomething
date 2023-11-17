@@ -1,24 +1,58 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { AuthContext } from "../../../context/auth-context";
+
+const profileUrl =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profile.php";
 
 export default function ProfileHelper() {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
   const [profilepic, setProfilepic] = useState(null);
   const [email, setEmail] = useState("");
-  const [changeEmail, setChangeEmail] = useState("");
+  //const [changeEmail, setChangeEmail] = useState("");
   const [name, setName] = useState("");
+  const [username, setUsername] = useState(auth.username);
+
+  const submitUsername = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(profileUrl, {
+        username: auth.username,
+        newUsername: username,
+        action: "changeUsername"
+      }).then((response) => {
+        auth.username = username;
+        console.log(response);
+      })
+    } catch (error) {
+      //console.log(username);
+      console.log(auth.username);
+      console.error("Error changing username:", error);
+    }
+  }
+
+  const deezNutz = () => {
+    axios.get(profileUrl).then(response => console.log(response))
+  }
+
+  const changeUsername = e => {
+    setUsername(e.target.value);
+  }
 
   const handleProfilepic = (e) => {
     setProfilepic(e.target.files[0]);
   };
 
+  
   const handleEditEmail = (e) => {
     e.preventDefault();
-    console.log(changeEmail);
+    //console.log(changeEmail);
   };
+  
 
   const handleEditName = (e) => {
     e.preventDefault();
@@ -87,20 +121,21 @@ export default function ProfileHelper() {
                 component="label"
                 htmlFor="change-email"
               >
-                Change Email
+                Change Username
               </Typography>
               <TextField
                 variant="outlined"
                 id="change-email"
-                value={changeEmail}
-                onChange={(e) => setChangeEmail(e.target.value)}
+                value={username}
+                onChange={changeUsername}
                 size="small"
-                type="email"
+                //type="email"
                 required
               />
+              <button onClick={deezNutz}>hello deez nutz</button>
             </Stack>
             <Box flex={1}>
-              <Button variant="contained" fullWidth type="submit">
+              <Button variant="contained" fullWidth type="submit" onClick={submitUsername}>
                 Submit
               </Button>
             </Box>
