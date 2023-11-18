@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import axios from "axios";
-
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
@@ -17,8 +16,10 @@ var endPartnership =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/endPartnership.php";
 
 
-  import { Avatar } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+
 
   const stringToColor = (string) => {
     let hash = 0;
@@ -47,6 +48,7 @@ const Message = () => {
   const [input, setInput] = useState("");
   const [pollingInterval, setPollingInterval] = useState(1000);
 
+
   const updateMessages = async () => {
     try {
       const response = await axios.post(retrieveMessageCheshire, {
@@ -55,6 +57,9 @@ const Message = () => {
       });
       console.log(response);
       setMessages(response.data);
+
+
+
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -90,25 +95,34 @@ const Message = () => {
   };
 
   const endPartner = async () => {
-    try {
-      const res = await axios.post(endPartnership, {
-        requester_username: auth.username,
-        receiver_username: auth.partner,
-      });
-      console.log(res);
-      makePartner(null);
-      navigate("/home")
-      // removePartner();
-      console.log(auth.partner);
-    } catch (err) {
-      console.error("Error ending partnership:", err);
+    const confirmEnd = window.confirm(
+      'Would you like to share your experience? Leave a reivew for your partner'
+    );
+
+    if (confirmEnd) {
+      try {
+        const res = await axios.post(endPartnership, {
+          requester_username: auth.username,
+          receiver_username: auth.partner,
+        });
+
+        console.log(res);
+        makePartner(null);
+        navigate("/partner-reviews");
+        // removePartner();
+        console.log(auth.partner);
+      } catch (err) {
+        console.error("Error ending partnership:", err);
+      }
     }
+    // If the user clicks Cancel in the confirmation popup, do nothing
   };
+  
 
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
-        <SideDrawer />
+        <SideDrawer/>
       </Grid>
 
       <Grid item xs={2}>
@@ -220,6 +234,8 @@ const Message = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Message;
+
+                  

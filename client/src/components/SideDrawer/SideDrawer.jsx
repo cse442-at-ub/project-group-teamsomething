@@ -1,4 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
+import React, {useState, useEffect } from "react";
+import { Avatar } from "@mui/material";
 
 import Logo from "../../assets/logo.png";
 import Home from "../../assets/Home.png";
@@ -8,7 +10,6 @@ import Matches from "../../assets/Matches.png";
 
 import { AuthContext } from "../../context/auth-context";
 import { useContext } from "react";
-import { Avatar } from "@mui/material";
 
 const stringToColor = (string) => {
   let hash = 0;
@@ -133,7 +134,9 @@ const SideDrawer = () => {
                     marginLeft: "calc(0.5vw + 0.5vh)",
                   }}
                 >
-                  <img src={Messages} className="w-6 h-6 mr-3" />
+          
+                    <img src={Messages} className="w-6 h-6 mr-3" />
+              
                   <div className="font-extralight text-sm">Message</div>
                 </li>
               </NavLink>

@@ -142,7 +142,6 @@ const Home = () => {
                 >
                   <h1 className="text-center font-bold">Schedule</h1>
                 </Box>
-                <Box className="font-bold">Resource</Box>
               </Stack>
               <Stack
                 flex={1}
