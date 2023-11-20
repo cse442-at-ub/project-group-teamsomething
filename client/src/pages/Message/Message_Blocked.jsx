@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
+import axios from "axios";
 
+import { AuthContext } from "../../context/auth-context";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Lock from "../../assets/lock1.png";
 
 const Message_Blocked = () => {
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  const { makePartner, removePartner } = useContext(AuthContext);
+  const [pollingInterval, setPollingInterval] = useState(100);
+
+  useEffect(() => {
+    getFriendshipStatus();
+  }, []);
+
+  const getFriendshipStatus = async () => {
+    try {
+      const response = await axios.post(getFriendshipStatusRoute, {
+        username: auth.username,
+      });
+      console.log(response);
+      if (response.data.partner != null) {
+        makePartner(response.data.partner);
+      } else {
+        makePartner(null);
+        navigate("/message-blocked");
+      }
+      console.log(auth.partner);
+    } catch (err) {
+      console.error("Error sending message:", error);
+    }
+  };
+
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import { Avatar } from "@mui/material";
 import axios from "axios";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
@@ -15,30 +17,27 @@ var sendMessageCheshire =
 var endPartnership =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/endPartnership.php";
 
+var getFriendshipStatusRoute =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getPartnershipStatus.php";
 
-import { Avatar } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+const stringToColor = (string) => {
+  let hash = 0;
+  let i;
 
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
 
+  let color = "#";
 
-  const stringToColor = (string) => {
-    let hash = 0;
-    let i;
-  
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-  
-    let color = "#";
-  
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.substr(-2);
-    }
-  
-    return color;
-  }; 
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+
+  return color;
+};
 
 const Message = () => {
   const navigate = useNavigate();
@@ -46,8 +45,39 @@ const Message = () => {
   const { makePartner, removePartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [pollingInterval, setPollingInterval] = useState(1000);
+  const [pollingInterval, setPollingInterval] = useState(100);
 
+  useEffect(() => {
+    getFriendshipStatus();
+  }, []);
+
+  useEffect(() => {
+    getFriendshipStatus();
+    // Set up the interval for polling
+    const intervalId = setInterval(updateMessages, pollingInterval);
+    console.log("Polling...");
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [pollingInterval]);
+
+  const getFriendshipStatus = async () => {
+    try {
+      const response = await axios.post(getFriendshipStatusRoute, {
+        username: auth.username,
+      });
+      console.log(response);
+      if (response.data.partner != null) {
+        makePartner(response.data.partner);
+      } else {
+        makePartner(null);
+        navigate("/message-blocked")
+      }
+      console.log(auth.partner)
+    } catch (err) {
+      console.error("Error sending message:", error);
+    }
+  };
 
   const updateMessages = async () => {
     try {
@@ -57,22 +87,10 @@ const Message = () => {
       });
       console.log(response);
       setMessages(response.data);
-
-
-
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
-
-  useEffect(() => {
-    // Set up the interval for polling
-    const intervalId = setInterval(updateMessages, pollingInterval);
-    console.log("Polling...");
-
-    // Clear interval on component unmount
-    return () => clearInterval(intervalId);
-  }, [pollingInterval]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -96,7 +114,7 @@ const Message = () => {
 
   const endPartner = async () => {
     const confirmEnd = window.confirm(
-      'Would you like to share your experience? Leave a reivew for your partner'
+      "Would you like to share your experience? Leave a reivew for your partner"
     );
 
     if (confirmEnd) {
@@ -117,12 +135,11 @@ const Message = () => {
     }
     // If the user clicks Cancel in the confirmation popup, do nothing
   };
-  
 
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
-        <SideDrawer/>
+        <SideDrawer />
       </Grid>
 
       <Grid item xs={2}>
@@ -134,16 +151,16 @@ const Message = () => {
           </div>
 
           <div className="flex items-center space-x-4 mb-4">
-              <Avatar
-                sx={{
-                  bgcolor: stringToColor(auth.partner),
-                  width: 48,
-                  height: 48,
-                  marginRight: 2,
-                }}
-              >
-                {auth.partner[0].toUpperCase()}
-              </Avatar>
+            <Avatar
+              sx={{
+                bgcolor: stringToColor(auth.partner),
+                width: 48,
+                height: 48,
+                marginRight: 2,
+              }}
+            >
+              {auth.partner[0].toUpperCase()}
+            </Avatar>
             <h1 className="text-xl font-medium text-gray-700">
               {auth.partner}
             </h1>
@@ -234,8 +251,6 @@ const Message = () => {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default Message;
-
-                  
