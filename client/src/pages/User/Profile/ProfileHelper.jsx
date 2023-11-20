@@ -16,20 +16,27 @@ export default function ProfileHelper() {
   //const [changeEmail, setChangeEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState(auth.username);
+	/*
   useEffect(() => {
     axios.get(profileUrl).then((response) => console.log(response))
   }, [])
+  */
 
   const submitUsername = async (e) => {
-    //e.preventDefault();
+    e.preventDefault();
+	document.getElementById("change-email").value = '';
     try {
+	  e.preventDefault();
       await axios.post(profileUrl, {
         oldUsername: auth.username,
         newUsername: username,
         action: "changeUsername"
       }).then((response) => {
+		window.alert("username changed!");
+		document.getElementById("userNameReal").textContent = username; 
+		e.preventDefault();
         sessionStorage.setItem("username", username); 
-        location.reload();
+        //location.reload();
         console.log(response);
       })
     } catch (error) {
@@ -40,6 +47,7 @@ export default function ProfileHelper() {
   }
 
   const changeUsername = e => {
+    e.preventDefault();
     setUsername(e.target.value);
   }
 
@@ -121,7 +129,7 @@ export default function ProfileHelper() {
                 component="label"
                 htmlFor="change-email"
               >
-                Change Username
+                Change Username 
               </Typography>
               <TextField
                 variant="outlined"
