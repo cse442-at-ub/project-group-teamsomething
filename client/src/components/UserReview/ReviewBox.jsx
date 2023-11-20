@@ -3,11 +3,11 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 
 ReviewBox.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  partner: PropTypes.string,
 };
 
-export default function ReviewBox({ text }) {
-
+export default function ReviewBox({ text, partner }) {
   const [highlighted, setHighlighted] = useState(false);
 
   const truncateText = (text) => {
@@ -40,23 +40,12 @@ export default function ReviewBox({ text }) {
             }}
           >
             {
-              text ? truncateText(text) : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue."
+              text ? truncateText(text) : "Review Text"
             }
           </Typography>
-            <span className="text-gray-400"> - Danny, 22</span>
-          <Box mt={2} className=" text-gray-400">Partner with Danny for 2 Months</Box>
+          <span className="text-gray-400"> {partner}</span>
         </CardContent>
       </Card>
-
-      <Button variant="contained"
-        sx={{
-          flex: 1
-        }}
-        size="large"
-        onClick={() => setHighlighted(!highlighted)}
-      >
-        {highlighted ? 'Unhighlight' : 'Highlight'}
-      </Button>
     </Stack>
   );
 }
