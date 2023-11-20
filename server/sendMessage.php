@@ -32,23 +32,16 @@ function connectToDatabase()
 // Retrieve all the message history for a given user
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
+    $text = $data['text'] ?? '';
     $sender_username = $data['sender_username'] ?? '';
     $receiver_username = $data['receiver_username'] ?? '';
 
     // Connect to the database
     $conn = connectToDatabase();
 
-    // Fetch the updated message history
-    $stmtSelect = $conn->prepare("SELECT * FROM messages WHERE (sender_username=? AND receiver_username=?) OR (receiver_username=? AND sender_username=?) ORDER BY timestamp ASC");
-    $stmtSelect->bind_param("ssss", $sender_username, $receiver_username, $sender_username, $receiver_username);
-    $stmtSelect->execute();
-    $result = $stmtSelect->get_result();
-    $messages = [];
-    while ($row = $result->fetch_assoc()) {
-        $messages[] = $row;
-    }
-    $stmtSelect->close();
-    $conn->close();
-
-    echo json_encode($messages);
+    // Insert the new message into the messages table
+    $stmtInsert = $conn->prepare("INSERT INTO messages (sender_username, receiver_username, content, timestamp) VALUES (?, ?, ?, NOW())");
+    $stmtInsert->bind_param("sss", $sender_username, $receiver_username, $text);
+    $stmtInsert->execute();
+    $stmtInsert->close();
 }

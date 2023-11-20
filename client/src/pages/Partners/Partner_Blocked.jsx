@@ -4,7 +4,7 @@ import { Grid } from "@mui/material";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Lock from "../../assets/lock1.png";
 
-const Message_Blocked = () => {
+const Partner_Blocked = () => {
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
@@ -18,7 +18,19 @@ const Message_Blocked = () => {
               <p className=""> </p>
             </div>
             <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p className="">You Currently Do Not Have A Partner! </p>
+              <p className="">
+                You Currently Have A Partner!
+              </p>
+            </div>
+            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
+              <p className="">
+                Finish Your Current Commitment
+              </p>
+            </div>
+            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
+              <p className="">
+                With Your Current Partner First Before Looking for a New One!{" "}
+              </p>
             </div>
           </div>
         </div>
@@ -27,4 +39,4 @@ const Message_Blocked = () => {
   );
 };
 
-export default Message_Blocked;
+export default Partner_Blocked;

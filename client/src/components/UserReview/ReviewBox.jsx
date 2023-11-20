@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import PropTypes from 'prop-types';
+import { useAuth } from "../../hooks/auth-hook";
 
 ReviewBox.propTypes = {
   text: PropTypes.string,
@@ -18,11 +19,28 @@ export default function ReviewBox({ text, partner }) {
     return text;
   }
 
+  const handleWriteReviewClick = () => {
+    setIsWritingReview(!isWritingReview);
+  }
+
+  const handleReviewInputChange = (event) => {
+    setReviewText(event.target.value);
+  }
+
+  const handleSaveReview = () => {
+    e.preventDefault()
+    console.log('Saved review:', reviewText);
+
+    setIsWritingReview(false);
+  }
+
   return (
     <Stack
       direction='row'
       spacing={2}
       alignItems='center'
+      component={'form'}
+      onSubmit={handleSaveReview}
     >
       <Card
         sx={{

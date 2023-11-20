@@ -4,6 +4,7 @@ import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 import UserSidebar from "../../../components/UserSidebar/UserSidebar";
 import ReviewBox from "../../../components/UserReview/ReviewBox";
 
+
 const PartnerReview = () => {
   const [reviews, setReviews] = useState([]);
   const [partnerName, setPartnerName] = useState("");

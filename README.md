@@ -18,3 +18,4 @@ uploading to cheshire files
     - Go to projectName
     - 'cd server'
 - scp [file_name] <your_ubit_name>@cheshire.cse.buffalo.edu:/web/CSE442-542/2023-Fall/cse-442x/
+- scp -r server zhaobint@cheshire.cse.buffalo.edu:/web/CSE442-542/2023-Fall/cse-442x/

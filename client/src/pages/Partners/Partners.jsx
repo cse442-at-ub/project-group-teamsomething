@@ -1,21 +1,21 @@
-import { Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
-import { Outlet } from "react-router-dom";
-import PartnersComp from '../../components/partners.jsx'
+import PartnerCard from "../../components/PartnerCard/PartnerCard.jsx";
 
 const Partners = () => {
   return (
-    <Stack direction='row' height='100vh' py={2}>
-      <Stack flex={2}>
+    <Grid container spacing={0}>
+      <Grid item xs={2}>
         <SideDrawer />
-      </Stack>
-      <Stack flex={10}>
-      <PartnersComp></PartnersComp>
-        <Outlet />
-      </Stack>
-    </Stack>
+      </Grid>
+
+      <Grid item xs={10}>
+        <PartnerCard />
+      </Grid>
+    </Grid>
   );
 };
 
 export default Partners;
+

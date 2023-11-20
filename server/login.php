@@ -10,10 +10,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-function sendResponse($message, $status = 200)
+function sendResponse($message, $data = [], $status = 200)
 {
     http_response_code($status);
-    echo json_encode(['message' => $message]);
+    $response = ['message' => $message] + $data;
+    echo json_encode($response);
     exit();
 }
 
@@ -25,23 +26,41 @@ function verifyUser($username, $password)
         sendResponse("Connection failed: " . $conn->connect_error, 500);
     }
 
-    $stmt = $conn->prepare("SELECT password_hash FROM users WHERE username = ?");
+    // Updated to select the partner column as well
+    $stmt = $conn->prepare("SELECT password_hash, partner FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
 
     if ($stmt->execute()) {
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            $stmt->bind_result($storedPasswordHash);
+            $stmt->bind_result($storedPasswordHash, $partner);  // Bind the partner variable
             $stmt->fetch();
+            $stmt->close();
 
             if (password_verify($password, trim($storedPasswordHash))) {
-                return true;
+                // Now fetch additional user data
+                $stmt = $conn->prepare("SELECT id, fname, lname FROM users WHERE username = ?");
+                $stmt->bind_param("s", $username);
+                $stmt->execute();
+                $stmt->bind_result($id, $fname, $lname);
+                $stmt->fetch();
+                $stmt->close();
+
+                // Return the user data as an array, including the partner
+                return [
+                    'id' => $id,
+                    'username' => $username,
+                    'fname' => $fname,
+                    'lname' => $lname,
+                    'partner' => $partner  // Include the partner in the response
+                ];
             }
         }
     }
     return false;
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -51,8 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loginResult = verifyUser($username, $password);
 
     if ($loginResult == false) {
-        sendResponse("incorrect credentials", 400);
+        sendResponse("Incorrect credentials", [], 400);
+    } else {
+        sendResponse("Login successful", ['user' => $loginResult]);
     }
-
-    sendResponse("Login successful");
 }

@@ -1,35 +1,128 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Grid, Paper, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
 
-var cheshire =
+var retrieveMessageCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
 
+var sendMessageCheshire =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendMessage.php";
+
+var endPartnership =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/endPartnership.php";
+
+
+import { Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+
+
+  const stringToColor = (string) => {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = "#";
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+  
+    return color;
+  }; 
+
 const Message = () => {
+  const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const { makePartner, removePartner } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [pollingInterval, setPollingInterval] = useState(1000);
 
-  const sendMessage = (e) => {
+
+  const updateMessages = async () => {
+    try {
+      const response = await axios.post(retrieveMessageCheshire, {
+        sender_username: auth.username,
+        receiver_username: auth.partner,
+      });
+      console.log(response);
+      setMessages(response.data);
+
+
+
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Set up the interval for polling
+    const intervalId = setInterval(updateMessages, pollingInterval);
+    console.log("Polling...");
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, [pollingInterval]);
+
+  const sendMessage = async (e) => {
     e.preventDefault();
     if (input.trim() !== "") {
       const newMessage = {
         text: input,
         sender_username: auth.username,
-        receiver_username: auth.username,
+        receiver_username: auth.partner,
       };
-      setMessages([...messages, newMessage]);
-      setInput("");
+
+      try {
+        setMessages((messages) => [...messages, newMessage]);
+        setInput("");
+        const response = await axios.post(sendMessageCheshire, newMessage);
+        console.log(response);
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
     }
   };
+
+  const endPartner = async () => {
+    const confirmEnd = window.confirm(
+      'Would you like to share your experience? Leave a reivew for your partner'
+    );
+
+    if (confirmEnd) {
+      try {
+        const res = await axios.post(endPartnership, {
+          requester_username: auth.username,
+          receiver_username: auth.partner,
+        });
+
+        console.log(res);
+        makePartner(null);
+        navigate("/partner-reviews");
+        // removePartner();
+        console.log(auth.partner);
+      } catch (err) {
+        console.error("Error ending partnership:", err);
+      }
+    }
+    // If the user clicks Cancel in the confirmation popup, do nothing
+  };
+  
 
   return (
     <Grid container spacing={0}>
       <Grid item xs={2}>
-        <SideDrawer />
+        <SideDrawer/>
       </Grid>
 
       <Grid item xs={2}>
@@ -41,12 +134,19 @@ const Message = () => {
           </div>
 
           <div className="flex items-center space-x-4 mb-4">
-            <img
-              className="w-16 h-16 rounded-full border-2 border-gray-300 object-cover"
-              src="../../assets/TempProfilePic.png"
-              alt="Profile"
-            />
-            <h1 className="text-xl font-medium text-gray-700">Samantha</h1>
+              <Avatar
+                sx={{
+                  bgcolor: stringToColor(auth.partner),
+                  width: 48,
+                  height: 48,
+                  marginRight: 2,
+                }}
+              >
+                {auth.partner[0].toUpperCase()}
+              </Avatar>
+            <h1 className="text-xl font-medium text-gray-700">
+              {auth.partner}
+            </h1>
           </div>
 
           <div className="text-sm text-gray-600 mb-2">Goal</div>
@@ -71,7 +171,10 @@ const Message = () => {
           </div>
 
           <div>
-            <button className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+            <button
+              onClick={endPartner}
+              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+            >
               End partnership
             </button>
           </div>
@@ -100,7 +203,7 @@ const Message = () => {
                         : "bg-gray-100"
                     }`}
                   >
-                    {message.text}
+                    {message.content}
                   </div>
                 </div>
               ))}
@@ -111,7 +214,7 @@ const Message = () => {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Message Samantha..."
+                  placeholder="Message Partner..."
                   className="w-full pl-4 pr-10 py-3 rounded-md bg-gray-100 text-gray-600 placeholder-gray-600 focus:outline-none"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -131,6 +234,8 @@ const Message = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Message;
+
+                  

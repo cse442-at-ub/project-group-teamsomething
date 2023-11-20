@@ -5,6 +5,7 @@ import background from "../../assets/loginBackground.png";
 
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
+import { CURRENT_TEST_ROLE } from "../../main";
 
 var cheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/login.php";
@@ -21,26 +22,25 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      console.log(username);
-      console.log(password);
-      if (username === "") {
+      if (username.trim() === "") {
         alert("Please enter a username.");
         return;
       }
 
-      if (password === "") {
+      if (password.trim() === "") {
         alert("Please enter a password.");
         return;
       }
       const res = await axios.post(cheshire, { username, password });
+      console.log(res)
 
       if (res.status == 200) {
-        login(username);
-        console.log(auth.username);
+        login(res.data.user.username, res.data.user.fname, res.data.user.lname, res.data.user.partner, CURRENT_TEST_ROLE);
         navigate("/home");
       }
-      console.log(auth.username);
+      console.log(auth)
     } catch (error) {
+      alert("Wrong password")
       console.error(error);
     }
   };
