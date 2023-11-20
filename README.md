@@ -21,4 +21,5 @@ uploading to cheshire files
     - Example: scp -r server zhaobint@cheshire.cse.buffalo.edu:/web/CSE442-542/2023-Fall/cse-442x/
 - ssh <your_ubit_name>@cheshire.cse.buffalo.edu
 - cd /web/CSE442-542/2023-Fall/cse-442x/
-- chmod 777 [folder] 
+- chmod 777 [folder] and
+- chmod -R 777 [folder]
