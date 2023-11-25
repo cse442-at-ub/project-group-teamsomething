@@ -16,6 +16,7 @@ export default function ProfileHelper() {
   //const [changeEmail, setChangeEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState(auth.username);
+  const [lastName, setLastName] = useState(""); // New state for last name
 	/*
   useEffect(() => {
     axios.get(profileUrl).then((response) => console.log(response))
@@ -45,6 +46,12 @@ export default function ProfileHelper() {
       console.error("Error changing username:", error);
     }
   }
+
+  const submitLastName = (e) => {
+    e.preventDefault();
+    console.log(lastName);
+    // Perform the necessary actions with the last name
+  };
 
   const changeUsername = e => {
     e.preventDefault();
@@ -161,7 +168,7 @@ export default function ProfileHelper() {
                 component="label"
                 htmlFor="name"
               >
-                Name
+                First Name
               </Typography>
               <TextField
                 variant="outlined"
@@ -175,10 +182,42 @@ export default function ProfileHelper() {
             </Stack>
             <Box flex={1}>
               <Button variant="contained" fullWidth type="submit">
-                Edit Name
+                Edit First Name
               </Button>
             </Box>
           </Stack>
+          <Stack
+          direction="row"
+          alignItems="flex-end"
+          spacing={2}
+          component="form"
+          onSubmit={submitLastName}
+        >
+          <Stack flex={3}>
+            <Typography
+              variant="h6"
+              fontWeight="600"
+              component="label"
+              htmlFor="last-name"
+            >
+              Last Name
+            </Typography>
+            <TextField
+              variant="outlined"
+              id="last-name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              size="small"
+              type="text"
+              required
+            />
+          </Stack>
+          <Box flex={1}>
+            <Button variant="contained" fullWidth type="submit">
+              Edit Last Name
+            </Button>
+          </Box>
+        </Stack>
           <Stack alignItems="flex-start" width={200} spacing={2}>
             <Button
               variant="contained"
