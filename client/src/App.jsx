@@ -134,7 +134,7 @@ function App() {
           removePartner: removePartner,
         }}
       >
-        <Router>
+        <Router basename="/CSE442-542/2023-Fall/cse-442x/dist">
           <Routes>
             <Route path={"/"} element={<Public />} />
             <Route path={"/login"} element={<Login />} />
