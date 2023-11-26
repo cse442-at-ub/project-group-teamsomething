@@ -14,42 +14,84 @@ export default function ProfileHelper() {
   const [profilepic, setProfilepic] = useState(null);
   const [email, setEmail] = useState("");
   //const [changeEmail, setChangeEmail] = useState("");
-  const [name, setName] = useState("");
+  const [fname, setFname] = useState(auth.fname);
   const [username, setUsername] = useState(auth.username);
-	/*
-  useEffect(() => {
-    axios.get(profileUrl).then((response) => console.log(response))
-  }, [])
-  */
+  const [lname, setLname] = useState(auth.lname); // New state for last name
 
   const submitUsername = async (e) => {
     e.preventDefault();
-	document.getElementById("change-email").value = '';
     try {
-	  e.preventDefault();
+	  //e.preventDefault();
+    console.log(auth.username);
       await axios.post(profileUrl, {
         oldUsername: auth.username,
         newUsername: username,
         action: "changeUsername"
       }).then((response) => {
-		window.alert("username changed!");
-		document.getElementById("userNameReal").textContent = username; 
-		e.preventDefault();
-        sessionStorage.setItem("username", username); 
-        //location.reload();
-        console.log(response);
+        if (response['data']['message'] == "Username taken already"){
+          window.alert("username already taken!");
+        }
+        else {
+          window.alert("username changed!");
+          document.getElementById("userNameReal").textContent = username; 
+          document.getElementById("change-email").value = '';
+          //e.preventDefault();
+          //sessionStorage.setItem("username", username); 
+          console.log(response);
+          auth.username = username;
+          //setUsername(username);
+        }
       })
     } catch (error) {
       //console.log(username);
-      console.log(auth.username);
       console.error("Error changing username:", error);
     }
-  }
+  };
 
-  const changeUsername = e => {
+
+  const editFname = async (e) => {
+    console.log(auth.fname);
     e.preventDefault();
-    setUsername(e.target.value);
-  }
+    try {
+    e.preventDefault();
+      await axios.post(profileUrl, {
+        username: auth.username,
+        fname,
+        action: "changeFname"
+      }).then((response) => {
+        window.alert("first name updated!");
+        document.getElementById("fullName").textContent = fname + ' ' + lname;
+        document.getElementById("fname").value = '';
+        e.preventDefault();
+        sessionStorage.setItem("fname", fname); 
+        console.log(response);
+    })
+    } catch (error) {
+      console.error("Error changing first name:", error);
+    }
+  };
+
+
+  const editLname = async (e) => {
+    e.preventDefault();
+    try {
+    e.preventDefault();
+      await axios.post(profileUrl, {
+        username: auth.username,
+        lname,
+        action: "changeLname"
+      }).then((response) => {
+        window.alert("last name updated!");
+        document.getElementById("fullName").textContent = fname + ' ' + lname;
+        document.getElementById("lname").value = '';
+        e.preventDefault();
+       sessionStorage.setItem("lname", lname); 
+        console.log(response);
+    })
+    } catch (error) {
+      console.error("Error changing last name:", error);
+    }
+  };
 
   const handleProfilepic = (e) => {
     setProfilepic(e.target.files[0]);
@@ -135,7 +177,7 @@ export default function ProfileHelper() {
                 variant="outlined"
                 id="change-email"
                 value={username}
-                onChange={changeUsername}
+                onChange={(e) => setUsername(e.target.value)}
                 size="small"
                 //type="email"
                 required
@@ -152,7 +194,7 @@ export default function ProfileHelper() {
             alignItems="flex-end"
             spacing={2}
             component="form"
-            onSubmit={handleEditName}
+            onSubmit={editFname}
           >
             <Stack flex={3}>
               <Typography
@@ -161,13 +203,13 @@ export default function ProfileHelper() {
                 component="label"
                 htmlFor="name"
               >
-                Name
+                First Name
               </Typography>
               <TextField
                 variant="outlined"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                id="fname"
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
                 size="small"
                 type="text"
                 required
@@ -175,10 +217,42 @@ export default function ProfileHelper() {
             </Stack>
             <Box flex={1}>
               <Button variant="contained" fullWidth type="submit">
-                Edit Name
+                Edit First Name
               </Button>
             </Box>
           </Stack>
+          <Stack
+          direction="row"
+          alignItems="flex-end"
+          spacing={2}
+          component="form"
+          onSubmit={editLname}
+        >
+          <Stack flex={3}>
+            <Typography
+              variant="h6"
+              fontWeight="600"
+              component="label"
+              htmlFor="last-name"
+            >
+              Last Name
+            </Typography>
+            <TextField
+              variant="outlined"
+              id="lname"
+              value={lname}
+              onChange={(e) => setLname(e.target.value)}
+              size="small"
+              type="text"
+              required
+            />
+          </Stack>
+          <Box flex={1}>
+            <Button variant="contained" fullWidth type="submit">
+              Edit Last Name
+            </Button>
+          </Box>
+        </Stack>
           <Stack alignItems="flex-start" width={200} spacing={2}>
             <Button
               variant="contained"
