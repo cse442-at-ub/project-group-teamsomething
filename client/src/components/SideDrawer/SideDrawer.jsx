@@ -176,7 +176,7 @@ const SideDrawer = () => {
               </Avatar>
               <div className="flex flex-col">
                 <p id="userNameReal" className="text-xs font-semibold">{auth.username}</p>
-                <p id="username" className="text-xs font-medium">
+                <p id="fullName" className="text-xs font-medium">
                   {auth.fname} {auth.lname}
                 </p>
               </div>
