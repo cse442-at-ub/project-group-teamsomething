@@ -33,9 +33,11 @@ const requestPartnerURL =
 const PartnerCard = () => {
   // State to store the array of data from the API
   const [partners, setPartners] = useState([]);
-
-  // Auth context to use authentication details if needed
+  const [partnerPics, setPartnerPics] = useState({});
   const auth = useContext(AuthContext);
+
+  const profilePicUrl = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+
 
   // The useEffect hook to perform the GET request on component mount
   useEffect(() => {
@@ -51,6 +53,21 @@ const PartnerCard = () => {
         console.error("Error fetching partner data:", error);
       });
   }, []);
+
+  useEffect(() => {
+    partners.forEach(partner => {
+      axios.get(profilePicUrl, { params: { username: partner.username } })
+        .then(picResponse => {
+          if (picResponse.data && picResponse.data.image) {
+            setPartnerPics(prevPics => ({
+              ...prevPics,
+              [partner.username]: `data:image/jpeg;base64,${picResponse.data.image}`
+            }));
+          }
+        })
+        .catch(error => console.error("Error fetching profile picture:", error));
+    });
+  }, [partners]);
 
   const sendFriendRequest = async (uname) => {
     try {
@@ -73,7 +90,8 @@ const PartnerCard = () => {
           if (partner.username === auth.username) {
             return null; // Don't render anything for this iteration
           }
-
+          
+          const partnerPic = partnerPics[partner.username];
           // Render the partner card for partners with a different username
           return (
             <div
@@ -81,12 +99,16 @@ const PartnerCard = () => {
               className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 overflow-hidden"
             >
               <div className= "flex items-center flex-grow">
-              <Avatar
-                style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95,  fontSize: 50,}}
-                className="m-10"
-              >
-                {partner.fname[0].toUpperCase()}
-              </Avatar>
+                {partnerPic ? (
+                  <img src={partnerPic} className="w-40 h-30 mr-12 object-cover" alt="Partner Profile" />
+                ) : (
+                  <Avatar
+                    style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95, fontSize: 50 }}
+                    className="m-10"
+                  >
+                    {partner.fname[0].toUpperCase()}
+                  </Avatar>
+                )}
                 <div classname = "flex flex-col">
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {partner.fname} {partner.lname}
