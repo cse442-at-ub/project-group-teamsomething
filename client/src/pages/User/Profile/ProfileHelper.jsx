@@ -7,6 +7,9 @@ import { AuthContext } from "../../../context/auth-context";
 const profileUrl =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profile.php";
 
+const profilepicUrl =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+
 export default function ProfileHelper() {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -93,8 +96,30 @@ export default function ProfileHelper() {
     }
   };
 
-  const handleProfilepic = (e) => {
-    setProfilepic(e.target.files[0]);
+  const handleProfilepic = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('profilepic', file);
+      formData.append('username', auth.username); // Send username along with the file
+  
+      // Call the function to upload the file
+      uploadProfilePic(formData);
+    }
+  };
+
+  const uploadProfilePic = async (formData) => {
+    try {
+      const response = await axios.post(profilepicUrl, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error uploading profile picture:", error);
+    }
   };
 
   

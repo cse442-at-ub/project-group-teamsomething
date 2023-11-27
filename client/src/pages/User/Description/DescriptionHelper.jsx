@@ -7,13 +7,58 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import TempProfilePic from "../../../assets/TempProfilePic.png"
+import { AuthContext } from "../../../context/auth-context";
+import axios from "axios";
+import React, { useState, useEffect, useContext } from 'react';
+import { Avatar } from "@mui/material";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import AccessAlarmsOutlinedIcon from "@mui/icons-material/AccessAlarmsOutlined";
 import GpsFixedOutlinedIcon from "@mui/icons-material/GpsFixedOutlined";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 
+const profilepicUrl =
+  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+
+
 export default function DescriptionHelper() {
+  const [profilePic, setProfilePic] = useState(null);
+  const auth = useContext(AuthContext);
+  const username = auth.username
+
+  useEffect(() => {
+    const fetchProfilePic = async () => {
+      try {
+        const response = await axios.get(profilepicUrl, {
+          params: { username: auth.username }
+        });
+        if (response.data && response.data.image) {
+          const imageUrl = `data:image/jpeg;base64,${response.data.image}`;
+          setProfilePic(imageUrl);
+        } else {
+          console.error('No image found:', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching profile picture:', error);
+      }
+    };
+    if (auth.username) {
+      fetchProfilePic();
+    }
+  }, [auth.username]);
+
+  const stringToColor = (string) => {
+    let hash = 0;
+    for (let i = 0; i < string.length; i++) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let color = '#';
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.substr(-2);
+    }
+    return color;
+  };
+
   return (
     <Box p={5}>
       <Card>
@@ -21,10 +66,25 @@ export default function DescriptionHelper() {
           <Grid container spacing={2}>
             <Grid item xs={3}>
               <Stack spacing={2}>
-                <img
-                  src={TempProfilePic}
-                  className="w-[150px] h-[150px] object-cover object-top"
-                />
+                {profilePic ? (
+                  <img
+                    src={profilePic}
+                    className="w-[150px] h-[150px] object-cover object-top"
+                    alt="Profile"
+                  />
+                ) : (
+                  <Avatar
+                    sx={{
+                      bgcolor: stringToColor(auth.username),
+                      width: 75,
+                      height: 75,
+                      fontSize: '2rem',
+                      marginRight: 2,
+                    }}
+                  >
+                    {auth.username.charAt(0).toUpperCase()}
+                  </Avatar>
+                )}
                 <Stack spacing={1} direction="row">
                   <PaidOutlinedIcon sx={{ fontSize: 30 }} />
                   <Stack>
@@ -78,7 +138,7 @@ export default function DescriptionHelper() {
                 <Stack direction="row" spacing={2} alignItems="flex-start">
                   <Stack>
                     <Typography fontSize={20} fontWeight={600}>
-                      Lindsey Dun
+                      {auth.fname} {auth.lname}
                     </Typography>
                     <Typography fontSize={14} fontWeight={600}>
                       Queens - New York
