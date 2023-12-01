@@ -20,6 +20,22 @@ export default function ProfileHelper() {
   const [fname, setFname] = useState(auth.fname);
   const [username, setUsername] = useState(auth.username);
   const [lname, setLname] = useState(auth.lname); // New state for last name
+  const [bio, setBio] = useState("");
+
+  const editBio = async (e) => {
+    e.preventDefault();
+    try {
+    e.preventDefault();
+      await axios.post(profileUrl, {
+        bio: bio,
+        action: "bio"
+      }).then((response) => {
+        window.alert("bio updated");
+    })
+    } catch (error) {
+      console.error("Error changing bio:", error);
+    }
+  };
 
   const submitUsername = async (e) => {
     e.preventDefault();
@@ -278,6 +294,42 @@ export default function ProfileHelper() {
             </Button>
           </Box>
         </Stack>
+
+        <Stack
+          direction="row"
+          alignItems="flex-end"
+          spacing={2}
+          component="form"
+          onSubmit={editBio}
+        >
+          <Stack flex={3}>
+            <Typography
+              variant="h6"
+              fontWeight="600"
+              component="label"
+              htmlFor="last-name"
+            >
+              Bio
+            </Typography>
+            <textarea
+              variant="outlined"
+              id="bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              rows={5}
+              size="small"
+              type="text"
+              style={{backgroundColor: '#e5e7eb'}}
+              required
+            />
+          </Stack>
+          <Box flex={1}>
+            <Button variant="contained" fullWidth type="submit">
+              Edit/Upload Bio
+            </Button>
+          </Box>
+        </Stack>
+
           <Stack alignItems="flex-start" width={200} spacing={2}>
             <Button
               variant="contained"
