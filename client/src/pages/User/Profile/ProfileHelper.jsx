@@ -319,7 +319,7 @@ export default function ProfileHelper() {
               rows={5}
               size="small"
               type="text"
-              style={{backgroundColor: '#e5e7eb'}}
+              style={{backgroundColor: '#E8E9F4'}}
               required
             />
           </Stack>
