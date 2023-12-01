@@ -3,12 +3,14 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+$data = json_decode(file_get_contents("php://input"), true);
+$action = $data['action'];
+$conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = json_decode(file_get_contents("php://input"), true);
-	$action = $data['action'];
-	$conn = new mysqli("oceanus.cse.buffalo.edu", "eriklich", "teamsomething", "cse442_2023_fall_team_x_db");
 
 	// user changing username
 	if ($action == "changeUsername"){
@@ -69,20 +71,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo ("last name changed successfully");
 	}
 
-	if ($action = "fetchBio"){
+	if ($action = "editBio"){
 		$username = $data['username'];
+		$bio = $data['newBio'];
 		
-		$stmt = $conn->prepare("SELECT bio FROM users WHERE username = ?");
-		$stmt->bind_param("s", $username);
+		$stmt = $conn->prepare("UPDATE users SET bio=? WHERE username=?");
+		$stmt->bind_param("ss", $bio, $username);
 		$stmt->execute();
-		$result = $stmt->get_result();
-		$bio = $result->fetch_all();
-		echo json_encode($bio);
+		http_response_code(200);
 	}
-	
 
 	$conn->close();
 	exit();
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+	$username = $_GET['username'];
+	$stmt = $conn->prepare("SELECT bio FROM users WHERE username = ?");
+	$stmt->bind_param("s", $username);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$bio = $result->fetch_all();
+	echo json_encode($bio);
 }
 
 ?>
