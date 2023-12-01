@@ -21,7 +21,8 @@ export default function ProfileHelper() {
   const [username, setUsername] = useState(auth.username);
   const [lname, setLname] = useState(auth.lname); // New state for last name
   const [bio, setBio] = useState('');
-
+  const [bioLength, setBioLength] = useState(0);
+  const [overLimit, setOverLimit] = useState(false);
 
   useEffect(() => {
     const fetchBio = async () => {
@@ -34,6 +35,7 @@ export default function ProfileHelper() {
         }).then((response) => {
           console.log(response);
           setBio(response['data']);
+          setBioLength(response['data'][0][0].length);
       })
       } catch (error) {
         console.error("Error fetching bio:", error);
@@ -43,8 +45,22 @@ export default function ProfileHelper() {
   }, []);
 
 
+  const changeBio = (e) => {
+    if (bio.length < 300){
+      setOverLimit(false);
+    }
+    else {
+      setOverLimit(true);
+    }
+    setBio(e.target.value);
+    setBioLength(bio.length);
+  }
+
   const editBio = async (e) => {
     e.preventDefault();
+    if (overLimit) {
+      window.alert('bio too long');
+      return}
     try {
       await axios.post(profileUrl, {
         newBio: bio,
@@ -337,13 +353,15 @@ export default function ProfileHelper() {
               variant="outlined"
               id="bio"
               value={bio}
-              onChange={(e) => setBio(e.target.value)}
+              onChange={changeBio}
               rows={5}
               size="small"
               type="text"
               style={{backgroundColor: '#E8E9F4'}}
               required
             />
+            <div>{bioLength}/300</div>
+            {overLimit?<div>over character limit for bio!</div>:<></>}
           </Stack>
           <Box flex={1}>
             <Button variant="contained" fullWidth type="submit">
