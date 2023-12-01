@@ -70,7 +70,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 
 	if ($action = "fetchBio"){
-		echo json_encode("fetched bio");
+		$username = $data['username'];
+		
+		$stmt = $conn->prepare("SELECT bio FROM users WHERE username = ?");
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$bio = $result->fetch_all();
+		echo json_encode($bio);
 	}
 	
 

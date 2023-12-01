@@ -29,6 +29,7 @@ export default function ProfileHelper() {
           username: auth.username,
           action: "fetchBio"
         }).then((response) => {
+          console.log(response);
           setBio(response['data']);
       })
       } catch (error) {
