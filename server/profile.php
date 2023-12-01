@@ -68,6 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->execute();
 		echo ("last name changed successfully");
 	}
+
+	if ($action = "fetchBio"){
+		echo json_encode("fetched bio");
+	}
 	
 
 	$conn->close();

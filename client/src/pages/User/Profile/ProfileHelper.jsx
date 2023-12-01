@@ -20,7 +20,23 @@ export default function ProfileHelper() {
   const [fname, setFname] = useState(auth.fname);
   const [username, setUsername] = useState(auth.username);
   const [lname, setLname] = useState(auth.lname); // New state for last name
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState('');
+
+  useEffect(() => {
+    const fetchBio = async () => {
+      try {
+        await axios.post(profileUrl, {
+          username: auth.username,
+          action: "fetchBio"
+        }).then((response) => {
+          setBio(response['data']);
+      })
+      } catch (error) {
+        console.error("Error fetching bio:", error);
+      }
+    }
+    fetchBio();
+  }, []);
 
   const editBio = async (e) => {
     e.preventDefault();
