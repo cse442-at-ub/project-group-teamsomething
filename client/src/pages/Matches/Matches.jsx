@@ -10,7 +10,7 @@ const Matches = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid container spacing={0} style={{ height: '100vh' }}>
+    <Grid container spacing={0}>
       {!isMobile && (
         <Grid item xs={2}>
           <SideDrawer />

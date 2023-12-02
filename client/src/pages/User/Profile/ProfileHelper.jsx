@@ -16,6 +16,7 @@ export default function ProfileHelper() {
   //const [changeEmail, setChangeEmail] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState(auth.username);
+  
 	/*
   useEffect(() => {
     axios.get(profileUrl).then((response) => console.log(response))
