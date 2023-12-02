@@ -5,8 +5,11 @@ import SendIcon from "@mui/icons-material/Send";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 
+import { useTheme, useMediaQuery } from '@mui/material';
+
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav";
 
 var retrieveMessageCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
@@ -40,6 +43,8 @@ const stringToColor = (string) => {
 };
 
 const Message = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const { makePartner, removePartner } = useContext(AuthContext);
@@ -71,9 +76,9 @@ const Message = () => {
         makePartner(response.data.partner);
       } else {
         makePartner(null);
-        navigate("/message-blocked")
+        navigate("/message-blocked");
       }
-      console.log(auth.partner)
+      console.log(auth.partner);
     } catch (err) {
       console.error("Error sending message:", error);
     }
@@ -138,9 +143,11 @@ const Message = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
 
       <Grid item xs={2}>
         <div className="w-full h-full bg-gray-100 p-4">
@@ -249,6 +256,8 @@ const Message = () => {
           </div>
         </div>
       </Grid>
+
+      {isMobile && <BottomTabNavigation />}
     </Grid>
   );
 };

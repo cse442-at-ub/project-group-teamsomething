@@ -6,12 +6,20 @@ import axios from "axios";
 import { AuthContext } from "../../context/auth-context";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Lock from "../../assets/lock1.png";
+import { useTheme, useMediaQuery } from '@mui/material';
+
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav";
 
 const Message_Blocked = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const { makePartner, removePartner } = useContext(AuthContext);
   const [pollingInterval, setPollingInterval] = useState(100);
+
+  var getFriendshipStatusRoute =
+    "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getPartnershipStatus.php";
 
   useEffect(() => {
     getFriendshipStatus();
@@ -31,16 +39,19 @@ const Message_Blocked = () => {
       }
       console.log(auth.partner);
     } catch (err) {
-      console.error("Error sending message:", error);
+      console.error("Error sending message:", err);
     }
   };
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
-      <Grid item xs={10}>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
+
+      <Grid item xs={12} md={isMobile ? 12 : 10}>
         <div className="flex justify-center items-center w-full h-full bg-[#E8E9F4]">
           <div className="flex flex-col justify-center items-center mb-12">
             <img src={Lock} className=" h-10 w-10"></img>
@@ -52,6 +63,7 @@ const Message_Blocked = () => {
             </div>
           </div>
         </div>
+        {isMobile && <BottomTabNavigation />}
       </Grid>
     </Grid>
   );
