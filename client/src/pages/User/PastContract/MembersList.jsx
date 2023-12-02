@@ -51,7 +51,7 @@ export default function MembersList() {
   return (
     <Stack mt={5} pl={1} spacing={2}>
       {partners.map((partner) => {
-        const isSelected = pathname.includes(partner)
+        const isSelected = pathname.includes(partner.id)
         return (
           <MemberItem
             {...partner}
