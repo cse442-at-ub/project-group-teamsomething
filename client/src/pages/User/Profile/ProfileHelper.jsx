@@ -176,18 +176,6 @@ export default function ProfileHelper() {
     }
   };
 
-  
-  const handleEditEmail = (e) => {
-    e.preventDefault();
-    //console.log(changeEmail);
-  };
-  
-
-  const handleEditName = (e) => {
-    e.preventDefault();
-    console.log(name);
-  };
-
   return (
     <Box p={5} maxWidth={800}>
       <Stack spacing={3}>
@@ -215,33 +203,11 @@ export default function ProfileHelper() {
           </Button>
         </Stack>
         <Stack spacing={2}>
-          <Stack direction="row" spacing={2}>
-            <Stack flex={3}>
-              <Typography
-                variant="h6"
-                fontWeight="600"
-                component="label"
-                htmlFor="email"
-              >
-                Email
-              </Typography>
-              <TextField
-                variant="outlined"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                size="small"
-                type="email"
-              />
-            </Stack>
-            <Box flex={1} />
-          </Stack>
           <Stack
             direction="row"
             alignItems="flex-end"
             spacing={2}
             component="form"
-            onSubmit={handleEditEmail}
           >
             <Stack flex={3}>
               <Typography
