@@ -5,7 +5,7 @@ import MessageIcon from "@mui/icons-material/Message";
 import PeopleIcon from "@mui/icons-material/People";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"; // Icon for Profile
 import { useNavigate } from "react-router-dom";
-import Matches from "../../assets/Matches.png"
+import Matches from "../../assets/Matches.png";
 
 const BottomTabNavigation = () => {
   const [value, setValue] = useState(0);
@@ -19,10 +19,10 @@ const BottomTabNavigation = () => {
         navigate("/home");
         break;
       case 1:
-        navigate("/matches");
+        navigate("/partners");
         break;
       case 2:
-        navigate("/partners");
+        navigate("/matches");
         break;
       case 3:
         navigate("/message");
@@ -38,18 +38,13 @@ const BottomTabNavigation = () => {
   return (
     <BottomNavigation value={value} onChange={handleChange} showLabels>
       <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction label="Partners" icon={<PeopleIcon />} />
       <BottomNavigationAction
         label="Matches"
         icon={<img src={Matches} alt="Matches" className="w-6 h-6" />}
-      />{" "}
-      {/* Ensure Matches is a valid image */}
-      <BottomNavigationAction label="Partners" icon={<PeopleIcon />} />
+      />
       <BottomNavigationAction label="Messages" icon={<MessageIcon />} />
-      <BottomNavigationAction
-        label="Profile"
-        icon={<AccountCircleIcon />}
-      />{" "}
-      {/* Profile Icon */}
+      <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
     </BottomNavigation>
   );
 };
