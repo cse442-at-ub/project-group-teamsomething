@@ -57,6 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmtUpdateUser->bind_param("ss", $requester, $receiver);
 
             if ($stmtUpdateUser->execute()) {
+                $sqla = "INSERT INTO past_partners (user, partner) VALUES (?, ?)";
+                $stmt = $conn->prepare($sqla);
+                $stmt->bind_param("ss", $requester, $receiver);
+                $stmt->execute();
+                $sqlb = "INSERT INTO past_partners (user, partner) VALUES (?, ?)";
+                $stmt = $conn->prepare($sqlb);
+                $stmt->bind_param("ss", $receiver, $requester);
+                $stmt->execute();
                 echo json_encode(['message' => 'Partnership ended and user partners updated']);
             } else {
                 echo json_encode(['message' => 'Partnership ende, but error updating user partners']);
