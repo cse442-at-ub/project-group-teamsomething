@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { Avatar } from "@mui/material";
 
 import Logo from "../../assets/logo.png";
@@ -9,7 +10,7 @@ import Messages from "../../assets/Messages.png";
 import Matches from "../../assets/Matches.png";
 
 import { AuthContext } from "../../context/auth-context";
-import { useContext } from "react";
+
 
 const stringToColor = (string) => {
   let hash = 0;
@@ -33,6 +34,29 @@ const stringToColor = (string) => {
 const SideDrawer = () => {
   const { pathname } = useLocation();
   const auth = useContext(AuthContext);
+  const [profilePic, setProfilePic] = useState('');
+
+  useEffect(() => {
+    if (auth.username) {
+      const profilePicUrl = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+
+      axios.get(profilePicUrl, {
+        params: {
+          username: auth.username // Pass the username as a parameter
+        }
+      })
+      .then(response => {
+        // The PHP script returns a base64 encoded image
+        if (response.data.image) {
+          setProfilePic(response.data.image);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching profile picture:', error);
+      });
+    }
+  // Include auth.username in the dependency array to refetch when it changes
+  }, [auth.username]);
 
   return (
     <>
@@ -164,16 +188,25 @@ const SideDrawer = () => {
                 pathname.includes("/home/user") ? "bg-[#E8E9F4]" : ""
               } hover:cursor-pointer hover:bg-[#E8E9F4] p-5 hover:rounded-tl-lg hover:rounded-bl-lg`}
             >
-              <Avatar
-                sx={{
-                  bgcolor: stringToColor(auth.username),
-                  width: 48,
-                  height: 48,
-                  marginRight: 2,
-                }}
-              >
-                {auth.username[0].toUpperCase()}
-              </Avatar>
+               {profilePic ? (
+                  <img
+                    src={`data:image/jpeg;base64,${profilePic}`}
+                    alt="Profile"
+                    className="w-12 h-12 rounded-full mr-2"
+                  />
+                ) : (
+
+                  <Avatar
+                    sx={{
+                      bgcolor: stringToColor(auth.username),
+                      width: 48,
+                      height: 48,
+                      marginRight: 2,
+                    }}
+                  >
+                    {auth.username[0].toUpperCase()}
+                  </Avatar>
+                )}
               <div className="flex flex-col">
                 <p id="userNameReal" className="text-xs font-semibold">{auth.username}</p>
                 <p id="fullName" className="text-xs font-medium">
