@@ -80,7 +80,7 @@ const PartnerCard = () => {
       for (const partner of partners) {
         try {
           const descResponse = await axios.get(pfdescription, { params: { username: partner.username } });
-          console.log("API response for", partner.username, ":", descResponse.data);
+          // console.log("API response for", partner.username, ":", descResponse.data);
   
           // Assuming descResponse.data is an array of objects
           const partnerDescription = descResponse.data.find(desc => desc.username === partner.username);
@@ -105,7 +105,7 @@ const PartnerCard = () => {
         sender: auth.username,
         receiver: uname,
       });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching partner data:", error);
     }
@@ -123,7 +123,7 @@ const PartnerCard = () => {
           
           const partnerPic = partnerPics[partner.username];
           const descriptions = partnerDescriptions[partner.username];
-          console.log("Rendering partner:", partner.username, "Description:", descriptions);
+          // console.log("Rendering partner:", partner.username, "Description:", descriptions);
 
           return (
             <div
