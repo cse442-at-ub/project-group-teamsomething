@@ -74,25 +74,29 @@ const PartnerCard = () => {
   }, [partners]);
 
   useEffect(() => {
-    partners.forEach(partner => {
-      axios.get(pfdescription, { params: { username: partner.username } })
-        .then(descResponse => {
-          console.log("Description response for", partner.username, ":", descResponse.data);
-          if (descResponse.data && descResponse.data.description) {
-            setPartnerDescriptions(prevDescs => ({
-              ...prevDescs,
-              [partner.username]: descResponse.data.description
-            }));
-          } else {
-            // Handle case where description is not present
-            setPartnerDescriptions(prevDescs => ({
-              ...prevDescs,
-              [partner.username]: null
-            }));
-          }
-        })
-        .catch(error => console.error("Error fetching user description:", error));
-    });
+    const fetchDescriptions = async () => {
+      const newDescriptions = {};
+  
+      for (const partner of partners) {
+        try {
+          const descResponse = await axios.get(pfdescription, { params: { username: partner.username } });
+          console.log("API response for", partner.username, ":", descResponse.data);
+  
+          // Assuming descResponse.data is an array of objects
+          const partnerDescription = descResponse.data.find(desc => desc.username === partner.username);
+          newDescriptions[partner.username] = partnerDescription ? partnerDescription.description : null;
+        } catch (error) {
+          console.error("Error fetching user description for", partner.username, ":", error);
+          newDescriptions[partner.username] = null;
+        }
+      }
+  
+      setPartnerDescriptions(newDescriptions);
+    };
+  
+    if (partners.length > 0) {
+      fetchDescriptions();
+    }
   }, [partners]);
 
   const sendFriendRequest = async (uname) => {
@@ -119,39 +123,46 @@ const PartnerCard = () => {
           
           const partnerPic = partnerPics[partner.username];
           const descriptions = partnerDescriptions[partner.username];
+          console.log("Rendering partner:", partner.username, "Description:", descriptions);
 
           return (
             <div
               key={index}
-              className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 overflow-hidden"
+              className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 px-6 py-4"
             >
-              <div className= "flex items-center flex-grow">
+              <div className= "flex items-center space-x-4">
                 {partnerPic ? (
-                  <img src={partnerPic} className="w-40 h-30 mr-12 object-cover" alt="Partner Profile" />
+                  <img src={partnerPic} className="w-32 h-32 rounded-full object-cover" alt="Partner Profile" />
                 ) : (
                   <Avatar
-                    style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95, fontSize: 50 }}
-                    className="m-10"
+                    style={{ backgroundColor: stringToColor(partner.username), width: 110, height: 110, fontSize: 35 }}
+                    className="mr-5"
                   >
                     {partner.fname[0].toUpperCase()}
                   </Avatar>
                 )}
-                <div classname = "flex flex-col">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {partner.fname} {partner.lname}
-                </h3>
-                <p className="text-gray-600 mb-4">{descriptions}</p>
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800">{partner.fname} {partner.lname}</span>
+                  <span className="text-gray-500 text-lg">@{partner.username}</span>
+                  {descriptions ? (
+                    <p className="text-gray-600 text-lg mr-2">{descriptions}</p>
+                  ) : (
+                    <p className="text-gray-600 text-lg mr-2"></p>
+                  )
+                  }  
                 </div>
-                </div>
-                <div style={{ flexBasis: '33%' }}></div>
-                <button
-                  onClick={() => sendFriendRequest(partner.username)}
-                  className="bg-[#FF3737] hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Request Friend
-                </button>
+                </div> 
+                <div className="flex items-center">
+                                
+                  <button
+                    onClick={() => sendFriendRequest(partner.username)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-lg transition-colors duration-300 ease-in-out"
+                  >
+                    Request Friend
+                  </button>
               
-            </div>
+                </div>
+              </div>
           );
         })
       ) : (
