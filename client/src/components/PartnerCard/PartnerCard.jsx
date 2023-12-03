@@ -30,13 +30,17 @@ const cheshire2 =
 const requestPartnerURL =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendPartnerRequest.php";
 
+
+
 const PartnerCard = () => {
   // State to store the array of data from the API
   const [partners, setPartners] = useState([]);
   const [partnerPics, setPartnerPics] = useState({});
+  const [partnerDescriptions, setPartnerDescriptions] = useState({});
   const auth = useContext(AuthContext);
 
   const profilePicUrl = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+  const pfdescription = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getdescription.php";
 
 
   // The useEffect hook to perform the GET request on component mount
@@ -45,7 +49,7 @@ const PartnerCard = () => {
       .get(cheshire2)
       .then((response) => {
         // Handle the response by storing the data in state
-        console.log(response.data);
+        
         setPartners(response.data);
       })
       .catch((error) => {
@@ -66,6 +70,28 @@ const PartnerCard = () => {
           }
         })
         .catch(error => console.error("Error fetching profile picture:", error));
+    });
+  }, [partners]);
+
+  useEffect(() => {
+    partners.forEach(partner => {
+      axios.get(pfdescription, { params: { username: partner.username } })
+        .then(descResponse => {
+          console.log("Description response for", partner.username, ":", descResponse.data);
+          if (descResponse.data && descResponse.data.description) {
+            setPartnerDescriptions(prevDescs => ({
+              ...prevDescs,
+              [partner.username]: descResponse.data.description
+            }));
+          } else {
+            // Handle case where description is not present
+            setPartnerDescriptions(prevDescs => ({
+              ...prevDescs,
+              [partner.username]: null
+            }));
+          }
+        })
+        .catch(error => console.error("Error fetching user description:", error));
     });
   }, [partners]);
 
@@ -92,7 +118,8 @@ const PartnerCard = () => {
           }
           
           const partnerPic = partnerPics[partner.username];
-          // Render the partner card for partners with a different username
+          const descriptions = partnerDescriptions[partner.username];
+
           return (
             <div
               key={index}
@@ -113,7 +140,7 @@ const PartnerCard = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {partner.fname} {partner.lname}
                 </h3>
-                <p className="text-gray-600 mb-4">{partner.username}</p>
+                <p className="text-gray-600 mb-4">{descriptions}</p>
                 </div>
                 </div>
                 <div style={{ flexBasis: '33%' }}></div>
@@ -135,6 +162,3 @@ const PartnerCard = () => {
 };
 
 export default PartnerCard;
-
-
-// i have this code that provides the webpage similar to the attached photo. Can you make the ParnterCard more similar to the second photo without changing any logic of the original code
