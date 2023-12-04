@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import axios from "axios";
 
 import { AuthContext } from "../../context/auth-context";
@@ -44,7 +44,7 @@ const Message_Blocked = () => {
   };
 
   return (
-    <Grid container spacing={0}>
+    <Grid container spacing={0} style={{ height: "100vh" }}>
       {!isMobile && (
         <Grid item xs={2}>
           <SideDrawer />
@@ -63,6 +63,7 @@ const Message_Blocked = () => {
             </div>
           </div>
         </div>
+
         {isMobile && (
           <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
             <BottomTabNavigation />

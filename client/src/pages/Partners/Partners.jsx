@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, useTheme, useMediaQuery } from "@mui/material";
+import { Grid, useTheme, useMediaQuery, Box } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav.jsx";
@@ -23,7 +23,11 @@ const Partners = () => {
         </Grid>
       </Grid>
 
-      {isMobile && <BottomTabNavigation />}
+      {isMobile && (
+        <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+          <BottomTabNavigation />
+        </Box>
+      )}
     </>
   );
 };
