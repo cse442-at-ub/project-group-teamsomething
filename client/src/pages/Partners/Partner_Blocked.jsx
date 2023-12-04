@@ -17,7 +17,7 @@ const Partner_Blocked = () => {
         </Grid>
       )}
 
-      <Grid item xs={12}>
+      <Grid item xs={12} md={10}>
         <div className="flex flex-col justify-center items-center w-full h-full bg-[#E8E9F4]">
           <div className="flex flex-col justify-center items-center mb-12">
             <img src={Lock} alt="Lock" className="h-10 w-10" />
