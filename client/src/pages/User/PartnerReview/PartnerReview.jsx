@@ -1,57 +1,68 @@
-import { Grid, Stack, TextField, Button } from "@mui/material";
+import { useTheme, Grid, Stack, TextField, Button, Box, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
 import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 import UserSidebar from "../../../components/UserSidebar/UserSidebar";
 import ReviewBox from "../../../components/UserReview/ReviewBox";
-
+import BottomTabNavigation from "../../../components/BottomTabNav/BottomTabNav";
 
 const PartnerReview = () => {
   const [reviews, setReviews] = useState([]);
   const [partnerName, setPartnerName] = useState("");
   const [reviewText, setReviewText] = useState("");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     // Fetch reviews from the server when the component mounts
-    fetch('https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/review.php')
-      .then(response => response.json())
-      .then(data => setReviews(data))
-      .catch(error => console.error('Error fetching reviews:', error));
+    fetch(
+      "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/review.php"
+    )
+      .then((response) => response.json())
+      .then((data) => setReviews(data))
+      .catch((error) => console.error("Error fetching reviews:", error));
   }, []);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Send data to the server when the form is submitted
-    fetch('https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveReview.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        partner: partnerName,
-        review: reviewText,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveReview.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          partner: partnerName,
+          review: reviewText,
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
         // Update the reviews state with the new data
         setReviews([...reviews, data]);
         // Clear the form fields
         setPartnerName("");
         setReviewText("");
       })
-      .catch(error => console.error('Error submitting review:', error));
+      .catch((error) => console.error("Error submitting review:", error));
   };
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
-      <Grid item xs={2}>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
+
+      <Grid item xs={isMobile ? 12 : 2}>
         <UserSidebar />
       </Grid>
-      <Grid item xs={8} overflow='scroll' maxHeight={'100vh'}>
+
+      <Grid item xs={isMobile ? 12 : 8} overflow="scroll" maxHeight={"100vh"}>
         <Stack p={3} spacing={3}>
           <form onSubmit={handleFormSubmit}>
             <TextField
@@ -72,16 +83,31 @@ const PartnerReview = () => {
               onChange={(e) => setReviewText(e.target.value)}
               margin="normal"
             />
-            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ mt: 2 }}
+            >
               Submit
             </Button>
           </form>
 
           {reviews.map((review, index) => (
-            <ReviewBox key={index} text={review.review} partner={review.partner} />
+            <ReviewBox
+              key={index}
+              text={review.review}
+              partner={review.partner}
+            />
           ))}
         </Stack>
       </Grid>
+
+      {isMobile && (
+        <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+          <BottomTabNavigation />
+        </Box>
+      )}
     </Grid>
   );
 };
