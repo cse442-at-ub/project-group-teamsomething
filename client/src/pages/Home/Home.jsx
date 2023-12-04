@@ -16,6 +16,7 @@ import SideDrawer from '../../components/SideDrawer/SideDrawer';
 import GoalComponent from '../../components/CurrentGoal/GoalComponent';
 import { AuthContext } from '../../context/auth-context';
 
+
 import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav"
 
 const EVENTS = [
@@ -125,7 +126,7 @@ const Home = () => {
 
       <Grid item xs={12} md={isMobile ? 12 : 10} height={'100vh'} className="bg-[#E8E9F4] p-5">
         <Grid container height="100%" spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Box
               height="100%"
               overflow="hidden"
@@ -136,7 +137,8 @@ const Home = () => {
               <GoalComponent />
             </Box>
           </Grid>
-          <Grid item xs={9} height="100%">
+          
+          <Grid item xs={12} md={9} height="100%">
             <Stack height="100%">
               <Stack direction="row" alignItems="center" spacing={4}>
                 <Box
@@ -194,7 +196,7 @@ const Home = () => {
                   </Stack>
                 </Stack>
                 <Divider />
-                <Box flex={1} overflow="scroll">
+                <Box flex={1} overflow="auto" style={{ height: '100%', overflow: 'auto' }}>
                   <Scheduler
                     ref={calendarRef}
                     deletable={false}
@@ -217,7 +219,11 @@ const Home = () => {
             </Stack>
           </Grid>
         </Grid>
-        {isMobile && <BottomTabNavigation />}
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
         <Outlet />
       </Grid>
     </Grid>

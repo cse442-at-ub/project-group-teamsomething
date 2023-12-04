@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from "../../context/auth-context";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import Lock from "../../assets/lock1.png";
-import { useTheme, useMediaQuery } from '@mui/material';
+import { useTheme, useMediaQuery } from "@mui/material";
 
 import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav";
 
@@ -63,7 +63,11 @@ const Message_Blocked = () => {
             </div>
           </div>
         </div>
-        {isMobile && <BottomTabNavigation />}
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );

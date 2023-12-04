@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, useMediaQuery, useTheme, Box} from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav"; // Adjust the import path as needed
@@ -10,14 +10,14 @@ const Partner_Blocked = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid container spacing={0} style={{ height: '80vh' }}>
+    <Grid container spacing={0} style={{ height: '100vh' }}>
       {!isMobile && (
         <Grid item xs={2}>
           <SideDrawer />
         </Grid>
       )}
 
-      <Grid item xs={12} md={isMobile ? 12 : 10}>
+      <Grid item xs={12}>
         <div className="flex flex-col justify-center items-center w-full h-full bg-[#E8E9F4]">
           <div className="flex flex-col justify-center items-center mb-12">
             <img src={Lock} alt="Lock" className="h-10 w-10" />
@@ -32,7 +32,11 @@ const Partner_Blocked = () => {
             </p>
           </div>
         </div>
-        {isMobile && <BottomTabNavigation />}
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );
