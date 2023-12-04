@@ -1,22 +1,25 @@
 import React from "react";
-import { Grid, Button, Paper, Typography } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import MatchesCard from "../../components/MatchesCard/MatchesCard.jsx";
-
-var cheshire =
-  "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/matches.php";
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav";
 
 const Matches = () => {
-  //const { pathname } = useLocation()
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
 
-      <Grid item xs={10}>
+      <Grid item xs={12} md={isMobile ? 12 : 10}>
         <MatchesCard />
+        {isMobile && <BottomTabNavigation />}
       </Grid>
     </Grid>
   );

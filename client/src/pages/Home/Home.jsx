@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Grid,
   Box,
@@ -5,14 +6,19 @@ import {
   Divider,
   Button,
   LinearProgress,
-} from "@mui/material";
-import { Scheduler } from "@aldabil/react-scheduler";
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import { Scheduler } from '@aldabil/react-scheduler';
+import { Outlet } from 'react-router-dom';
 
-import SideDrawer from "../../components/SideDrawer/SideDrawer";
-import { Outlet } from "react-router-dom";
-import GoalComponent from "../../components/CurrentGoal/GoalComponent";
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/auth-context";
+import SideDrawer from '../../components/SideDrawer/SideDrawer';
+import GoalComponent from '../../components/CurrentGoal/GoalComponent';
+import { AuthContext } from '../../context/auth-context';
+
+
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav"
+
 const EVENTS = [
   {
     event_id: 1,
@@ -82,6 +88,8 @@ const EVENTS = [
 ];
 
 const Home = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const auth = useContext(AuthContext);
   useEffect(() => {
     console.log(auth);
@@ -110,12 +118,15 @@ const Home = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
-      <Grid item xs={10} height={"100vh"} className="bg-[#E8E9F4] p-5">
+       {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
+
+      <Grid item xs={12} md={isMobile ? 12 : 10} height={'100vh'} className="bg-[#E8E9F4] p-5">
         <Grid container height="100%" spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Box
               height="100%"
               overflow="hidden"
@@ -126,7 +137,8 @@ const Home = () => {
               <GoalComponent />
             </Box>
           </Grid>
-          <Grid item xs={9} height="100%">
+          
+          <Grid item xs={12} md={9} height="100%">
             <Stack height="100%">
               <Stack direction="row" alignItems="center" spacing={4}>
                 <Box
@@ -184,7 +196,7 @@ const Home = () => {
                   </Stack>
                 </Stack>
                 <Divider />
-                <Box flex={1} overflow="scroll">
+                <Box flex={1} overflow="auto" style={{ height: '100%', overflow: 'auto' }}>
                   <Scheduler
                     ref={calendarRef}
                     deletable={false}
@@ -207,6 +219,11 @@ const Home = () => {
             </Stack>
           </Grid>
         </Grid>
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
         <Outlet />
       </Grid>
     </Grid>

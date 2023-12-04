@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Paper, TextField, Button } from "@mui/material";
+import { Grid, Paper, TextField, Button, Box } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Avatar } from "@mui/material";
 import axios from "axios";
 
+import { useTheme, useMediaQuery } from '@mui/material';
+
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import { AuthContext } from "../../context/auth-context";
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav";
 
 var retrieveMessageCheshire =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/retrieveMessage.php";
@@ -40,6 +43,8 @@ const stringToColor = (string) => {
 };
 
 const Message = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
   const { makePartner, removePartner } = useContext(AuthContext);
@@ -71,9 +76,9 @@ const Message = () => {
         makePartner(response.data.partner);
       } else {
         makePartner(null);
-        navigate("/message-blocked")
+        navigate("/message-blocked");
       }
-      console.log(auth.partner)
+      console.log(auth.partner);
     } catch (err) {
       console.error("Error sending message:", error);
     }
@@ -137,12 +142,14 @@ const Message = () => {
   };
 
   return (
-    <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
+    <Grid container spacing={0} style={{ paddingBottom: isMobile ? '56px' : '0px' }}>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
 
-      <Grid item xs={2}>
+      <Grid item xs={12} md={2}>
         <div className="w-full h-full bg-gray-100 p-4">
           <div>
             <h1 className="text-xl font-semibold text-gray-800 mb-2">
@@ -166,7 +173,7 @@ const Message = () => {
             </h1>
           </div>
 
-          <div className="text-sm text-gray-600 mb-2">Goal</div>
+          {/* <div className="text-sm text-gray-600 mb-2">Goal</div>
 
           <div className="text-sm text-gray-600 mb-2">
             GoLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -185,7 +192,7 @@ const Message = () => {
           <div className="text-sm text-gray-500 mb-6">
             Contract - Othopal disclaims responsibility for contract breaches,
             as the agreement relies solely on trust between the two parties.
-          </div>
+          </div> */}
 
           <div>
             <button
@@ -198,7 +205,7 @@ const Message = () => {
         </div>
       </Grid>
 
-      <Grid item xs={8}>
+      <Grid item xs={12} md={8}>
         <div className="flex h-screen antialiased text-gray-800">
           {/* Main Chat Area */}
           <div className="flex-1 flex flex-col">
@@ -249,6 +256,12 @@ const Message = () => {
           </div>
         </div>
       </Grid>
+
+      {isMobile && (
+        <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+          <BottomTabNavigation />
+        </Box>
+      )}
     </Grid>
   );
 };
