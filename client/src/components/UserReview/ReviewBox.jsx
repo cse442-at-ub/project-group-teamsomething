@@ -45,7 +45,8 @@ export default function ReviewBox({ text, partner }) {
       <Card
         sx={{
           flex: 8,
-          background: '#e1f7dd'
+          background: '#e1f7dd',
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
         }}
       >
         <CardContent>

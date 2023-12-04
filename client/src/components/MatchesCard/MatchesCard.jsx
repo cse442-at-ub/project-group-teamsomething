@@ -51,7 +51,7 @@ const MatchesCard = () => {
   };
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full min-h-screen p-4 bg-gradient-to-r from-[#662c91] to-[#662c91]">
       {partners.length > 0 ? (
         partners.map((partner, index) => (
           <div
@@ -73,38 +73,25 @@ const MatchesCard = () => {
           </div>
         ))
       ) : (
-        <Grid container spacing={0}>
+        <Grid container spacing={0} justifyContent="center" alignItems="center">
           <Grid item xs={12}>
-            <div className="flex justify-center items-center w-full h-full">
-              <div className="flex flex-col justify-center items-center mb-12">
-                <img src={Lock} className=" h-10 w-10"></img>
-                <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-                  <p className=""> </p>
-                </div>
-                <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-                  <p className="">
-                    You Currently Do Not Have A Match Request!{" "}
-                  </p>
-                </div>
-                <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-                  <p whitespace-pre-wrap absolute className="">
-                    Head to the partners tab to send match requests
-                  </p>
-                </div>
-                <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-                  <p whitespace-pre-wrap absolute className="">
-                    Check back here later to view an incoming request.
-                  </p>
-                </div>
-                <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-                  <p whitespace-pre-wrap absolute className="">
-                    Good Luck with your Search!{" "}
-                  </p>
-                </div>
-              </div>
+            <div className="flex flex-col justify-center items-center mb-12 bg-white p-6 rounded-lg shadow-md">
+              <img src={Lock} className="h-10 w-10 mb-4" alt="Lock Icon" />
+              <div className="text-2xl font-bold text-gray-800 mb-4">
+                You Currently Do Not Have A Match Request!
             </div>
-          </Grid>
+            <p className="text-xl font-light text-center text-black mb-4">
+                Head to the partners tab to send match requests.
+            </p>
+            <p className="text-xl font-light text-center text-black mb-4">
+                Check back here later to view an incoming request.
+            </p>
+            <p className="text-xl font-light text-center text-black mb-4">
+                Good Luck with your Search!
+            </p>
+          </div>
         </Grid>
+      </Grid>
       )}
     </div>
   );

@@ -39,6 +39,7 @@ const UserSidebar = () => {
         borderBottomLeftRadius: "0px",
         boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
         overflow: "hidden",
+        transition: "width 0.3s ease-in-out",
       }}
     >
       <Grid container spacing={0} className="h-full bg-[#E8E9F4]">
@@ -48,7 +49,7 @@ const UserSidebar = () => {
               SIDEBAR_ITEMS.map((item) => {
                 const selected = pathname.includes(item.path);
                 return (
-                  <Link to={`${item.path}`} key={item.id} className={`${selected ? "bg-white" : ""} p-4 font-bold`}>
+                  <Link to={`${item.path}`} key={item.id} className={`${selected ? "bg-white" : ""} p-4 font-bold transition-colors hover:bg-grey-200 flex items-center justify-center`}>
                     <h1>{item.name}</h1>
                   </Link>
                 )

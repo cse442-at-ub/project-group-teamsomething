@@ -72,7 +72,7 @@ const PartnerReview = () => {
               onChange={(e) => setReviewText(e.target.value)}
               margin="normal"
             />
-            <Button type="submit" variant="contained" color="primary">
+            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
               Submit
             </Button>
           </form>

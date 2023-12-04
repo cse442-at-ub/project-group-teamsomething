@@ -98,19 +98,19 @@ const PartnerCard = () => {
               key={index}
               className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 overflow-hidden"
             >
-              <div className= "flex items-center flex-grow">
+              <div className="flex items-center flex-grow">
                 {partnerPic ? (
                   <img src={partnerPic} className="w-40 h-30 mr-12 object-cover" alt="Partner Profile" />
-                ) : (
+                  ) : (
                   <Avatar
-                    style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95, fontSize: 50 }}
-                    className="m-10"
+                  style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95, fontSize: 30 }}
+                  className="mr-10"
                   >
                     {partner.fname[0].toUpperCase()}
                   </Avatar>
                 )}
-                <div classname = "flex flex-col">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <div className = "flex flex-col">
+                <h3 className="text-xl font-semibold text-gray-800 mb-1">
                   {partner.fname} {partner.lname}
                 </h3>
                 <p className="text-gray-600 mb-4">{partner.username}</p>
