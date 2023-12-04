@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, useMediaQuery, useTheme, Box } from "@mui/material";
 
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
 import MatchesCard from "../../components/MatchesCard/MatchesCard.jsx";
@@ -19,8 +19,13 @@ const Matches = () => {
 
       <Grid item xs={12} md={isMobile ? 12 : 10}>
         <MatchesCard />
-        {isMobile && <BottomTabNavigation />}
       </Grid>
+
+      {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
     </Grid>
   );
 };

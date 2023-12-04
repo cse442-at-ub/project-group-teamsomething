@@ -23,7 +23,8 @@ const stringToColor = (string) => {
 const Partner_Blocked = () => {
   const [partnerPic, setPartnerPic] = useState(null);
   const auth = useContext(AuthContext);
-  const partner = auth.partner;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const profilepicUrl =
     "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
@@ -43,12 +44,20 @@ const Partner_Blocked = () => {
         });
     }
   }, [auth.partner]);
+
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} md={2}>
-        <SideDrawer />
-      </Grid>
-      <Grid item xs={12} md={10}>
+    <Grid container spacing={3} style={{ height: "100vh" }}>
+      {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
+
+      <Grid
+        item
+        xs={12}
+        md={10}
+      >
         <div className="flex justify-center items-center w-full h-full bg-gradient-to-r from-[#662c91] to-[#662c91]">
           <div className="flex flex-col justify-center items-center mb-12">
             <div className="flex items-center flex-grow bg-white rounded-lg shadow-md p-4 mb-6">
@@ -97,6 +106,12 @@ const Partner_Blocked = () => {
             </div>
           </div>
         </div>
+
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
       </Grid>
     </Grid>
   );
