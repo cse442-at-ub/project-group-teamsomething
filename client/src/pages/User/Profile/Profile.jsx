@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Grid, useMediaQuery, useTheme, Box } from "@mui/material";
 
 import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 import UserSidebar from "../../../components/UserSidebar/UserSidebar";
@@ -25,7 +25,11 @@ const Profile = () => {
         <ProfileHelper />
       </Grid>
 
-      {isMobile && <BottomTabNavigation />}
+      {isMobile && (
+        <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+          <BottomTabNavigation />
+        </Box>
+      )}
     </Grid>
   );
 };
