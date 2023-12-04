@@ -4,7 +4,7 @@ import { Grid, useMediaQuery, useTheme, Box } from "@mui/material";
 import SideDrawer from "../../../components/SideDrawer/SideDrawer";
 import UserSidebar from "../../../components/UserSidebar/UserSidebar";
 import DescriptionHelper from "./DescriptionHelper";
-import BottomTabNavigation from "../../../components/BottomTabNav/BottomTabNav"; // Adjust the import path as needed
+import BottomTabNavigation from "../../../components/BottomTabNav/BottomTabNav";
 
 const Description = () => {
   const theme = useTheme();
