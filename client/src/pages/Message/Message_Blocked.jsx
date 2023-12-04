@@ -41,14 +41,14 @@ const Message_Blocked = () => {
         <SideDrawer />
       </Grid>
       <Grid item xs={10}>
-        <div className="flex justify-center items-center w-full h-full bg-[#E8E9F4]">
-          <div className="flex flex-col justify-center items-center mb-12">
+        <div className="flex justify-center items-center w-full h-full bg-gradient-to-r from-[#662c91] to-[#662c91]">
+          <div className="flex flex-col justify-center items-center mb-12 p-8 rounded-md shadow-md bg-white">
             <img src={Lock} className=" h-10 w-10"></img>
-            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
+            <div className="font-['Open Sans'] text-xl leading-[normal] font-light text-center text-black h-6">
               <p className=""> </p>
             </div>
-            <div className="font-['Kanit'] text-xl leading-[normal] font-light text-center text-black h-6">
-              <p className="">You Currently Do Not Have A Partner! </p>
+            <div className="font-['Open Sans'] text-xl leading-[normal] font-light text-center text-black h-6">
+              <p className="font-bold">You Currently Do Not Have A Partner! </p>
             </div>
           </div>
         </div>
