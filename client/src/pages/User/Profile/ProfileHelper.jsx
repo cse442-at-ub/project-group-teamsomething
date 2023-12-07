@@ -3,7 +3,28 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../../context/auth-context";
+import { Avatar } from "@mui/material";
 
+
+const stringToColor = (string) => {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.substr(-2);
+  }
+  
+
+  return color;
+}
 const profileUrl =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profile.php";
 
@@ -23,6 +44,20 @@ export default function ProfileHelper() {
   const [bio, setBio] = useState('');
   const [bioLength, setBioLength] = useState(0);
   const [overLimit, setOverLimit] = useState(false);
+  const [profilePic, setProfilePic] = useState(null);
+
+  useEffect(() => {
+    axios.get(profilepicUrl, { params: { username: auth.username } })
+      .then(response => {
+        if (response.data && response.data.image) {
+          setProfilePic(`data:image/jpeg;base64,${response.data.image}`);
+        }
+      })
+      .catch(error => console.error("Error fetching profile picture:", error));
+  }, []);
+  
+
+
 
   useEffect(() => {
     const fetchBio = async () => {
@@ -183,16 +218,25 @@ export default function ProfileHelper() {
           Account Info
         </Typography>
         <Stack spacing={2} width={250}>
-          <Box
-            height={50}
-            width={50}
-            className="overflow-hidden rounded-[30px] relative border-2"
-          >
-            <img
-              src={profilepic ? URL.createObjectURL(profilepic) : null}
-              className="w-full h-full object-cover object-top"
-            />
-          </Box>
+          
+            {profilePic ? ( 
+              <Box
+                height={120}
+                width={120}
+                className="overflow-hidden rounded-[30px] relative border-2"
+              >
+              <img src={profilePic} className="w-full h-full object-cover object-top" />
+              </Box>
+            ) : (
+              
+              <Avatar
+              style={{ backgroundColor: stringToColor(auth.username), width: 120, height: 120, fontSize: 50 }}
+              className="mr-5"
+            >
+              {auth.fname[0].toUpperCase()}
+            </Avatar>
+            )}
+          
           <Button variant="contained" fullWidth>
             Edit Profile Picture
             <input
@@ -230,7 +274,7 @@ export default function ProfileHelper() {
             </Stack>
             <Box flex={1}>
               <Button variant="contained" fullWidth type="submit" onClick={submitUsername}>
-                Edit Username
+                Submit
               </Button>
             </Box>
           </Stack>
@@ -299,7 +343,7 @@ export default function ProfileHelper() {
           </Box>
         </Stack>
 
-        {/* <Stack
+        <Stack
           direction="row"
           alignItems="flex-end"
           spacing={2}
@@ -334,7 +378,7 @@ export default function ProfileHelper() {
               Edit/Upload Bio
             </Button>
           </Box>
-        </Stack> */}
+        </Stack>
 
           <Stack alignItems="flex-start" width={200} spacing={2}>
             <Button
