@@ -230,7 +230,7 @@ export default function ProfileHelper() {
             </Stack>
             <Box flex={1}>
               <Button variant="contained" fullWidth type="submit" onClick={submitUsername}>
-                Submit
+                Edit Username
               </Button>
             </Box>
           </Stack>
