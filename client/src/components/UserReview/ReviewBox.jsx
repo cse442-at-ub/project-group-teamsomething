@@ -1,13 +1,14 @@
 import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import PropTypes from 'prop-types';
+import { useAuth } from "../../hooks/auth-hook";
 
 ReviewBox.propTypes = {
-  text: PropTypes.string
+  text: PropTypes.string,
+  partner: PropTypes.string,
 };
 
-export default function ReviewBox({ text }) {
-
+export default function ReviewBox({ text, partner }) {
   const [highlighted, setHighlighted] = useState(false);
 
   const truncateText = (text) => {
@@ -18,16 +19,34 @@ export default function ReviewBox({ text }) {
     return text;
   }
 
+  const handleWriteReviewClick = () => {
+    setIsWritingReview(!isWritingReview);
+  }
+
+  const handleReviewInputChange = (event) => {
+    setReviewText(event.target.value);
+  }
+
+  const handleSaveReview = () => {
+    e.preventDefault()
+    console.log('Saved review:', reviewText);
+
+    setIsWritingReview(false);
+  }
+
   return (
     <Stack
       direction='row'
       spacing={2}
       alignItems='center'
+      component={'form'}
+      onSubmit={handleSaveReview}
     >
       <Card
         sx={{
           flex: 8,
-          background: '#e1f7dd'
+          background: '#e1f7dd',
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
         }}
       >
         <CardContent>
@@ -40,23 +59,12 @@ export default function ReviewBox({ text }) {
             }}
           >
             {
-              text ? truncateText(text) : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue."
+              text ? truncateText(text) : "Review Text"
             }
           </Typography>
-            <span className="text-gray-400"> - Danny, 22</span>
-          <Box mt={2} className=" text-gray-400">Partner with Danny for 2 Months</Box>
+          <span className="text-gray-400"> {partner}</span>
         </CardContent>
       </Card>
-
-      <Button variant="contained"
-        sx={{
-          flex: 1
-        }}
-        size="large"
-        onClick={() => setHighlighted(!highlighted)}
-      >
-        {highlighted ? 'Unhighlight' : 'Highlight'}
-      </Button>
     </Stack>
   );
 }

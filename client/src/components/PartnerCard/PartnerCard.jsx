@@ -30,12 +30,18 @@ const cheshire2 =
 const requestPartnerURL =
   "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/sendPartnerRequest.php";
 
+
+
 const PartnerCard = () => {
   // State to store the array of data from the API
   const [partners, setPartners] = useState([]);
-
-  // Auth context to use authentication details if needed
+  const [partnerPics, setPartnerPics] = useState({});
+  const [partnerDescriptions, setPartnerDescriptions] = useState({});
   const auth = useContext(AuthContext);
+
+  const profilePicUrl = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/profilepic.php";
+  const pfdescription = "https://www-student.cse.buffalo.edu/CSE442-542/2023-Fall/cse-442x/server/getdescription.php";
+
 
   // The useEffect hook to perform the GET request on component mount
   useEffect(() => {
@@ -43,7 +49,7 @@ const PartnerCard = () => {
       .get(cheshire2)
       .then((response) => {
         // Handle the response by storing the data in state
-        console.log(response.data);
+        
         setPartners(response.data);
       })
       .catch((error) => {
@@ -52,13 +58,54 @@ const PartnerCard = () => {
       });
   }, []);
 
+  useEffect(() => {
+    partners.forEach(partner => {
+      axios.get(profilePicUrl, { params: { username: partner.username } })
+        .then(picResponse => {
+          if (picResponse.data && picResponse.data.image) {
+            setPartnerPics(prevPics => ({
+              ...prevPics,
+              [partner.username]: `data:image/jpeg;base64,${picResponse.data.image}`
+            }));
+          }
+        })
+        .catch(error => console.error("Error fetching profile picture:", error));
+    });
+  }, [partners]);
+
+  useEffect(() => {
+    const fetchDescriptions = async () => {
+      const newDescriptions = {};
+  
+      for (const partner of partners) {
+        try {
+          const descResponse = await axios.get(pfdescription, { params: { username: partner.username } });
+          // console.log("API response for", partner.username, ":", descResponse.data);
+  
+          // Assuming descResponse.data is an array of objects
+          const partnerDescription = descResponse.data.find(desc => desc.username === partner.username);
+          newDescriptions[partner.username] = partnerDescription ? partnerDescription.description : null;
+        } catch (error) {
+          console.error("Error fetching user description for", partner.username, ":", error);
+          newDescriptions[partner.username] = null;
+        }
+      }
+  
+      setPartnerDescriptions(newDescriptions);
+    };
+  
+    if (partners.length > 0) {
+      fetchDescriptions();
+    }
+  }, [partners]);
+
   const sendFriendRequest = async (uname) => {
     try {
       const response = await axios.post(requestPartnerURL, {
         sender: auth.username,
         receiver: uname,
       });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching partner data:", error);
     }
@@ -73,36 +120,49 @@ const PartnerCard = () => {
           if (partner.username === auth.username) {
             return null; // Don't render anything for this iteration
           }
+          
+          const partnerPic = partnerPics[partner.username];
+          const descriptions = partnerDescriptions[partner.username];
+          // console.log("Rendering partner:", partner.username, "Description:", descriptions);
 
-          // Render the partner card for partners with a different username
           return (
             <div
               key={index}
-              className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 overflow-hidden"
+              className="flex items-center justify-between bg-white rounded-lg shadow-md mb-4 px-6 py-4"
             >
-              <div className= "flex items-center flex-grow">
-              <Avatar
-                style={{ backgroundColor: stringToColor(partner.username), width: 100, height: 95,  fontSize: 50,}}
-                className="m-10"
-              >
-                {partner.fname[0].toUpperCase()}
-              </Avatar>
-                <div classname = "flex flex-col">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                  {partner.fname} {partner.lname}
-                </h3>
-                <p className="text-gray-600 mb-4">{partner.username}</p>
+              <div className= "flex items-center space-x-4">
+                {partnerPic ? (
+                  <img src={partnerPic} className="w-32 h-32 rounded-full object-cover" alt="Partner Profile" />
+                ) : (
+                  <Avatar
+                    style={{ backgroundColor: stringToColor(partner.username), width: 110, height: 110, fontSize: 35 }}
+                    className="mr-5"
+                  >
+                    {partner.fname[0].toUpperCase()}
+                  </Avatar>
+                )}
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800">{partner.fname} {partner.lname}</span>
+                  <span className="text-gray-500 text-lg">@{partner.username}</span>
+                  {descriptions ? (
+                    <p className="text-gray-600 text-lg mr-2">{descriptions}</p>
+                  ) : (
+                    <p className="text-gray-600 text-lg mr-2"></p>
+                  )
+                  }  
                 </div>
-                </div>
-                <div style={{ flexBasis: '33%' }}></div>
-                <button
-                  onClick={() => sendFriendRequest(partner.username)}
-                  className="bg-[#FF3737] hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Request Friend
-                </button>
+                </div> 
+                <div className="flex items-center">
+                                
+                  <button
+                    onClick={() => sendFriendRequest(partner.username)}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-lg transition-colors duration-300 ease-in-out"
+                  >
+                    Request Friend
+                  </button>
               
-            </div>
+                </div>
+              </div>
           );
         })
       ) : (
@@ -113,6 +173,3 @@ const PartnerCard = () => {
 };
 
 export default PartnerCard;
-
-
-// i have this code that provides the webpage similar to the attached photo. Can you make the ParnterCard more similar to the second photo without changing any logic of the original code

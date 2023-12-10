@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Grid,
   Box,
@@ -5,83 +6,24 @@ import {
   Divider,
   Button,
   LinearProgress,
-} from "@mui/material";
-import { Scheduler } from "@aldabil/react-scheduler";
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import { Outlet } from 'react-router-dom';
 
-import SideDrawer from "../../components/SideDrawer/SideDrawer";
-import { Outlet } from "react-router-dom";
-import GoalComponent from "../../components/CurrentGoal/GoalComponent";
-import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../context/auth-context";
-const EVENTS = [
-  {
-    event_id: 1,
-    title: "Event 1",
-    start: new Date(new Date(new Date().setHours(9)).setMinutes(0)),
-    end: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
-    disabled: true,
-    admin_id: [1, 2, 3, 4],
-  },
-  {
-    event_id: 2,
-    title: "Event 2",
-    start: new Date(new Date(new Date().setHours(10)).setMinutes(0)),
-    end: new Date(new Date(new Date().setHours(12)).setMinutes(0)),
-    admin_id: 2,
-    color: "#50b500",
-  },
-  {
-    event_id: 3,
-    title: "Event 3",
-    start: new Date(new Date(new Date().setHours(11)).setMinutes(0)),
-    end: new Date(new Date(new Date().setHours(12)).setMinutes(0)),
-    admin_id: 1,
-  },
-  {
-    event_id: 4,
-    title: "Event 4",
-    start: new Date(
-      new Date(new Date(new Date().setHours(9)).setMinutes(30)).setDate(
-        new Date().getDate() - 2
-      )
-    ),
-    end: new Date(
-      new Date(new Date(new Date().setHours(11)).setMinutes(0)).setDate(
-        new Date().getDate() - 2
-      )
-    ),
-    admin_id: 2,
-    color: "#900000",
-  },
-  {
-    event_id: 5,
-    title: "Event 5",
-    start: new Date(
-      new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(
-        new Date().getDate() - 2
-      )
-    ),
-    end: new Date(
-      new Date(new Date(new Date().setHours(14)).setMinutes(0)).setDate(
-        new Date().getDate() - 2
-      )
-    ),
-    admin_id: 2,
-  },
-  {
-    event_id: 6,
-    title: "Event 6",
-    start: new Date(
-      new Date(new Date(new Date().setHours(10)).setMinutes(30)).setDate(
-        new Date().getDate() - 4
-      )
-    ),
-    end: new Date(new Date(new Date().setHours(14)).setMinutes(0)),
-    admin_id: 2,
-  },
-];
+import SideDrawer from '../../components/SideDrawer/SideDrawer';
+import GoalComponent from '../../components/CurrentGoal/GoalComponent';
+import { AuthContext } from '../../context/auth-context';
+
+
+import BottomTabNavigation from "../../components/BottomTabNav/BottomTabNav"
+import EventScheduler from './EventScheduler';
+
+
 
 const Home = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const auth = useContext(AuthContext);
   useEffect(() => {
     console.log(auth);
@@ -110,12 +52,15 @@ const Home = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid item xs={2}>
-        <SideDrawer />
-      </Grid>
-      <Grid item xs={10} height={"100vh"} className="bg-[#E8E9F4] p-5">
+       {!isMobile && (
+        <Grid item xs={2}>
+          <SideDrawer />
+        </Grid>
+      )}
+
+      <Grid item xs={12} md={isMobile ? 12 : 10} height={'100vh'} className="bg-[#E8E9F4] p-5">
         <Grid container height="100%" spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12} md={3}>
             <Box
               height="100%"
               overflow="hidden"
@@ -126,7 +71,8 @@ const Home = () => {
               <GoalComponent />
             </Box>
           </Grid>
-          <Grid item xs={9} height="100%">
+          
+          <Grid item xs={12} md={9} height="100%">
             <Stack height="100%">
               <Stack direction="row" alignItems="center" spacing={4}>
                 <Box
@@ -142,7 +88,6 @@ const Home = () => {
                 >
                   <h1 className="text-center font-bold">Schedule</h1>
                 </Box>
-                <Box className="font-bold">Resource</Box>
               </Stack>
               <Stack
                 flex={1}
@@ -185,29 +130,18 @@ const Home = () => {
                   </Stack>
                 </Stack>
                 <Divider />
-                <Box flex={1} overflow="scroll">
-                  <Scheduler
-                    ref={calendarRef}
-                    deletable={false}
-                    draggable={false}
-                    editable={false}
-                    disableViewNavigator={true}
-                    events={EVENTS}
-                    height={300}
-                    week={{
-                      weekDays: [0, 1, 2, 3, 4, 5, 6],
-                      weekStartOn: 6,
-                      startHour: 0,
-                      endHour: 24,
-                      step: 30,
-                    }}
-                    view="week"
-                  />
+                <Box flex={1} overflow="auto" style={{ height: '100%', overflow: 'auto' }}>
+                    <EventScheduler editable ref={calendarRef} />
                 </Box>
               </Stack>
             </Stack>
           </Grid>
         </Grid>
+        {isMobile && (
+          <Box position="fixed" bottom={0} left={0} right={0} zIndex={100}>
+            <BottomTabNavigation />
+          </Box>
+        )}
         <Outlet />
       </Grid>
     </Grid>

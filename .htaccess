@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /CSE442-542/2023-Fall/cse-442x/dist/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /CSE442-542/2023-Fall/cse-442x/dist/index.html [L]

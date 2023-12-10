@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { CURRENT_TEST_ROLE } from "../main";
+
 
 export const useAuth = () => {
   // Initialize the username and partner state from sessionStorage to maintain session on page refresh
@@ -6,8 +8,9 @@ export const useAuth = () => {
   const [fname, setFname] = useState(sessionStorage.getItem("fname"));
   const [lname, setLname] = useState(sessionStorage.getItem("lname"));
   const [partner, setPartner] = useState(sessionStorage.getItem("partner"));
+  const [role, setRole] = useState(CURRENT_TEST_ROLE);
 
-  const login = useCallback((b_username, b_fname, b_lname, b_partner) => {
+  const login = useCallback((b_username, b_fname, b_lname, b_partner, role) => {
     sessionStorage.setItem("username", b_username); // Store the username in sessionStorage
     sessionStorage.setItem("fname", b_fname); // Store the first name
     sessionStorage.setItem("lname", b_lname); // Store the last name
@@ -16,6 +19,7 @@ export const useAuth = () => {
     setFname(b_fname);
     setLname(b_lname);
     setPartner(b_partner);
+    setRole(role);
   }, []);
 
   const logout = useCallback(() => {
@@ -28,6 +32,8 @@ export const useAuth = () => {
     setFname(null);
     setLname(null);
     setPartner(null);
+    setRole(null);
+
   }, []);
 
   const makePartner = useCallback((b_partner) => {
@@ -55,6 +61,9 @@ export const useAuth = () => {
       if (event.key === "partner") {
         setPartner(sessionStorage.getItem("partner"));
       }
+      if (event.key === "role") {
+        setRole(sessionStorage.getItem("role"));
+      }
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -64,5 +73,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  return { username, fname, lname, partner, login, logout, makePartner, removePartner };
+  return { username, fname, lname, partner, login, logout, makePartner, removePartner, role };
 };
